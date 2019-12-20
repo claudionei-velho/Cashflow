@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnoRequired" xml:space="preserve">
+    <value>Informe o Ano</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Profuzzy : Fluxo de Caixa</value>
+  </data>
+  <data name="AppProvider" xml:space="preserve">
+    <value>Profuzzy Consultoria e Sistemas Ltda.</value>
+  </data>
+  <data name="ArCondicionadoRequired" xml:space="preserve">
+    <value>Informe se Veículo com Ar Condicionado</value>
+  </data>
+  <data name="AtendimentoDto" xml:space="preserve">
+    <value>do Atendimento</value>
+  </data>
+  <data name="CaptacaoRequired" xml:space="preserve">
+    <value>Informe se Linha de Captação</value>
+  </data>
+  <data name="CargoDto" xml:space="preserve">
+    <value>do Cargo</value>
+  </data>
+  <data name="CargoIdRequired" xml:space="preserve">
+    <value>Informe o Cargo</value>
+  </data>
+  <data name="CategoriaIdRequired" xml:space="preserve">
+    <value>Informe a Categoria</value>
+  </data>
+  <data name="CentroDto" xml:space="preserve">
+    <value>do Centro de Custos</value>
+  </data>
+  <data name="ChassiNoRequired" xml:space="preserve">
+    <value>Informe o Número do Chassi</value>
+  </data>
+  <data name="ClasseIdRequired" xml:space="preserve">
+    <value>Informe a Classe</value>
+  </data>
+  <data name="ClassificacaoIdRequired" xml:space="preserve">
+    <value>Informe a Classificação</value>
+  </data>
+  <data name="ClassificacaoRequired" xml:space="preserve">
+    <value>Informe a Classificação</value>
+  </data>
+  <data name="CnpjRequired" xml:space="preserve">
+    <value>Informe o CNPJ</value>
+  </data>
+  <data name="CodigoRequired" xml:space="preserve">
+    <value>Informe o Código</value>
+  </data>
+  <data name="CoeficienteRequired" xml:space="preserve">
+    <value>Informe o Coeficiente</value>
+  </data>
+  <data name="ComArRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CombustivelIdRequired" xml:space="preserve">
+    <value>Informe o Tipo de Combustível</value>
+  </data>
+  <data name="ContaDto" xml:space="preserve">
+    <value>da Conta</value>
+  </data>
+  <data name="ContaIdRequired" xml:space="preserve">
+    <value>Informe a Conta</value>
+  </data>
+  <data name="CorRequired" xml:space="preserve">
+    <value>Informe a Cor</value>
+  </data>
+  <data name="CstCarroceriaDto" xml:space="preserve">
+    <value>do Custo da Carroceria</value>
+  </data>
+  <data name="CstChassiDto" xml:space="preserve">
+    <value>do Custo do Chassi</value>
+  </data>
+  <data name="CstCombustivelDto" xml:space="preserve">
+    <value>do Custo dos Combustíveis</value>
+  </data>
+  <data name="CstPneuDto" xml:space="preserve">
+    <value>do Custo dos Pneus</value>
+  </data>
+  <data name="DemandaRequired" xml:space="preserve">
+    <value>Informe a Demanda Mensal Transportada</value>
+  </data>
+  <data name="DenominacaoRequired" xml:space="preserve">
+    <value>Informe a Denominação</value>
+  </data>
+  <data name="DepartamentoDto" xml:space="preserve">
+    <value>do Departamento</value>
+  </data>
+  <data name="DepartamentoIdRequired" xml:space="preserve">
+    <value>Informe o Departamento</value>
+  </data>
+  <data name="DescricaoRequired" xml:space="preserve">
+    <value>Informe a Descrição</value>
+  </data>
+  <data name="DiaIdRequired" xml:space="preserve">
+    <value>Informe o Dia de Operação</value>
+  </data>
+  <data name="DistribuicaoRequired" xml:space="preserve">
+    <value>Informe se Linha de Distribuição</value>
+  </data>
+  <data name="DomingosRequired" xml:space="preserve">
+    <value>Informe se há Operação aos Domingos</value>
+  </data>
+  <data name="DominioIdRequired" xml:space="preserve">
+    <value>Informe a Jurisdição</value>
+  </data>
+  <data name="ECVeiculoDto" xml:space="preserve">
+    <value>do Veículo da Empresa</value>
+  </data>
+  <data name="EixoFrenteRequired" xml:space="preserve">
+    <value>Informe a quantidade de Eixos Dianteiros</value>
+  </data>
+  <data name="EixoTrasRequired" xml:space="preserve">
+    <value>Informe a quantidade de Eixos Traseiros</value>
+  </data>
+  <data name="EmbarcadoDto" xml:space="preserve">
+    <value>da Tecnologia Embarcada</value>
+  </data>
+  <data name="EmpresaDto" xml:space="preserve">
+    <value>da Empresa</value>
+  </data>
+  <data name="EmpresaIdRequired" xml:space="preserve">
+    <value>Informe a Empresa</value>
+  </data>
+  <data name="EncargoDto" xml:space="preserve">
+    <value>do Encargo Social</value>
+  </data>
+  <data name="EncargoIdRequired" xml:space="preserve">
+    <value>Informe o Encargo Social</value>
+  </data>
+  <data name="EnderecoRequired" xml:space="preserve">
+    <value>Informe o Endereço ou Localização</value>
+  </data>
+  <data name="EquipamentoIdRequired" xml:space="preserve">
+    <value>Informe o Equipamento (Item)</value>
+  </data>
+  <data name="EquivalenteRequired" xml:space="preserve">
+    <value>Informe a Demanda Mensal Equivalente</value>
+  </data>
+  <data name="EscapeHRequired" xml:space="preserve">
+    <value>Informe se Escapamento Horizontal</value>
+  </data>
+  <data name="EscapeVRequired" xml:space="preserve">
+    <value>Informe se Escapamento Vertical</value>
+  </data>
+  <data name="EtariaIdRequired" xml:space="preserve">
+    <value>Informe a Faixa Etária</value>
+  </data>
+  <data name="FantasiaRequired" xml:space="preserve">
+    <value>Informe o Nome Fantasia</value>
+  </data>
+  <data name="FornecedorDto" xml:space="preserve">
+    <value>do Fornecedor</value>
+  </data>
+  <data name="FornecedorIdRequired" xml:space="preserve">
+    <value>Informe o Fornecedor</value>
+  </data>
+  <data name="FrotaDto" xml:space="preserve">
+    <value>da Frota da Empresa</value>
+  </data>
+  <data name="FrotaHoraDto" xml:space="preserve">
+    <value>da Distribuição Horária da Frota</value>
+  </data>
+  <data name="FrotaOperacaoRequired" xml:space="preserve">
+    <value>Informe a Frota Operacional</value>
+  </data>
+  <data name="FrotaRequired" xml:space="preserve">
+    <value>Informe a Quantidade de Veículos</value>
+  </data>
+  <data name="FuFuncaoDto" xml:space="preserve">
+    <value>F.U. (Fator de Uso) por Função</value>
+  </data>
+  <data name="FuncaoDto" xml:space="preserve">
+    <value>da Função</value>
+  </data>
+  <data name="FuncaoIdRequired" xml:space="preserve">
+    <value>Informe a Função</value>
+  </data>
+  <data name="GratuidadeRequired" xml:space="preserve">
+    <value>Informe se Gratuidade</value>
+  </data>
+  <data name="GrupoRequired" xml:space="preserve">
+    <value>Informe o Grupo</value>
+  </data>
+  <data name="GtinRequired" xml:space="preserve">
+    <value>Informe o Código Gtin</value>
+  </data>
+  <data name="HorarioIdRequired" xml:space="preserve">
+    <value>Informe a Faixa Horária</value>
+  </data>
+  <data name="InativoRequired" xml:space="preserve">
+    <value>Informe se Veículo Inativo</value>
+  </data>
+  <data name="InicioRequired" xml:space="preserve">
+    <value>Informe a Hora de Início</value>
+  </data>
+  <data name="InstalacaoDto" xml:space="preserve">
+    <value>da Instalação da Empresa</value>
+  </data>
+  <data name="InstalacaoIdRequired" xml:space="preserve">
+    <value>Informe a Instalação</value>
+  </data>
+  <data name="ItemRequired" xml:space="preserve">
+    <value>Informe o Item</value>
+  </data>
+  <data name="KmProdutivoRequired" xml:space="preserve">
+    <value>Informe a Quilometragem Produtiva</value>
+  </data>
+  <data name="LinhaDto" xml:space="preserve">
+    <value>da Linha</value>
+  </data>
+  <data name="LinhaIdRequired" xml:space="preserve">
+    <value>Informe a Linha</value>
+  </data>
+  <data name="MarcaRequired" xml:space="preserve">
+    <value>Informe a Marca</value>
+  </data>
+  <data name="MesRequired" xml:space="preserve">
+    <value>Informe o Mês</value>
+  </data>
+  <data name="ModeloRequired" xml:space="preserve">
+    <value>Informe o Modelo</value>
+  </data>
+  <data name="MunicipioRequired" xml:space="preserve">
+    <value>Informe o Município</value>
+  </data>
+  <data name="NcmIdRequired" xml:space="preserve">
+    <value>Informe o Código NCM</value>
+  </data>
+  <data name="NumeroRequired" xml:space="preserve">
+    <value>Informe o Número</value>
+  </data>
+  <data name="OperacaoIdRequired" xml:space="preserve">
+    <value>Informe a Operação</value>
+  </data>
+  <data name="PaisIdRequired" xml:space="preserve">
+    <value>Informe o País</value>
+  </data>
+  <data name="Passageirom2Required" xml:space="preserve">
+    <value>Informe a Quantidade de Passageiros por m²</value>
+  </data>
+  <data name="PassageirosRequired" xml:space="preserve">
+    <value>Informe a Quantidade de Passageiros</value>
+  </data>
+  <data name="PCoeficienteDto" xml:space="preserve">
+    <value>dos Parâmetros de Consumo</value>
+  </data>
+  <data name="PCombustivelDto" xml:space="preserve">
+    <value>dos Coeficientes de Consumo de Combustíveis</value>
+  </data>
+  <data name="PlacaRequired" xml:space="preserve">
+    <value>Informe a Placa</value>
+  </data>
+  <data name="PortaInRequired" xml:space="preserve">
+    <value>Informe a Localização da(s) Porta(s) de Entrada</value>
+  </data>
+  <data name="PortasRequired" xml:space="preserve">
+    <value>Informe a quantidade de Portas</value>
+  </data>
+  <data name="PrefixoRequired" xml:space="preserve">
+    <value>Informe o Prefixo ou Número</value>
+  </data>
+  <data name="PremissaDto" xml:space="preserve">
+    <value>das Premissas para Composição de Custos e Receitas</value>
+  </data>
+  <data name="ProdutoDto" xml:space="preserve">
+    <value>do Produto</value>
+  </data>
+  <data name="PropositoIdRequired" xml:space="preserve">
+    <value>Informe a Finalidade (Propósito)</value>
+  </data>
+  <data name="QuantidadeRequired" xml:space="preserve">
+    <value>Informe a Quantidade</value>
+  </data>
+  <data name="RazaoRequired" xml:space="preserve">
+    <value>Informe a Razão Social</value>
+  </data>
+  <data name="ReferenciaRequired" xml:space="preserve">
+    <value>Informe a Data de Referência</value>
+  </data>
+  <data name="RenavamRequired" xml:space="preserve">
+    <value>Informe o Renavam</value>
+  </data>
+  <data name="SabadosRequired" xml:space="preserve">
+    <value>Informe se há Operação aos Sábados</value>
+  </data>
+  <data name="SaidaFrenteRequired" xml:space="preserve">
+    <value>Informe se há Saída(s) Dianteira(s)</value>
+  </data>
+  <data name="SaidaMeioRequired" xml:space="preserve">
+    <value>Informe se há Saída(s) Central(is)</value>
+  </data>
+  <data name="SaidaTrasRequired" xml:space="preserve">
+    <value>Informe se há Saída(s) Traseira(s)</value>
+  </data>
+  <data name="SalarioDto" xml:space="preserve">
+    <value>dos Salários</value>
+  </data>
+  <data name="SalBaseRequired" xml:space="preserve">
+    <value>Informe o Valor do Salário Base</value>
+  </data>
+  <data name="SentidoRequired" xml:space="preserve">
+    <value>Informe o Sentido</value>
+  </data>
+  <data name="SetorDto" xml:space="preserve">
+    <value>do Setor</value>
+  </data>
+  <data name="SetorIdRequired" xml:space="preserve">
+    <value>Informe o Setor</value>
+  </data>
+  <data name="SistemaDto" xml:space="preserve">
+    <value>do Sistema</value>
+  </data>
+  <data name="SistemaIdRequired" xml:space="preserve">
+    <value>Informe o Sistema</value>
+  </data>
+  <data name="TarifaDto" xml:space="preserve">
+    <value>da Tarifa</value>
+  </data>
+  <data name="TarifariaIdRequired" xml:space="preserve">
+    <value>Informe a Modalidade Tarifária</value>
+  </data>
+  <data name="TCategoriaDto" xml:space="preserve">
+    <value>da Modalidade Tarifária</value>
+  </data>
+  <data name="TitularRequired" xml:space="preserve">
+    <value>Informe a quantidade de Titulares na Função</value>
+  </data>
+  <data name="TituloRequired" xml:space="preserve">
+    <value>Informe o Título</value>
+  </data>
+  <data name="TransporteRequired" xml:space="preserve">
+    <value>Informe se Linha de Transporte</value>
+  </data>
+  <data name="TurnoDto" xml:space="preserve">
+    <value>do Turno</value>
+  </data>
+  <data name="UfIdRequired" xml:space="preserve">
+    <value>Informe a U.F.</value>
+  </data>
+  <data name="UnidadeIdRequired" xml:space="preserve">
+    <value>Informe a Unidade Comercial</value>
+  </data>
+  <data name="UnitarioRequired" xml:space="preserve">
+    <value>Informe o Custo Unitário R$</value>
+  </data>
+  <data name="UnitPneuRequired" xml:space="preserve">
+    <value>Informe o Custo Unitário R$ do Pneu</value>
+  </data>
+  <data name="UnitRecapRequired" xml:space="preserve">
+    <value>Informe o Custo Unitário R$ da Recapagem</value>
+  </data>
+  <data name="UteisRequired" xml:space="preserve">
+    <value>Informe se há Operação em Dias Úteis</value>
+  </data>
+  <data name="ValorBaseRequired" xml:space="preserve">
+    <value>Informe o Valor Base R$</value>
+  </data>
+  <data name="ValorRequired" xml:space="preserve">
+    <value>Informe o Valor R$</value>
+  </data>
+  <data name="VCatalogoDto" xml:space="preserve">
+    <value>do Catálogo de Veículos</value>
+  </data>
+  <data name="VeiculoDto" xml:space="preserve">
+    <value>do Veículo</value>
+  </data>
+  <data name="VeiculoIdRequired" xml:space="preserve">
+    <value>Informe o Veículo</value>
+  </data>
+  <data name="VEquipamentoDto" xml:space="preserve">
+    <value>do Equipamento do Veículo</value>
+  </data>
+</root>
