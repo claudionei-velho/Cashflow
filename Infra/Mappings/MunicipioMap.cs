@@ -17,6 +17,8 @@ namespace Infra.Mappings {
       builder.Property(t => t.Nome).HasColumnName("Nome")
           .IsRequired().HasMaxLength(64);
 
+      builder.Property(t => t.Estado).HasColumnName("Estado").IsRequired();
+
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Uf)
           .WithMany(f => f.Municipios).HasForeignKey(k => k.UfId).IsRequired()

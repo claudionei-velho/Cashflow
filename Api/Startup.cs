@@ -31,8 +31,10 @@ namespace Api {
       services.AddDbContextPool<DataContext>(options => 
           options.UseSqlServer(Configuration.GetConnectionString("DataContext")));
 
-      services.AddControllers().AddNewtonsoftJson(options =>
-          options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+      services.AddControllers().AddNewtonsoftJson(options => {
+          options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize; 
+      });
 
       // Auto Mapper Configurations
       services.AddAutoMapper(typeof(Startup).Assembly);

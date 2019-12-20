@@ -5,6 +5,7 @@ namespace Domain.Models {
     public int Id { get; private set; }
     public int UfId { get; private set; }
     public string Nome { get; private set; }
+    public string Estado { get; private set; }
 
     // Navigation Properties
     public Uf Uf { get; private set; }
