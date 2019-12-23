@@ -4,11 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 using Domain.Interfaces.Repositories;
 using Domain.Models;
-
 
 namespace Infra.Repositories {
   public class MunicipioRepository : RepositoryBase<Municipio>, IMunicipioRepository {
@@ -19,11 +17,10 @@ namespace Infra.Repositories {
         int[] cities = _context.Set<Empresa>().AsNoTracking()
                            .Select(e => e.MunicipioId).Distinct().ToArray();
 
-        IIncludableQueryable<Municipio, Uf> query = (from city in _context.Municipios
-                                                     where cities.Contains(city.Id)
-                                                     orderby city.Nome
-                                                     select city).AsNoTracking().Include(m => m.Uf);
-        return query;
+        return (from city in _context.Municipios
+                where cities.Contains(city.Id)
+                orderby city.Nome
+                select city).AsNoTracking().Include(m => m.Uf);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

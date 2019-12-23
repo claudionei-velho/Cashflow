@@ -47,8 +47,8 @@ namespace Infra.Mappings {
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Cidade)
-        .WithMany(f => f.Empresas).HasForeignKey(k => k.MunicipioId)
-        .OnDelete(DeleteBehavior.Restrict);
+          .WithMany(f => f.Empresas).HasForeignKey(k => k.MunicipioId)
+          .OnDelete(DeleteBehavior.Restrict);
 
       builder.HasOne(t => t.Pais)
           .WithMany(f => f.Empresas).HasForeignKey(k => k.PaisId).IsRequired()
