@@ -30,9 +30,7 @@ namespace Api.Models.Validations {
       RuleFor(e => e.EnderecoNo).MaximumLength(8);
       RuleFor(e => e.Complemento).MaximumLength(64);
       RuleFor(e => e.Bairro).MaximumLength(32);
-      RuleFor(e => e.Municipio)
-          .NotNull().WithMessage(x => Resources.MunicipioRequired).MaximumLength(32)
-          .NotEmpty().WithMessage(x => Resources.MunicipioRequired).MaximumLength(32);
+      RuleFor(e => e.Municipio).MaximumLength(32);
 
       RuleFor(e => e.UfId)
           .NotNull().WithMessage(x => Resources.UfIdRequired).Length(2)

@@ -31,9 +31,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.Complemento).HasColumnName("Complemento").HasMaxLength(64);
       builder.Property(t => t.Cep).HasColumnName("Cep");
       builder.Property(t => t.Bairro).HasColumnName("Bairro").HasMaxLength(32);
-      builder.Property(t => t.Municipio).HasColumnName("Municipio")
-          .IsRequired().HasMaxLength(32);
-
+      builder.Property(t => t.Municipio).HasColumnName("Municipio").HasMaxLength(32);
       builder.Property(t => t.MunicipioId).HasColumnName("MunicipioId");
       builder.Property(t => t.UfId).HasColumnName("UfId")
           .IsRequired().IsFixedLength().HasMaxLength(2);
