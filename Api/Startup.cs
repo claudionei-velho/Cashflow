@@ -33,7 +33,7 @@ namespace Api {
 
       services.AddControllers().AddNewtonsoftJson(options => {
           options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize; 
+          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; 
       });
 
       // Auto Mapper Configurations

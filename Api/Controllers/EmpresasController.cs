@@ -96,6 +96,15 @@ namespace Api.Controllers {
       return NoContent();
     }
 
+    [HttpGet, Route("List/{mn}")]
+    public async Task<IActionResult> List(int mn) {
+      using (_empresas) {
+        return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
+                      await _empresas.GetData(e => e.MunicipioId == mn,
+                                              e => e.OrderBy(q => q.Fantasia)).ToListAsync()));
+      }
+    }
+
     [HttpGet, Route("PagedList/{p}/{k}")]
     public async Task<IActionResult> PagedList(int p, int k) {
       if (p < 1 || k < 1) {
@@ -116,13 +125,6 @@ namespace Api.Controllers {
                         ).ToListAsync());
       }
     }
-
-    [HttpGet, Route("Cities")]
-    //public async Task<IActionResult> Cities() {
-    //  using (_empresas) {
-    //    return Ok(await _empresas.ListCities());
-    //  }
-    //}
 
     [HttpGet, Route("Pages/{k?}")]
     public IActionResult Pages(int? k) {

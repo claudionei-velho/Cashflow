@@ -14,7 +14,7 @@ namespace Api.Models {
     public int? Cep { get; set; }
     public string Bairro { get; set; }
     public string Municipio { get; set; }
-    public int? MunicipioId { get; set; }
+    public int MunicipioId { get; set; }
     public string UfId { get; set; }
     public string PaisId { get; set; }
     public string Telefone { get; set; }
@@ -24,7 +24,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public MunicipioDto Cidade { get; set; }
-    public PaisDto Pais { get; set; }
+    public MunicipioDto Cidade { get; private set; }
+    public PaisDto Pais { get; private set; }
   }
 }

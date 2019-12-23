@@ -122,5 +122,13 @@ namespace Api.Controllers {
                                              _municipios.Pages(m => m.Uf.Sigla.Equals(uf), k)));
       }
     }
+
+    [HttpGet, Route("Expertise")]
+    public async Task<IActionResult> Expertise() {
+      using (_municipios) {
+        return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
+                      await _municipios.GetExpertise().ToListAsync()));
+      }
+    }
   }
 }

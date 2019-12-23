@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Api.Models {
+﻿namespace Api.Models {
   public class MunicipioDto {
     public int Id { get; set; }
     public int UfId { get; set; }
@@ -8,6 +6,6 @@ namespace Api.Models {
     public string Estado { get; set; }
 
     // Navigation Properties
-    public UfDto Uf { get; set; }
+    public UfDto Uf { get; private set; }
   }
 }

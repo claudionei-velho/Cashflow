@@ -15,7 +15,7 @@ namespace Domain.Models {
     public int? Cep { get; private set; }
     public string Bairro { get; private set; }
     public string Municipio { get; private set; }
-    public int? MunicipioId { get; private set; }
+    public int MunicipioId { get; private set; }
     public string UfId { get; private set; }
     public string PaisId { get; private set; }
     public string Telefone { get; private set; }

@@ -18,7 +18,7 @@ namespace Infra.Repositories {
         int[] selected = _context.Set<Chassi>().AsNoTracking()
                              .Select(q => q.VeiculoId).Distinct().ToArray();
 
-        IQueryable<Veiculo> query = getListVeiculos(selected);
+        IQueryable<Veiculo> query = GetListVeiculos(selected);
         if (condition != null) {
           query = query.Where(condition);
         }
@@ -38,7 +38,7 @@ namespace Infra.Repositories {
         int[] selected = _context.Set<Carroceria>().AsNoTracking()
                              .Select(q => q.VeiculoId).Distinct().ToArray();
 
-        IQueryable<Veiculo> query = getListVeiculos(selected);
+        IQueryable<Veiculo> query = GetListVeiculos(selected);
         if (condition != null) {
           query = query.Where(condition);
         }
@@ -72,7 +72,7 @@ namespace Infra.Repositories {
       }
     }
 
-    private IQueryable<Veiculo> getListVeiculos(int[] list) {
+    private IQueryable<Veiculo> GetListVeiculos(int[] list) {
       return (from v in Get()
               where !list.Contains(v.Id)
               select v).AsNoTracking();

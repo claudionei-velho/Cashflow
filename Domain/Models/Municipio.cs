@@ -8,9 +8,9 @@ namespace Domain.Models {
     public string Estado { get; private set; }
 
     // Navigation Properties
-    public Uf Uf { get; private set; }
+    public Uf Uf { get; set; }
 
-    public ICollection<Empresa> Empresas { get; private set; }
-    public ICollection<Fornecedor> Fornecedores { get; private set; }
+    public ICollection<Empresa> Empresas { get; set; }
+    public ICollection<Fornecedor> Fornecedores { get; set; }
   }
 }
