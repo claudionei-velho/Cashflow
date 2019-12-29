@@ -156,7 +156,7 @@ namespace Infra.Repositories {
     #region IDisposable Support
     private bool disposedValue;    // To detect redundant calls
 
-    private void Dispose(bool disposing) {
+    protected virtual void Dispose(bool disposing) {
       if (!disposedValue) {
         if (disposing) {
           _context.Dispose();

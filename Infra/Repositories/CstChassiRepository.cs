@@ -15,15 +15,8 @@ namespace Infra.Repositories {
     protected override IQueryable<CstChassi> Get(Expression<Func<CstChassi, bool>> condition = null,
         Func<IQueryable<CstChassi>, IOrderedQueryable<CstChassi>> order = null) {
       try {
-        IQueryable<CstChassi> query = _context.Set<CstChassi>().AsNoTracking()
-                                          .Include(c => c.Empresa).Include(c => c.CVeiculo);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order)
+                   .Include(c => c.Empresa).Include(c => c.CVeiculo);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

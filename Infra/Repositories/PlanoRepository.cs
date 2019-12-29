@@ -15,15 +15,8 @@ namespace Infra.Repositories {
     protected override IQueryable<Plano> Get(Expression<Func<Plano, bool>> condition = null, 
         Func<IQueryable<Plano>, IOrderedQueryable<Plano>> order = null) {
       try {
-        IQueryable<Plano> query = _context.Set<Plano>().AsNoTracking()
-                                      .Include(p => p.Linha).Include(p => p.Atendimento);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order)
+                   .Include(p => p.Linha).Include(p => p.Atendimento);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

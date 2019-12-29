@@ -15,15 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<FrotaHora> Get(Expression<Func<FrotaHora, bool>> condition = null, 
         Func<IQueryable<FrotaHora>, IOrderedQueryable<FrotaHora>> order = null) {
       try {
-        IQueryable<FrotaHora> query = _context.Set<FrotaHora>().AsNoTracking()
-                                          .Include(f => f.Empresa);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order).Include(f => f.Empresa);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

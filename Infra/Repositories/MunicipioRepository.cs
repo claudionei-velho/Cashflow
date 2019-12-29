@@ -30,14 +30,7 @@ namespace Infra.Repositories {
     protected override IQueryable<Municipio> Get(Expression<Func<Municipio, bool>> condition = null, 
         Func<IQueryable<Municipio>, IOrderedQueryable<Municipio>> order = null) {
       try {
-        IQueryable<Municipio> query = _context.Set<Municipio>().AsNoTracking().Include(m => m.Uf);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order).Include(m => m.Uf);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

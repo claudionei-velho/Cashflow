@@ -15,15 +15,8 @@ namespace Infra.Repositories {
     protected override IQueryable<ProducaoMedia> Get(Expression<Func<ProducaoMedia, bool>> condition = null, 
         Func<IQueryable<ProducaoMedia>, IOrderedQueryable<ProducaoMedia>> order = null) {
       try {
-        IQueryable<ProducaoMedia> query = _context.Set<ProducaoMedia>().AsNoTracking()
-                                              .Include(p => p.Empresa).Include(p => p.TCategoria);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order)
+                   .Include(p => p.Empresa).Include(p => p.TCategoria);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

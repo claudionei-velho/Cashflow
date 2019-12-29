@@ -15,15 +15,8 @@ namespace Infra.Repositories {
     protected override IQueryable<PCombustivel> Get(Expression<Func<PCombustivel, bool>> condition = null, 
         Func<IQueryable<PCombustivel>, IOrderedQueryable<PCombustivel>> order = null) {
       try {
-        IQueryable<PCombustivel> query = _context.Set<PCombustivel>().AsNoTracking().Include(p => p.Empresa)
-                                             .Include(p => p.CVeiculo).Include(p => p.Combustivel);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order).Include(p => p.Empresa)
+                   .Include(p => p.CVeiculo).Include(p => p.Combustivel);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

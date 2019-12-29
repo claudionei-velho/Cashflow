@@ -15,15 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<Salario> Get(Expression<Func<Salario, bool>> condition = null, 
         Func<IQueryable<Salario>, IOrderedQueryable<Salario>> order = null) {                
       try {
-        IQueryable<Salario> query = _context.Set<Salario>().AsNoTracking()
-                                        .Include(s => s.Funcao.Cargo);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order).Include(s => s.Funcao.Cargo);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

@@ -16,8 +16,8 @@ namespace Infra.Repositories {
       Depreciacao dataset = GetFirst(
           d => (d.ClasseId == classeId) && (d.EtariaId == etariaId));
 
-      try {        
-        return (1 - dataset.ECVeiculo.Residual) * dataset.Anos / 
+      try {
+        return (1 - dataset.ECVeiculo.Residual) * dataset.Anos /
                         SomaIdade(d => d.ClasseId == classeId);
       }
       catch (DivideByZeroException) {
@@ -43,15 +43,8 @@ namespace Infra.Repositories {
     protected override IQueryable<Depreciacao> Get(Expression<Func<Depreciacao, bool>> condition = null,
         Func<IQueryable<Depreciacao>, IOrderedQueryable<Depreciacao>> order = null) {
       try {
-        IQueryable<Depreciacao> query = _context.Set<Depreciacao>().AsNoTracking()
-                                            .Include(d => d.ECVeiculo).Include(d => d.FxEtaria);
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order)
+                   .Include(d => d.ECVeiculo).Include(d => d.FxEtaria);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
@@ -59,8 +52,7 @@ namespace Infra.Repositories {
     }
 
     private int SomaIdade(Expression<Func<Depreciacao, bool>> condition) {
-      return _context.Set<Depreciacao>().AsNoTracking()
-                 .Where(condition).Sum(d => d.Anos);
+      return Get(condition).Sum(d => d.Anos);
     }
   }
 }

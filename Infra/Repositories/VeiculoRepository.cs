@@ -52,20 +52,15 @@ namespace Infra.Repositories {
       }
     }
 
-    protected override IQueryable<Veiculo> Get(Expression<Func<Veiculo, bool>> condition = null, 
+    protected override IQueryable<Veiculo> Get(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
       try {
-        IQueryable<Veiculo> query = _context.Set<Veiculo>().AsNoTracking()
-                                        .Include(v => v.Empresa).Include(v => v.CVeiculo)
-                                        .Where(v => !v.Inativo)
-                                        .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero);
-        if (condition != null) {
-          query = query.Where(condition);
+        if (condition == null) {
+          condition = v => !v.Inativo;
         }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
+        return base.Get(condition, order)
+                   .Include(v => v.Empresa).Include(v => v.CVeiculo)
+                   .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
