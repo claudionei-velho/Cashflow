@@ -30,6 +30,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.Distribuicao).HasColumnName("Distribuicao");
       builder.Property(t => t.ExtensaoAB).HasColumnName("ExtensaoAB").HasColumnType("decimal(18, 3)");
       builder.Property(t => t.ExtensaoBA).HasColumnName("ExtensaoBA").HasColumnType("decimal(18, 3)");
+      builder.Property(t => t.LoteId).HasColumnName("LoteId");
       builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)
@@ -43,6 +44,10 @@ namespace Infra.Mappings {
 
       builder.HasOne(t => t.Empresa)
           .WithMany(f => f.Linhas).HasForeignKey(k => k.EmpresaId).IsRequired()
+          .OnDelete(DeleteBehavior.Restrict);
+
+      builder.HasOne(t => t.Lote)
+          .WithMany(f => f.Linhas).HasForeignKey(k => k.LoteId)
           .OnDelete(DeleteBehavior.Restrict);
 
       builder.HasOne(t => t.Operacao)

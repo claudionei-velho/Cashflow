@@ -64,12 +64,14 @@ namespace Domain.Models {
 
     public decimal? Extensao => Handler.NullIf((ExtensaoAB ?? 0) + (ExtensaoBA ?? 0), 0);
 
+    public int? LoteId { get; private set; }
     public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties
     public CLinha CLinha { get; private set; }
     public EDominio EDominio { get; private set; }
     public Empresa Empresa { get; private set; }
+    public Lote Lote { get; private set; }
     public Operacao Operacao { get; private set; }
 
     public ICollection<Atendimento> Atendimentos { get; private set; }

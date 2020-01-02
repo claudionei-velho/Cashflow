@@ -106,6 +106,24 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to da Bacia Operacional.
+        /// </summary>
+        public static string BaciaDto {
+            get {
+                return ResourceManager.GetString("BaciaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Bacia Operacional.
+        /// </summary>
+        public static string BaciaIdRequired {
+            get {
+                return ResourceManager.GetString("BaciaIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se Linha de Captação.
         /// </summary>
         public static string CaptacaoRequired {
@@ -700,6 +718,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to do Lote.
+        /// </summary>
+        public static string LoteDto {
+            get {
+                return ResourceManager.GetString("LoteDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe a Marca.
         /// </summary>
         public static string MarcaRequired {
@@ -723,6 +750,15 @@ namespace Api.Properties {
         public static string ModeloRequired {
             get {
                 return ResourceManager.GetString("ModeloRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Município.
+        /// </summary>
+        public static string MunicipioIdRequired {
+            get {
+                return ResourceManager.GetString("MunicipioIdRequired", resourceCulture);
             }
         }
         

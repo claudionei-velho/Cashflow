@@ -10,14 +10,12 @@ namespace Infra.Mappings {
       builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
-      builder.ToTable("Municipios");
+      builder.ToTable("Cidades");
 
       builder.Property(t => t.Id).HasColumnName("Id");
       builder.Property(t => t.UfId).HasColumnName("UfId").IsRequired();
-      builder.Property(t => t.Nome).HasColumnName("Nome")
+      builder.Property(t => t.Nome).HasColumnName("Municipio")
           .IsRequired().HasMaxLength(64);
-
-      builder.Property(t => t.Estado).HasColumnName("Estado").IsRequired();
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Uf)

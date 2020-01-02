@@ -16,7 +16,7 @@ namespace Infra.Repositories {
         Func<IQueryable<Fornecedor>, IOrderedQueryable<Fornecedor>> order = null) {                
       try {
         return base.Get(condition, order)
-                   .Include(f => f.Municipio).Include(f => f.Pais);
+                   .Include(f => f.Municipio.Uf).Include(f => f.Pais);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

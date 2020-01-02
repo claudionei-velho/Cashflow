@@ -132,6 +132,12 @@
   <data name="AtendimentoDto" xml:space="preserve">
     <value>do Atendimento</value>
   </data>
+  <data name="BaciaDto" xml:space="preserve">
+    <value>da Bacia Operacional</value>
+  </data>
+  <data name="BaciaIdRequired" xml:space="preserve">
+    <value>Informe a Bacia Operacional</value>
+  </data>
   <data name="CaptacaoRequired" xml:space="preserve">
     <value>Informe se Linha de Captação</value>
   </data>
@@ -330,6 +336,9 @@
   <data name="LinhaIdRequired" xml:space="preserve">
     <value>Informe a Linha</value>
   </data>
+  <data name="LoteDto" xml:space="preserve">
+    <value>do Lote</value>
+  </data>
   <data name="MarcaRequired" xml:space="preserve">
     <value>Informe a Marca</value>
   </data>
@@ -338,6 +347,9 @@
   </data>
   <data name="ModeloRequired" xml:space="preserve">
     <value>Informe o Modelo</value>
+  </data>
+  <data name="MunicipioIdRequired" xml:space="preserve">
+    <value>Informe o Município</value>
   </data>
   <data name="MunicipioRequired" xml:space="preserve">
     <value>Informe o Município</value>

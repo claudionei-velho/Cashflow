@@ -5,12 +5,12 @@ namespace Domain.Models {
     public int Id { get; private set; }
     public int UfId { get; private set; }
     public string Nome { get; private set; }
-    public string Estado { get; private set; }
 
     // Navigation Properties
     public Uf Uf { get; set; }
 
-    public ICollection<Empresa> Empresas { get; set; }
-    public ICollection<Fornecedor> Fornecedores { get; set; }
+    public ICollection<Bacia> Bacias { get; private set; }
+    public ICollection<Empresa> Empresas { get; private set; }
+    public ICollection<Fornecedor> Fornecedores { get; private set; }
   }
 }

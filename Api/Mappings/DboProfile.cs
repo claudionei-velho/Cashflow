@@ -6,6 +6,8 @@ using Domain.Models;
 namespace Api.Mappings {
   public class DboProfile : Profile {
     public DboProfile() {
+      CreateMap<BaciaDto, Bacia>().ReverseMap();
+
       CreateMap<CargoDto, Cargo>().ReverseMap();
       CreateMap<CentroDto, Centro>().ReverseMap();
       CreateMap<ClassLinhaDto, ClassLinha>().ReverseMap();
@@ -22,6 +24,7 @@ namespace Api.Mappings {
       CreateMap<FInstalacaoDto, FInstalacao>().ReverseMap();
       CreateMap<FuncaoDto, Funcao>().ReverseMap();
 
+      CreateMap<LoteDto, Lote>().ReverseMap();
       CreateMap<MunicipioDto, Municipio>().ReverseMap();
       CreateMap<OpLinhaDto, OpLinha>().ReverseMap();
       CreateMap<PaisDto, Pais>().ReverseMap();      

@@ -26,6 +26,7 @@ namespace Infra {
     public DbSet<AnpProduto> AnpProdutos { get; private set; }
     public DbSet<Atendimento> Atendimentos { get; private set; }
     public DbSet<ATrafego> ATrafegos { get; private set; }
+    public DbSet<Bacia> Bacias { get; private set; }
     public DbSet<Cargo> Cargos { get; private set; }
     public DbSet<Carroceria> Carrocerias { get; private set; }
     public DbSet<Centro> Centros { get; private set; }
@@ -60,6 +61,7 @@ namespace Infra {
     public DbSet<Horario> Horarios { get; private set; }
     public DbSet<Instalacao> Instalacoes { get; private set; }
     public DbSet<Linha> Linhas { get; private set; }
+    public DbSet<Lote> Lotes { get; private set; }
     public DbSet<Municipio> Municipios { get; private set; }
     public DbSet<Ncm> Ncms { get; private set; }
     public DbSet<Operacao> Operacoes { get; private set; }

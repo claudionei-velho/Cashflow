@@ -62,12 +62,14 @@ namespace Api.Models {
 
     public decimal? Extensao => (ExtensaoAB ?? 0) + (ExtensaoBA ?? 0);
 
+    public int? LoteId { get; set; }
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
     public CLinhaDto CLinha { get; set; }
     public EDominioDto EDominio { get; set; }
     public EmpresaDto Empresa { get; set; }
+    public LoteDto Lote { get; set; }
     public OperacaoDto Operacao { get; set; }
   }
 }

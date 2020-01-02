@@ -98,6 +98,9 @@ namespace Api {
       services.AddScoped<IAtendimentoService, AtendimentoService>();
       services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
 
+      services.AddScoped<IBaciaService, BaciaService>();
+      services.AddScoped<IBaciaRepository, BaciaRepository>();
+
       services.AddScoped<ICargoService, CargoService>();
       services.AddScoped<ICargoRepository, CargoRepository>();
 
@@ -181,6 +184,9 @@ namespace Api {
 
       services.AddScoped<ILinhaService, LinhaService>();
       services.AddScoped<ILinhaRepository, LinhaRepository>();
+
+      services.AddScoped<ILoteService, LoteService>();
+      services.AddScoped<ILoteRepository, LoteRepository>();
 
       services.AddScoped<IMunicipioService, MunicipioService>();
       services.AddScoped<IMunicipioRepository, MunicipioRepository>();
