@@ -1,7 +1,7 @@
 ﻿using System;
 
+using Domain.Extensions;
 using Domain.Lists;
-using Domain.Models;
 
 namespace Api.Models {
   public class PSinteseDto {

@@ -1,4 +1,4 @@
-﻿namespace Domain.Models {
+﻿namespace Domain.Extensions {
   public static class CustomCalendar {
     public const int WeeksPerYear = 52;
     public const int MonthsPerYear = 12;

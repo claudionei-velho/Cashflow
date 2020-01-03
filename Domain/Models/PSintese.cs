@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Domain.Extensions;
 using Domain.Lists;
 
 namespace Domain.Models {

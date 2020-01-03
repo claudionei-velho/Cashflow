@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Domain.Models;
+using Domain.Extensions;
 
 namespace Api.Models {
   public class ESistemaDto {

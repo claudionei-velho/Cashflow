@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Domain.Extensions;
+
 namespace Domain.Models {
   public class ESistema {
     public int Id { get; private set; }
