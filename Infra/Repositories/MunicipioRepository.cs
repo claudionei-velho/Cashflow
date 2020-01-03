@@ -14,8 +14,9 @@ namespace Infra.Repositories {
 
     public IQueryable<Municipio> GetExpertise() {
       try {
-        int[] cities = _context.Set<Empresa>().AsNoTracking()
-                           .Select(e => e.MunicipioId).Distinct().ToArray();
+        int[] cities = _context.Empresas.AsNoTracking().Select(e => e.MunicipioId).Union(
+                           _context.Consorcios.AsNoTracking().Select(c => c.MunicipioId)
+                       ).Distinct().ToArray();
 
         return (from city in _context.Municipios
                 where cities.Contains(city.Id)

@@ -180,6 +180,12 @@
   <data name="CombustivelIdRequired" xml:space="preserve">
     <value>Informe o Tipo de Combustível</value>
   </data>
+  <data name="ConsorcioDto" xml:space="preserve">
+    <value>do Consórcio</value>
+  </data>
+  <data name="ConsorcioIdRequired" xml:space="preserve">
+    <value>Informe o Consórcio</value>
+  </data>
   <data name="ContaDto" xml:space="preserve">
     <value>da Conta</value>
   </data>
@@ -227,6 +233,9 @@
   </data>
   <data name="DominioIdRequired" xml:space="preserve">
     <value>Informe a Jurisdição</value>
+  </data>
+  <data name="EConsorcioDto" xml:space="preserve">
+    <value>das Empresa no Consórcio</value>
   </data>
   <data name="ECVeiculoDto" xml:space="preserve">
     <value>do Veículo da Empresa</value>
@@ -324,6 +333,9 @@
   <data name="InstalacaoIdRequired" xml:space="preserve">
     <value>Informe a Instalação</value>
   </data>
+  <data name="IntegracaoRequired" xml:space="preserve">
+    <value>Informe a Data de Integração</value>
+  </data>
   <data name="ItemRequired" xml:space="preserve">
     <value>Informe o Item</value>
   </data>
@@ -401,6 +413,9 @@
   </data>
   <data name="QuantidadeRequired" xml:space="preserve">
     <value>Informe a Quantidade</value>
+  </data>
+  <data name="RatioRequired" xml:space="preserve">
+    <value>Informe a participação (%)</value>
   </data>
   <data name="RazaoRequired" xml:space="preserve">
     <value>Informe a Razão Social</value>

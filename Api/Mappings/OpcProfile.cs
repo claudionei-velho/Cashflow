@@ -15,6 +15,7 @@ namespace Api.Mappings {
 
       CreateMap<DepreciacaoDto, Depreciacao>().ReverseMap();
 
+      CreateMap<EConsorcioDto, EConsorcio>().ReverseMap();
       CreateMap<ECVeiculoDto, ECVeiculo>().ReverseMap();
       CreateMap<EDominioDto, EDominio>().ReverseMap();
       CreateMap<EInstalacaoDto, EInstalacao>().ReverseMap();

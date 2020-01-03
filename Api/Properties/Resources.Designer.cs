@@ -250,6 +250,24 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to do Consórcio.
+        /// </summary>
+        public static string ConsorcioDto {
+            get {
+                return ResourceManager.GetString("ConsorcioDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Consórcio.
+        /// </summary>
+        public static string ConsorcioIdRequired {
+            get {
+                return ResourceManager.GetString("ConsorcioIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to da Conta.
         /// </summary>
         public static string ContaDto {
@@ -390,6 +408,15 @@ namespace Api.Properties {
         public static string DominioIdRequired {
             get {
                 return ResourceManager.GetString("DominioIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to das Empresa no Consórcio.
+        /// </summary>
+        public static string EConsorcioDto {
+            get {
+                return ResourceManager.GetString("EConsorcioDto", resourceCulture);
             }
         }
         
@@ -682,6 +709,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Data de Integração.
+        /// </summary>
+        public static string IntegracaoRequired {
+            get {
+                return ResourceManager.GetString("IntegracaoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Item.
         /// </summary>
         public static string ItemRequired {
@@ -912,6 +948,15 @@ namespace Api.Properties {
         public static string QuantidadeRequired {
             get {
                 return ResourceManager.GetString("QuantidadeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a participação (%).
+        /// </summary>
+        public static string RatioRequired {
+            get {
+                return ResourceManager.GetString("RatioRequired", resourceCulture);
             }
         }
         

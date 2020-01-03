@@ -15,7 +15,7 @@ namespace Infra.Repositories {
     public IQueryable<Veiculo> GetNoChassi(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
       try {
-        int[] selected = _context.Set<Chassi>().AsNoTracking()
+        int[] selected = _context.Chassis.AsNoTracking()
                              .Select(q => q.VeiculoId).Distinct().ToArray();
 
         IQueryable<Veiculo> query = GetListVeiculos(selected);
@@ -35,7 +35,7 @@ namespace Infra.Repositories {
     public IQueryable<Veiculo> GetNoCarroceria(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
       try {
-        int[] selected = _context.Set<Carroceria>().AsNoTracking()
+        int[] selected = _context.Carrocerias.AsNoTracking()
                              .Select(q => q.VeiculoId).Distinct().ToArray();
 
         IQueryable<Veiculo> query = GetListVeiculos(selected);

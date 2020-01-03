@@ -33,6 +33,7 @@ namespace Infra {
     public DbSet<Chassi> Chassis { get; private set; }
     public DbSet<ClassLinha> ClassLinhas { get; private set; }
     public DbSet<CLinha> CLinhas { get; private set; }
+    public DbSet<Consorcio> Consorcios { get; private set; }
     public DbSet<Conta> Contas { get; private set; }
     public DbSet<CstCarroceria> CstCarrocerias { get; private set; }
     public DbSet<CstChassi> CstChassis { get; private set; }
@@ -42,6 +43,7 @@ namespace Infra {
     public DbSet<Departamento> Departamentos { get; private set; }
     public DbSet<Depreciacao> Depreciacoes { get; private set; }
     public DbSet<Dominio> Dominios { get; private set; }
+    public DbSet<EConsorcio> EConsorcios { get; private set; }
     public DbSet<ECVeiculo> ECVeiculos { get; private set; }
     public DbSet<EDominio> EDominios { get; private set; }
     public DbSet<EEncargo> EEncargos { get; private set; }
@@ -126,6 +128,9 @@ namespace Infra {
       // Depreciacoes
       modelBuilder.Entity<Depreciacao>().Ignore(p => p.Coeficiente);
       modelBuilder.Entity<Depreciacao>().Ignore(p => p.Acumulado);
+
+      // Empresas do Consorcio
+      modelBuilder.Entity<EConsorcio>().Ignore(p => p.Ativo);
 
       // ESistemas
       modelBuilder.Entity<ESistema>().Ignore(p => p.Coeficiente);

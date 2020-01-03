@@ -3,10 +3,10 @@ using Domain.Interfaces.Services;
 using Domain.Models;
 
 namespace Domain.Services {
-  public class EmpresaService : ServiceBase<Empresa>, IEmpresaService {
-    private readonly IEmpresaRepository _repository;
+  public class ConsorcioService : ServiceBase<Consorcio>, IConsorcioService {
+    private readonly IConsorcioRepository _repository;
 
-    public EmpresaService(IEmpresaRepository repository) : base(repository) {
+    public ConsorcioService(IConsorcioRepository repository) : base(repository) {
       _repository = repository;
     }
 

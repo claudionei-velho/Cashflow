@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
 namespace Domain.Interfaces.Repositories {
-  public interface IEmpresaRepository : IRepositoryBase<Empresa> {
+  public interface IConsorcioRepository : IRepositoryBase<Consorcio> {
   }
 }

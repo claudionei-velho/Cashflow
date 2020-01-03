@@ -116,6 +116,9 @@ namespace Api {
       services.AddScoped<ICLinhaService, CLinhaService>();
       services.AddScoped<ICLinhaRepository, CLinhaRepository>();
 
+      services.AddScoped<IConsorcioService, ConsorcioService>();
+      services.AddScoped<IConsorcioRepository, ConsorcioRepository>();
+
       services.AddScoped<IContaService, ContaService>();
       services.AddScoped<IContaRepository, ContaRepository>();
 
@@ -136,6 +139,9 @@ namespace Api {
 
       services.AddScoped<IDepreciacaoService, DepreciacaoService>();
       services.AddScoped<IDepreciacaoRepository, DepreciacaoRepository>();
+
+      services.AddScoped<IEConsorcioService, EConsorcioService>();
+      services.AddScoped<IEConsorcioRepository, EConsorcioRepository>();
 
       services.AddScoped<IECVeiculoService, ECVeiculoService>();
       services.AddScoped<IECVeiculoRepository, ECVeiculoRepository>();

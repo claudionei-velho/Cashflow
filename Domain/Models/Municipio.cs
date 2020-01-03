@@ -10,6 +10,7 @@ namespace Domain.Models {
     public Uf Uf { get; set; }
 
     public ICollection<Bacia> Bacias { get; private set; }
+    public ICollection<Consorcio> Consorcios { get; private set; }
     public ICollection<Empresa> Empresas { get; private set; }
     public ICollection<Fornecedor> Fornecedores { get; private set; }
   }
