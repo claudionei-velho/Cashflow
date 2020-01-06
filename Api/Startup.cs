@@ -43,9 +43,10 @@ namespace Api {
       services.AddCors(options => 
           options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
-      services.AddMvc().AddFluentValidation(cfg => 
-          cfg.RegisterValidatorsFromAssemblyContaining<Startup>()
-      ).SetCompatibilityVersion(CompatibilityVersion.Latest);
+      services.AddMvc().AddControllersAsServices()
+          .AddFluentValidation(cfg => 
+              cfg.RegisterValidatorsFromAssemblyContaining<Startup>()
+          ).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
       #region Dependency Injection for Services and Repositories
       // Services and Repositories for Generic Purpose
