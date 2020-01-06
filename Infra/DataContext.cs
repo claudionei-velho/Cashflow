@@ -56,7 +56,7 @@ namespace Infra {
     public DbSet<Fornecedor> Fornecedores { get; private set; }
     public DbSet<Frota> Frotas { get; private set; }
     public DbSet<FrotaEtaria> FrotaEtarias { get; private set; }
-    public DbSet<FrotaHora> FrotaHoras { get; private set; }
+    public DbSet<FrotaHoraria> FrotaHorarias { get; private set; }
     public DbSet<FuFuncao> FuFuncoes { get; private set; }
     public DbSet<Funcao> Funcoes { get; private set; }
     public DbSet<FxEtaria> FxEtarias { get; private set; }

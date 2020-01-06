@@ -170,11 +170,11 @@ namespace Api {
       services.AddScoped<IFrotaService, FrotaService>();
       services.AddScoped<IFrotaRepository, FrotaRepository>();
 
-      services.AddScoped<IFrotaHoraService, FrotaHoraService>();
-      services.AddScoped<IFrotaHoraRepository, FrotaHoraRepository>();
-
       services.AddScoped<IFrotaEtariaService, FrotaEtariaService>();
       services.AddScoped<IFrotaEtariaRepository, FrotaEtariaRepository>();
+
+      services.AddScoped<IFrotaHorariaService, FrotaHorariaService>();
+      services.AddScoped<IFrotaHorariaRepository, FrotaHorariaRepository>();
 
       services.AddScoped<IFuFuncaoService, FuFuncaoService>();
       services.AddScoped<IFuFuncaoRepository, FuFuncaoRepository>();

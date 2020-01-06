@@ -23,7 +23,7 @@ namespace Api.Mappings {
 
       CreateMap<FrotaDto, Frota>().ReverseMap();
       CreateMap<FrotaEtariaDto, FrotaEtaria>().ReverseMap();
-      CreateMap<FrotaHoraDto, FrotaHora>().ReverseMap();
+      CreateMap<FrotaHorariaDto, FrotaHoraria>().ReverseMap();
       CreateMap<FuFuncaoDto, FuFuncao>().ReverseMap();
       CreateMap<FxEtariaDto, FxEtaria>().ReverseMap();
 

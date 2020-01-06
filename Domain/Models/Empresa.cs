@@ -43,7 +43,7 @@ namespace Domain.Models {
     public ICollection<ESistema> ESistemas { get; private set; }
     public ICollection<Frota> Frotas { get; private set; }
     public ICollection<FrotaEtaria> FrotaEtarias { get; private set; }
-    public ICollection<FrotaHora> FrotaHoras { get; private set; }
+    public ICollection<FrotaHoraria> FrotaHorarias { get; private set; }
     public ICollection<FuFuncao> FuFuncoes { get; private set; }
     public ICollection<Instalacao> Instalacoes { get; private set; }
     public ICollection<Linha> Linhas { get; private set; }
