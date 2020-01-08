@@ -321,6 +321,9 @@
   <data name="HorarioIdRequired" xml:space="preserve">
     <value>Informe a Faixa Horária</value>
   </data>
+  <data name="IdadeFrotaRequired" xml:space="preserve">
+    <value>Informe a Idade Média da Frota</value>
+  </data>
   <data name="InativoRequired" xml:space="preserve">
     <value>Informe se Veículo Inativo</value>
   </data>

@@ -16,7 +16,7 @@ namespace Infra.Repositories {
         Func<IQueryable<EInstalacao>, IOrderedQueryable<EInstalacao>> order = null) {                
       try {
         return base.Get(condition, order).Include(e => e.Instalacao)
-                   .Include(e => e.FInstalacao).Include(e => e.Conta);
+                   .Include(e => e.FInstalacao).Include(e => e.Conta).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

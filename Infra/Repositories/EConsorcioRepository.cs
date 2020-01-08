@@ -13,7 +13,7 @@ namespace Infra.Repositories {
     public EConsorcioRepository(DataContext context) : base(context) { }
 
     public decimal? TotalRatio(Expression<Func<EConsorcio, bool>> condition = null) {
-      return Get(condition).Sum(p => p.Ratio);
+      return base.Get(condition).Sum(p => p.Ratio);
     }
 
     protected override IQueryable<EConsorcio> Get(Expression<Func<EConsorcio, bool>> condition = null, 
@@ -21,7 +21,7 @@ namespace Infra.Repositories {
       try {
         return base.Get(condition, order)
                    .Include(c => c.Consorcio).Include(c => c.Empresa)
-                   .Where(e => e.Ativo);
+                   .Where(e => e.Ativo).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

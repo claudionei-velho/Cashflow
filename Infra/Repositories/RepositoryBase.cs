@@ -16,23 +16,6 @@ namespace Infra.Repositories {
       _context = context;
     }
 
-    protected virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> condition = null,
-        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
-      try {
-        IQueryable<TEntity> query = _context.Set<TEntity>().AsNoTracking();
-        if (condition != null) {
-          query = query.Where(condition);
-        }
-        if (order != null) {
-          query = order(query);
-        }
-        return query;
-      }
-      catch (DbException ex) {
-        throw new Exception(ex.Message);
-      }
-    }
-
     public IQueryable<TEntity> GetData(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
       return Get(condition, order);
@@ -41,7 +24,7 @@ namespace Infra.Repositories {
     public IQueryable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns,
         Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
-      return Get(condition, order).Select(columns);
+      return Get(condition, order).Select(columns).AsNoTracking();
     }
 
     public TEntity GetById(int id) {
@@ -80,11 +63,11 @@ namespace Infra.Repositories {
       }
     }
 
-    public TEntity GetFirst(Expression<Func<TEntity, bool>> condition = null) {
+    public TEntity GetFirst(Expression<Func<TEntity, bool>> condition) {
       return Get(condition).FirstOrDefault();
     }
 
-    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition = null) {
+    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition) {
       return await Get(condition).FirstOrDefaultAsync();
     }
 
@@ -150,6 +133,23 @@ namespace Infra.Repositories {
         catch (DbException ex) {
           throw new Exception(ex.Message);
         }
+      }
+    }
+
+    protected virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
+      try {
+        IQueryable<TEntity> query = _context.Set<TEntity>();
+        if (condition != null) {
+          query = query.Where(condition);
+        }
+        if (order != null) {
+          query = order(query);
+        }
+        return query.AsNoTracking();
+      }
+      catch (DbException ex) {
+        throw new Exception(ex.Message);
       }
     }
 

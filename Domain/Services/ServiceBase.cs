@@ -41,11 +41,11 @@ namespace Domain.Services {
       return await _repository.GetByIdAsync(id);
     }
 
-    public TEntity GetFirst(Expression<Func<TEntity, bool>> condition = null) {
+    public TEntity GetFirst(Expression<Func<TEntity, bool>> condition) {
       return _repository.GetFirst(condition);
     }
 
-    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition = null) {
+    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition) {
       return await _repository.GetFirstAsync(condition);
     }
 

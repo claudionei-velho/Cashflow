@@ -16,7 +16,7 @@ namespace Infra.Repositories {
         Func<IQueryable<PCombustivel>, IOrderedQueryable<PCombustivel>> order = null) {
       try {
         return base.Get(condition, order).Include(p => p.Empresa)
-                   .Include(p => p.CVeiculo).Include(p => p.Combustivel);
+                   .Include(p => p.CVeiculo).Include(p => p.Combustivel).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

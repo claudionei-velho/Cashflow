@@ -21,6 +21,11 @@ namespace Infra.Mappings {
       builder.Property(t => t.KmImprodutivo).HasColumnName("KmImprodutivo").HasColumnType("decimal(24, 6)");
       builder.Property(t => t.FrotaOperacao).HasColumnName("FrotaOperacao").IsRequired();
       builder.Property(t => t.FrotaReserva).HasColumnName("FrotaReserva");
+      builder.Property(t => t.IdadeFrota).HasColumnName("IdadeFrota")
+          .IsRequired().HasColumnType("decimal(4, 1)");
+
+      builder.Property(t => t.InicioContrato).HasColumnName("InicioContrato");
+      builder.Property(t => t.TerminoContrato).HasColumnName("TerminoContrato");
       builder.Property(t => t.Demanda).HasColumnName("Demanda").IsRequired();
       builder.Property(t => t.Equivalente).HasColumnName("Equivalente").IsRequired();
       builder.Property(t => t.IPKe).HasColumnName("IPKe").HasColumnType("decimal(24, 6)");

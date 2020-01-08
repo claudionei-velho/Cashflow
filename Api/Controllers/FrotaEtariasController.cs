@@ -25,7 +25,7 @@ namespace Api.Controllers {
 
     // GET: FrotaEtarias
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
                       await _frotaEtarias.GetData(
@@ -53,7 +53,7 @@ namespace Api.Controllers {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
                       await _frotaEtarias.GetData(
-                                f => f.EmpresaId == id, 
+                                f => f.EmpresaId == id,
                                 f => f.OrderBy(q => q.EtariaId)
                             ).ToListAsync()));
       }
@@ -70,6 +70,13 @@ namespace Api.Controllers {
                                 order: f => f.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.EtariaId)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
+      }
+    }
+
+    [HttpGet, Route("Average/{id}")]
+    public IActionResult Average(int id) {
+      using (_frotaEtarias) {
+        return Ok(_frotaEtarias.IdadeFrota(p => p.EmpresaId == id));
       }
     }
 

@@ -22,8 +22,8 @@ namespace Infra.Mappings {
       builder.Property(t => t.Articulado).HasColumnName("Articulado");
       builder.Property(t => t.BiArticulado).HasColumnName("BiArticulado");
       builder.Property(t => t.Frota).HasColumnName("Frota");
-      builder.Property(t => t.Ratio).HasColumnName("Ratio");
-      builder.Property(t => t.EqvIdade).HasColumnName("EqvIdade");
+      builder.Property(t => t.Ratio).HasColumnName("Ratio").HasColumnType("decimal(24, 6)");
+      builder.Property(t => t.EqvIdade).HasColumnName("EqvIdade").HasColumnType("decimal(24, 3)");
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Empresa)

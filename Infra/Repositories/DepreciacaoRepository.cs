@@ -43,8 +43,8 @@ namespace Infra.Repositories {
     protected override IQueryable<Depreciacao> Get(Expression<Func<Depreciacao, bool>> condition = null,
         Func<IQueryable<Depreciacao>, IOrderedQueryable<Depreciacao>> order = null) {
       try {
-        return base.Get(condition, order)
-                   .Include(d => d.ECVeiculo).Include(d => d.FxEtaria);
+        return base.Get(condition, order).Include(d => d.ECVeiculo)
+                   .Include(d => d.FxEtaria).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
@@ -52,7 +52,7 @@ namespace Infra.Repositories {
     }
 
     private int SomaIdade(Expression<Func<Depreciacao, bool>> condition) {
-      return Get(condition).Sum(d => d.Anos);
+      return base.Get(condition).Sum(d => d.Anos);
     }
   }
 }

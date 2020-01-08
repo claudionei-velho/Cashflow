@@ -12,7 +12,7 @@
     public int? BiArticulado { get; private set; }
     public int? Frota { get; private set; }
     public decimal? Ratio { get; private set; }
-    public int? EqvIdade { get; private set; }
+    public decimal? EqvIdade { get; private set; }
 
     // Navigation Properties
     public Empresa Empresa { get; private set; }

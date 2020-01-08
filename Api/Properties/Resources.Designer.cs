@@ -673,6 +673,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Idade Média da Frota.
+        /// </summary>
+        public static string IdadeFrotaRequired {
+            get {
+                return ResourceManager.GetString("IdadeFrotaRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se Veículo Inativo.
         /// </summary>
         public static string InativoRequired {

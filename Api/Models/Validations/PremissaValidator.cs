@@ -10,6 +10,10 @@ namespace Api.Models.Validations {
       RuleFor(p => p.Mes).NotNull().WithMessage(x => Resources.MesRequired);
       RuleFor(p => p.KmProdutivo).NotNull().WithMessage(x => Resources.KmProdutivoRequired);
       RuleFor(p => p.FrotaOperacao).NotNull().WithMessage(x => Resources.FrotaOperacaoRequired);
+      RuleFor(p => p.IdadeFrota)
+          .NotNull().WithMessage(x => Resources.IdadeFrotaRequired)
+          .ScalePrecision(4, 1);
+
       RuleFor(p => p.Demanda).NotNull().WithMessage(x => Resources.DemandaRequired);
       RuleFor(p => p.Equivalente).NotNull().WithMessage(x => Resources.EquivalenteRequired);
     }

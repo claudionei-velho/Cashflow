@@ -7,6 +7,8 @@ namespace Domain.Models {
     public int Minimo { get; private set; }
     public int Maximo { get; private set; }
 
+    public decimal Media => (Minimo + Maximo) * 0.5m;
+
     // Navigation Properties
     public ICollection<Depreciacao> Depreciacoes { get; private set; }
     public ICollection<Frota> Frotas { get; private set; }

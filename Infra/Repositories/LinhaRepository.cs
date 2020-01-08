@@ -16,8 +16,10 @@ namespace Infra.Repositories {
         Func<IQueryable<Linha>, IOrderedQueryable<Linha>> order = null) {
       try {
         return base.Get(condition, order).Include(l => l.Empresa)
-                   .Include(l => l.EDominio.Dominio).Include(l => l.Operacao.OpLinha)
-                   .Include(l => l.CLinha.ClassLinha).Include(l => l.Lote.Bacia);
+                   .Include(l => l.EDominio.Dominio)
+                   .Include(l => l.Operacao.OpLinha)
+                   .Include(l => l.CLinha.ClassLinha)
+                   .Include(l => l.Lote.Bacia).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

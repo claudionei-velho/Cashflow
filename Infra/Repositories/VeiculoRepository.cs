@@ -15,8 +15,7 @@ namespace Infra.Repositories {
     public IQueryable<Veiculo> GetNoChassi(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
       try {
-        int[] selected = _context.Chassis.AsNoTracking()
-                             .Select(q => q.VeiculoId).Distinct().ToArray();
+        int[] selected = _context.Chassis.Select(q => q.VeiculoId).Distinct().ToArray();
 
         IQueryable<Veiculo> query = GetListVeiculos(selected);
         if (condition != null) {
@@ -35,8 +34,7 @@ namespace Infra.Repositories {
     public IQueryable<Veiculo> GetNoCarroceria(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
       try {
-        int[] selected = _context.Carrocerias.AsNoTracking()
-                             .Select(q => q.VeiculoId).Distinct().ToArray();
+        int[] selected = _context.Carrocerias.Select(q => q.VeiculoId).Distinct().ToArray();
 
         IQueryable<Veiculo> query = GetListVeiculos(selected);
         if (condition != null) {
@@ -60,7 +58,7 @@ namespace Infra.Repositories {
         }
         return base.Get(condition, order)
                    .Include(v => v.Empresa).Include(v => v.CVeiculo)
-                   .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero);
+                   .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
@@ -68,9 +66,7 @@ namespace Infra.Repositories {
     }
 
     private IQueryable<Veiculo> GetListVeiculos(int[] list) {
-      return (from v in Get()
-              where !list.Contains(v.Id)
-              select v).AsNoTracking();
+      return from v in Get() where !list.Contains(v.Id) select v;
     }
   }
 }

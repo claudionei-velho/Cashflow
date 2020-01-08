@@ -15,8 +15,8 @@ namespace Infra.Repositories {
     protected override IQueryable<SistFuncao> Get(Expression<Func<SistFuncao, bool>> condition = null, 
         Func<IQueryable<SistFuncao>, IOrderedQueryable<SistFuncao>> order = null) {                
       try {
-        return base.Get(condition, order)
-                   .Include(f => f.ESistema).Include(f => f.Funcao);
+        return base.Get(condition, order).Include(f => f.ESistema)
+                   .Include(f => f.Funcao).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

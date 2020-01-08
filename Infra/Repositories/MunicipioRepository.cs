@@ -14,14 +14,14 @@ namespace Infra.Repositories {
 
     public IQueryable<Municipio> GetExpertise() {
       try {
-        int[] cities = _context.Empresas.AsNoTracking().Select(e => e.MunicipioId).Union(
-                           _context.Consorcios.AsNoTracking().Select(c => c.MunicipioId)
+        int[] cities = _context.Empresas.Select(e => e.MunicipioId).Union(
+                           _context.Consorcios.Select(c => c.MunicipioId)
                        ).Distinct().ToArray();
 
         return (from city in _context.Municipios
                 where cities.Contains(city.Id)
                 orderby city.Nome
-                select city).AsNoTracking().Include(m => m.Uf);
+                select city).Include(m => m.Uf).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
@@ -31,7 +31,7 @@ namespace Infra.Repositories {
     protected override IQueryable<Municipio> Get(Expression<Func<Municipio, bool>> condition = null, 
         Func<IQueryable<Municipio>, IOrderedQueryable<Municipio>> order = null) {
       try {
-        return base.Get(condition, order).Include(m => m.Uf);
+        return base.Get(condition, order).Include(m => m.Uf).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

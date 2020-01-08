@@ -15,7 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<PCoeficiente> Get(Expression<Func<PCoeficiente, bool>> condition = null, 
         Func<IQueryable<PCoeficiente>, IOrderedQueryable<PCoeficiente>> order = null) {
       try {
-        return base.Get(condition, order).Include(p => p.Empresa);
+        return base.Get(condition, order).Include(p => p.Empresa).AsNoTracking();
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

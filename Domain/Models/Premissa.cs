@@ -27,6 +27,9 @@ namespace Domain.Models {
       }
     }
 
+    public decimal IdadeFrota { get; private set; }
+    public DateTime? InicioContrato { get; private set; }
+    public DateTime? TerminoContrato { get; private set; }
     public int Demanda { get; private set; }
     public int Equivalente { get; private set; }
 

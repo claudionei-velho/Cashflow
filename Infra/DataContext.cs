@@ -145,6 +145,9 @@ namespace Infra {
       // dbo.Funcoes
       modelBuilder.Entity<Funcao>().Ignore(p => p.Vigente);
 
+      // Faixas Etarias
+      modelBuilder.Entity<FxEtaria>().Ignore(p => p.Media);
+
       // Linhas
       modelBuilder.Entity<Linha>().Ignore(p => p.Descricao);
       modelBuilder.Entity<Linha>().Ignore(p => p.DiasOperacao);
