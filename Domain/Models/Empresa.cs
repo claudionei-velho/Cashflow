@@ -47,6 +47,7 @@ namespace Domain.Models {
     public ICollection<FuFuncao> FuFuncoes { get; private set; }
     public ICollection<Instalacao> Instalacoes { get; private set; }
     public ICollection<Linha> Linhas { get; private set; }
+    public ICollection<NFiscal> NFiscais { get; private set; }
     public ICollection<Operacao> Operacoes { get; private set; }
     public ICollection<Operacional> Operacionais { get; private set; }
     public ICollection<PCoeficiente> PCoeficientes { get; private set; }

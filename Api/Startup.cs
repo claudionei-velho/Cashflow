@@ -198,6 +198,12 @@ namespace Api {
       services.AddScoped<IMunicipioService, MunicipioService>();
       services.AddScoped<IMunicipioRepository, MunicipioRepository>();
 
+      services.AddScoped<INFiscalService, NFiscalService>();
+      services.AddScoped<INFiscalRepository, NFiscalRepository>();
+
+      services.AddScoped<INfReferenciaService, NfReferenciaService>();
+      services.AddScoped<INfReferenciaRepository, NfReferenciaRepository>();
+
       services.AddScoped<IOperacaoService, OperacaoService>();
       services.AddScoped<IOperacaoRepository, OperacaoRepository>();
 

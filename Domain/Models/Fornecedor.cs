@@ -33,6 +33,8 @@ namespace Domain.Models {
     public Municipio Municipio { get; private set; }
     public Pais Pais { get; private set; }
 
+    public ICollection<NFiscal> NFiscais { get; private set; }
+    public ICollection<NfReferencia> NfReferencias { get; private set; }
     public ICollection<VCatalogo> VCatalogos { get; private set; }
   }
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnoMesRequired" xml:space="preserve">
+    <value>Informe o Ano e Mês de Emissão</value>
+  </data>
   <data name="AnoRequired" xml:space="preserve">
     <value>Informe o Ano</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ChassiNoRequired" xml:space="preserve">
     <value>Informe o Número do Chassi</value>
+  </data>
+  <data name="ChaveNfeRequired" xml:space="preserve">
+    <value>Informe a Chave</value>
   </data>
   <data name="ClasseIdRequired" xml:space="preserve">
     <value>Informe a Classe</value>
@@ -225,6 +231,9 @@
   <data name="DiaIdRequired" xml:space="preserve">
     <value>Informe o Dia de Operação</value>
   </data>
+  <data name="DigitoRequired" xml:space="preserve">
+    <value>Informe o Dígito Verificador da Chave</value>
+  </data>
   <data name="DistribuicaoRequired" xml:space="preserve">
     <value>Informe se Linha de Distribuição</value>
   </data>
@@ -248,6 +257,12 @@
   </data>
   <data name="EmbarcadoDto" xml:space="preserve">
     <value>da Tecnologia Embarcada</value>
+  </data>
+  <data name="EmissaoRequired" xml:space="preserve">
+    <value>Informe a Data de Emissão</value>
+  </data>
+  <data name="EmitenteRequired" xml:space="preserve">
+    <value>Informe o Emitente</value>
   </data>
   <data name="EmpresaDto" xml:space="preserve">
     <value>da Empresa</value>
@@ -282,11 +297,17 @@
   <data name="FantasiaRequired" xml:space="preserve">
     <value>Informe o Nome Fantasia</value>
   </data>
+  <data name="FinalidadeRequired" xml:space="preserve">
+    <value>Informe a Finalidade</value>
+  </data>
   <data name="FornecedorDto" xml:space="preserve">
     <value>do Fornecedor</value>
   </data>
   <data name="FornecedorIdRequired" xml:space="preserve">
     <value>Informe o Fornecedor</value>
+  </data>
+  <data name="FPagamentoIdRequired" xml:space="preserve">
+    <value>Informe a Forma de Pagamento</value>
   </data>
   <data name="FrotaDto" xml:space="preserve">
     <value>da Frota da Empresa</value>
@@ -369,14 +390,29 @@
   <data name="MunicipioRequired" xml:space="preserve">
     <value>Informe o Município</value>
   </data>
+  <data name="NaturezaRequired" xml:space="preserve">
+    <value>Informe a Natureza da Operação</value>
+  </data>
   <data name="NcmIdRequired" xml:space="preserve">
     <value>Informe o Código NCM</value>
+  </data>
+  <data name="NFiscalDto" xml:space="preserve">
+    <value>da NF-e (Nota Fiscal Eletrônica)</value>
+  </data>
+  <data name="NfReferenciaDto" xml:space="preserve">
+    <value>da Nota Fiscal Referenciada</value>
+  </data>
+  <data name="NotaIdRequired" xml:space="preserve">
+    <value>Informe a Nota Fiscal</value>
   </data>
   <data name="NumeroRequired" xml:space="preserve">
     <value>Informe o Número</value>
   </data>
   <data name="OperacaoIdRequired" xml:space="preserve">
     <value>Informe a Operação</value>
+  </data>
+  <data name="OperacaoRequired" xml:space="preserve">
+    <value>Informe o Tipo de Operação</value>
   </data>
   <data name="PaisIdRequired" xml:space="preserve">
     <value>Informe o País</value>
@@ -449,6 +485,9 @@
   </data>
   <data name="SentidoRequired" xml:space="preserve">
     <value>Informe o Sentido</value>
+  </data>
+  <data name="SerieRequired" xml:space="preserve">
+    <value>Informe a Série</value>
   </data>
   <data name="SetorDto" xml:space="preserve">
     <value>do Setor</value>

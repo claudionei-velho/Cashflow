@@ -66,6 +66,8 @@ namespace Infra {
     public DbSet<Lote> Lotes { get; private set; }
     public DbSet<Municipio> Municipios { get; private set; }
     public DbSet<Ncm> Ncms { get; private set; }
+    public DbSet<NFiscal> NFiscais { get; private set; }
+    public DbSet<NfReferencia> NfReferencias { get; private set; }
     public DbSet<Operacao> Operacoes { get; private set; }
     public DbSet<Operacional> Operacionais { get; private set; }
     public DbSet<OpLinha> OperLinhas { get; private set; }
@@ -153,6 +155,10 @@ namespace Infra {
       modelBuilder.Entity<Linha>().Ignore(p => p.DiasOperacao);
       modelBuilder.Entity<Linha>().Ignore(p => p.Funcao);
       modelBuilder.Entity<Linha>().Ignore(p => p.Extensao);
+
+      // NF-e: Notas Fiscais
+      modelBuilder.Entity<NFiscal>().Ignore(p => p.FPagamentoCap);
+      modelBuilder.Entity<NFiscal>().Ignore(p => p.FinalidadeCap);
 
       // Plano Operacional
       modelBuilder.Entity<Operacional>().Ignore(p => p.PercursoUtil);

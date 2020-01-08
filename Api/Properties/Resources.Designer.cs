@@ -61,6 +61,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe o Ano e Mês de Emissão.
+        /// </summary>
+        public static string AnoMesRequired {
+            get {
+                return ResourceManager.GetString("AnoMesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Ano.
         /// </summary>
         public static string AnoRequired {
@@ -174,6 +183,15 @@ namespace Api.Properties {
         public static string ChassiNoRequired {
             get {
                 return ResourceManager.GetString("ChassiNoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Chave.
+        /// </summary>
+        public static string ChaveNfeRequired {
+            get {
+                return ResourceManager.GetString("ChaveNfeRequired", resourceCulture);
             }
         }
         
@@ -385,6 +403,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe o Dígito Verificador da Chave.
+        /// </summary>
+        public static string DigitoRequired {
+            get {
+                return ResourceManager.GetString("DigitoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se Linha de Distribuição.
         /// </summary>
         public static string DistribuicaoRequired {
@@ -453,6 +480,24 @@ namespace Api.Properties {
         public static string EmbarcadoDto {
             get {
                 return ResourceManager.GetString("EmbarcadoDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Data de Emissão.
+        /// </summary>
+        public static string EmissaoRequired {
+            get {
+                return ResourceManager.GetString("EmissaoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Emitente.
+        /// </summary>
+        public static string EmitenteRequired {
+            get {
+                return ResourceManager.GetString("EmitenteRequired", resourceCulture);
             }
         }
         
@@ -556,6 +601,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Finalidade.
+        /// </summary>
+        public static string FinalidadeRequired {
+            get {
+                return ResourceManager.GetString("FinalidadeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to do Fornecedor.
         /// </summary>
         public static string FornecedorDto {
@@ -570,6 +624,15 @@ namespace Api.Properties {
         public static string FornecedorIdRequired {
             get {
                 return ResourceManager.GetString("FornecedorIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Forma de Pagamento.
+        /// </summary>
+        public static string FPagamentoIdRequired {
+            get {
+                return ResourceManager.GetString("FPagamentoIdRequired", resourceCulture);
             }
         }
         
@@ -817,11 +880,47 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Natureza da Operação.
+        /// </summary>
+        public static string NaturezaRequired {
+            get {
+                return ResourceManager.GetString("NaturezaRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Código NCM.
         /// </summary>
         public static string NcmIdRequired {
             get {
                 return ResourceManager.GetString("NcmIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to da NF-e (Nota Fiscal Eletrônica).
+        /// </summary>
+        public static string NFiscalDto {
+            get {
+                return ResourceManager.GetString("NFiscalDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to da Nota Fiscal Referenciada.
+        /// </summary>
+        public static string NfReferenciaDto {
+            get {
+                return ResourceManager.GetString("NfReferenciaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Nota Fiscal.
+        /// </summary>
+        public static string NotaIdRequired {
+            get {
+                return ResourceManager.GetString("NotaIdRequired", resourceCulture);
             }
         }
         
@@ -840,6 +939,15 @@ namespace Api.Properties {
         public static string OperacaoIdRequired {
             get {
                 return ResourceManager.GetString("OperacaoIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Tipo de Operação.
+        /// </summary>
+        public static string OperacaoRequired {
+            get {
+                return ResourceManager.GetString("OperacaoRequired", resourceCulture);
             }
         }
         
@@ -1056,6 +1164,15 @@ namespace Api.Properties {
         public static string SentidoRequired {
             get {
                 return ResourceManager.GetString("SentidoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Série.
+        /// </summary>
+        public static string SerieRequired {
+            get {
+                return ResourceManager.GetString("SerieRequired", resourceCulture);
             }
         }
         
