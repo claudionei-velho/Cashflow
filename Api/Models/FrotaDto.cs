@@ -10,8 +10,8 @@
     public int Quantidade { get; set; }
 
     // Navigation Properties
-    public CVeiculoDto CVeiculo { get; set; }
-    public EmpresaDto Empresa { get; set; }
-    public FxEtariaDto FxEtaria { get; set; }
+    public CVeiculoDto CVeiculo { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
+    public FxEtariaDto FxEtaria { get; private set; }
   }
 }

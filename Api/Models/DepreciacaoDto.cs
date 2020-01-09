@@ -7,7 +7,7 @@
     public decimal? Acumulado { get; set; }
 
     // Navigation Properties
-    public ECVeiculoDto ECVeiculo { get; set; }
-    public FxEtariaDto FxEtaria { get; set; }
+    public ECVeiculoDto ECVeiculo { get; private set; }
+    public FxEtariaDto FxEtaria { get; private set; }
   }
 }

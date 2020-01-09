@@ -66,10 +66,10 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public CLinhaDto CLinha { get; set; }
-    public EDominioDto EDominio { get; set; }
-    public EmpresaDto Empresa { get; set; }
-    public LoteDto Lote { get; set; }
-    public OperacaoDto Operacao { get; set; }
+    public CLinhaDto CLinha { get; private set; }
+    public EDominioDto EDominio { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
+    public LoteDto Lote { get; private set; }
+    public OperacaoDto Operacao { get; private set; }
   }
 }

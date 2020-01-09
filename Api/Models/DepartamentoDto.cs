@@ -11,7 +11,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public CargoDto Cargo { get; set; }
-    public SetorDto Setor { get; set; }
+    public CargoDto Cargo { get; private set; }
+    public SetorDto Setor { get; private set; }
   }
 }

@@ -10,7 +10,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public CentroDto Vinculo { get; set; }
-    public EmpresaDto Empresa { get; set; }
+    public CentroDto Vinculo { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

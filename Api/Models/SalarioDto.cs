@@ -12,6 +12,6 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public FuncaoDto Funcao { get; set; }
+    public FuncaoDto Funcao { get; private set; }
   }
 }

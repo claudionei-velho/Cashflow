@@ -27,6 +27,6 @@ namespace Api.Models {
     public decimal? PercursoAno => Math.Round(Dias * Percurso, 1);
 
     // Navigation Properties
-    public EmpresaDto Empresa { get; set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

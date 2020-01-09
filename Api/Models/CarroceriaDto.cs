@@ -37,6 +37,6 @@ namespace Api.Models {
     public bool SaidaTras { get; set; }
 
     // Navigation Properties
-    public VeiculoDto Veiculo { get; set; }
+    public VeiculoDto Veiculo { get; private set; }
   }
 }

@@ -8,7 +8,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public DominioDto Dominio { get; set; }
-    public EmpresaDto Empresa { get; set; }
+    public DominioDto Dominio { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

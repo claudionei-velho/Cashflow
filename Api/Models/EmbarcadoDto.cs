@@ -17,7 +17,7 @@ namespace Api.Models {
     public int? OSDesinstala { get; set; }
 
     // Navigation Properties
-    public VeiculoDto Veiculo { get; set; }
-    public VEquipamentoDto Equipamento { get; set; }
+    public VeiculoDto Veiculo { get; private set; }
+    public VEquipamentoDto Equipamento { get; private set; }
   }
 }

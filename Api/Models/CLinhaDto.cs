@@ -8,7 +8,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public ClassLinhaDto ClassLinha { get; set; }
-    public EmpresaDto Empresa { get; set; }
+    public ClassLinhaDto ClassLinha { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

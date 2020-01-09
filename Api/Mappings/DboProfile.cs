@@ -13,6 +13,7 @@ namespace Api.Mappings {
       CreateMap<ClassLinhaDto, ClassLinha>().ReverseMap();
       CreateMap<ConsorcioDto, Consorcio>().ReverseMap();
       CreateMap<ContaDto, Conta>().ReverseMap();
+      CreateMap<ContatoDto, Contato>().ReverseMap();
 
       CreateMap<DepartamentoDto, Departamento>().ReverseMap();
       CreateMap<DominioDto, Dominio>().ReverseMap();

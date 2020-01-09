@@ -15,7 +15,7 @@
     public int? EqvIdade { get; set; }
 
     // Navigation Properties
-    public EmpresaDto Empresa { get; set; }
-    public FxEtariaDto FxEtaria { get; set; }
+    public EmpresaDto Empresa { get; private set; }
+    public FxEtariaDto FxEtaria { get; private set; }
   }
 }

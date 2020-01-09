@@ -32,6 +32,7 @@ namespace Domain.Models {
     public ICollection<Centro> Centros { get; private set; }
     public ICollection<CLinha> CLinhas { get; private set; }
     public ICollection<Conta> Contas { get; private set; }
+    public ICollection<Contato> Contatos { get; private set; }
     public ICollection<CstCarroceria> CstCarrocerias { get; private set; }
     public ICollection<CstChassi> CstChassis { get; private set; }
     public ICollection<CstCombustivel> CstCombustiveis { get; private set; }

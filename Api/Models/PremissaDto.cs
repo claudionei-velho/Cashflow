@@ -27,9 +27,9 @@ namespace Api.Models {
       }
     }
 
-    public decimal IdadeFrota { get; private set; }
-    public DateTime? InicioContrato { get; private set; }
-    public DateTime? TerminoContrato { get; private set; }
+    public decimal IdadeFrota { get; set; }
+    public DateTime? InicioContrato { get; set; }
+    public DateTime? TerminoContrato { get; set; }
     public int Demanda { get; set; }
     public int Equivalente { get; set; }
 
@@ -48,6 +48,6 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public EmpresaDto Empresa { get; set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

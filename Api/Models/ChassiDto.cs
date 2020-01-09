@@ -36,6 +36,6 @@ namespace Api.Models {
     public string DirecaoCap => new Direcao().Items[DirecaoId ?? 1];
 
     // Navigation Properties
-    public VeiculoDto Veiculo { get; set; }
+    public VeiculoDto Veiculo { get; private set; }
   }
 }

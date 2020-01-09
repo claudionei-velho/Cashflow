@@ -20,8 +20,8 @@
     public decimal? PercursoDom => Extensao * ViagensDom;
 
     // Navigation Properties
-    public AtendimentoDto Atendimento { get; set; }
-    public EmpresaDto Empresa { get; set; }
-    public LinhaDto Linha { get; set; }    
+    public AtendimentoDto Atendimento { get; private set; }
+    public EmpresaDto Empresa { get; private set; }
+    public LinhaDto Linha { get; private set; }
   }
 }

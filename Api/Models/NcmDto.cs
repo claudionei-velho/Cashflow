@@ -8,6 +8,6 @@
     public int? GrupoId { get; set; }
 
     // Navigation Properties
-    public NcmDto Agrupamento { get; set; }
+    public NcmDto Agrupamento { get; private set; }
   }
 }

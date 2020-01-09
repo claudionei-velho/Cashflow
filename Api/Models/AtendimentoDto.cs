@@ -42,6 +42,6 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public LinhaDto Linha { get; set; }
+    public LinhaDto Linha { get; private set; }
   }
 }

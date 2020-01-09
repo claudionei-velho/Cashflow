@@ -10,7 +10,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public NcmDto Ncm { get; set; }
-    public UComercialDto UComercial { get; set; }
+    public NcmDto Ncm { get; private set; }
+    public UComercialDto UComercial { get; private set; }
   }
 }

@@ -29,7 +29,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public MunicipioDto Municipio { get; set; }
-    public PaisDto Pais { get; set; }
+    public MunicipioDto Municipio { get; private set; }
+    public PaisDto Pais { get; private set; }
   }
 }

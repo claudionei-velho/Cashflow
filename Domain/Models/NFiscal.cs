@@ -31,6 +31,7 @@ namespace Domain.Models {
     public Empresa Empresa { get; private set; }
     public Fornecedor Fornecedor { get; private set; }
 
+    public ICollection<NfEntrega> NfEntregas { get; private set; }
     public ICollection<NfReferencia> NfReferencias { get; private set; }
   }
 }

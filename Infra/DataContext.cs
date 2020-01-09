@@ -35,6 +35,7 @@ namespace Infra {
     public DbSet<CLinha> CLinhas { get; private set; }
     public DbSet<Consorcio> Consorcios { get; private set; }
     public DbSet<Conta> Contas { get; private set; }
+    public DbSet<Contato> Contatos { get; private set; }
     public DbSet<CstCarroceria> CstCarrocerias { get; private set; }
     public DbSet<CstChassi> CstChassis { get; private set; }
     public DbSet<CstCombustivel> CstCombustiveis { get; private set; }
@@ -66,6 +67,7 @@ namespace Infra {
     public DbSet<Lote> Lotes { get; private set; }
     public DbSet<Municipio> Municipios { get; private set; }
     public DbSet<Ncm> Ncms { get; private set; }
+    public DbSet<NfEntrega> NfEntregas { get; private set; }
     public DbSet<NFiscal> NFiscais { get; private set; }
     public DbSet<NfReferencia> NfReferencias { get; private set; }
     public DbSet<Operacao> Operacoes { get; private set; }

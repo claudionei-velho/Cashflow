@@ -8,6 +8,6 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public BaciaDto Bacia { get; set; }
+    public BaciaDto Bacia { get; private set; }
   }
 }

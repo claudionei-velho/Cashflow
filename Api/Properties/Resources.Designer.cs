@@ -304,6 +304,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to do Contato da Empresa.
+        /// </summary>
+        public static string ContatoDto {
+            get {
+                return ResourceManager.GetString("ContatoDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe a Cor.
         /// </summary>
         public static string CorRequired {
@@ -898,6 +907,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to do Local de Entrega.
+        /// </summary>
+        public static string NfEntregaDto {
+            get {
+                return ResourceManager.GetString("NfEntregaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to da NF-e (Nota Fiscal Eletrônica).
         /// </summary>
         public static string NFiscalDto {
@@ -912,6 +930,15 @@ namespace Api.Properties {
         public static string NfReferenciaDto {
             get {
                 return ResourceManager.GetString("NfReferenciaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Nome.
+        /// </summary>
+        public static string NomeRequired {
+            get {
+                return ResourceManager.GetString("NomeRequired", resourceCulture);
             }
         }
         
@@ -1236,6 +1263,15 @@ namespace Api.Properties {
         public static string TCategoriaDto {
             get {
                 return ResourceManager.GetString("TCategoriaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o(s) Telefone(s).
+        /// </summary>
+        public static string TelefoneRequired {
+            get {
+                return ResourceManager.GetString("TelefoneRequired", resourceCulture);
             }
         }
         

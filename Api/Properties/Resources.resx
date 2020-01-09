@@ -198,6 +198,9 @@
   <data name="ContaIdRequired" xml:space="preserve">
     <value>Informe a Conta</value>
   </data>
+  <data name="ContatoDto" xml:space="preserve">
+    <value>do Contato da Empresa</value>
+  </data>
   <data name="CorRequired" xml:space="preserve">
     <value>Informe a Cor</value>
   </data>
@@ -396,11 +399,17 @@
   <data name="NcmIdRequired" xml:space="preserve">
     <value>Informe o Código NCM</value>
   </data>
+  <data name="NfEntregaDto" xml:space="preserve">
+    <value>do Local de Entrega</value>
+  </data>
   <data name="NFiscalDto" xml:space="preserve">
     <value>da NF-e (Nota Fiscal Eletrônica)</value>
   </data>
   <data name="NfReferenciaDto" xml:space="preserve">
     <value>da Nota Fiscal Referenciada</value>
+  </data>
+  <data name="NomeRequired" xml:space="preserve">
+    <value>Informe o Nome</value>
   </data>
   <data name="NotaIdRequired" xml:space="preserve">
     <value>Informe a Nota Fiscal</value>
@@ -509,6 +518,9 @@
   </data>
   <data name="TCategoriaDto" xml:space="preserve">
     <value>da Modalidade Tarifária</value>
+  </data>
+  <data name="TelefoneRequired" xml:space="preserve">
+    <value>Informe o(s) Telefone(s)</value>
   </data>
   <data name="TitularRequired" xml:space="preserve">
     <value>Informe a quantidade de Titulares na Função</value>

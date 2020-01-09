@@ -13,5 +13,6 @@ namespace Domain.Models {
     public ICollection<Consorcio> Consorcios { get; private set; }
     public ICollection<Empresa> Empresas { get; private set; }
     public ICollection<Fornecedor> Fornecedores { get; private set; }
+    public ICollection<NfEntrega> NfEntregas { get; private set; }
   }
 }

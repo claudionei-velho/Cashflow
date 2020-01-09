@@ -8,6 +8,6 @@ namespace Api.Models {
     public decimal Valor { get; set; }
     public string Decreto { get; set; }
 
-    public EmpresaDto Empresa { get; set; }
+    public EmpresaDto Empresa { get; private set; }
   }
 }

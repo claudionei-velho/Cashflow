@@ -27,7 +27,7 @@ namespace Api.Models {
     public decimal? Ratio { get; set; }
 
     // Navigation Properties
-    public EmpresaDto Empresa { get; set; }
-    public TCategoriaDto TCategoria { get; set; }
+    public EmpresaDto Empresa { get; private set; }
+    public TCategoriaDto TCategoria { get; private set; }
   }
 }

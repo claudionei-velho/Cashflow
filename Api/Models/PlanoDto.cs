@@ -12,7 +12,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public AtendimentoDto Atendimento { get; set; }
-    public LinhaDto Linha { get; set; }    
+    public AtendimentoDto Atendimento { get; private set; }
+    public LinhaDto Linha { get; private set; }
   }
 }

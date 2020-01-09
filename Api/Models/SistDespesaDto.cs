@@ -12,7 +12,7 @@ namespace Api.Models {
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
-    public ContaDto Conta { get; set; }
-    public ESistemaDto ESistema { get; set; }
+    public ContaDto Conta { get; private set; }
+    public ESistemaDto ESistema { get; private set; }
   }
 }

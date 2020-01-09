@@ -2,19 +2,19 @@
 
 namespace Api.Models {
   public class EConsorcioDto {
-    public int Id { get; private set; }
-    public int ConsorcioId { get; private set; }
-    public int EmpresaId { get; private set; }
-    public decimal Ratio { get; private set; }
-    public DateTime Integracao { get; private set; }
-    public string Documento { get; private set; }
-    public DateTime? Desintegracao { get; private set; }
+    public int Id { get; set; }
+    public int ConsorcioId { get; set; }
+    public int EmpresaId { get; set; }
+    public decimal Ratio { get; set; }
+    public DateTime Integracao { get; set; }
+    public string Documento { get; set; }
+    public DateTime? Desintegracao { get; set; }
 
     public bool Ativo => Desintegracao == null;
 
-    public string Responsavel { get; private set; }
-    public string CpfResponsavel { get; private set; }
-    public DateTime? Cadastro { get; private set; }
+    public string Responsavel { get; set; }
+    public string CpfResponsavel { get; set; }
+    public DateTime? Cadastro { get; set; }
 
     // Navigation Properties
     public ConsorcioDto Consorcio { get; private set; }

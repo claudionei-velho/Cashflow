@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Newtonsoft.Json.Serialization;
-
+  
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
@@ -123,6 +123,9 @@ namespace Api {
       services.AddScoped<IContaService, ContaService>();
       services.AddScoped<IContaRepository, ContaRepository>();
 
+      services.AddScoped<IContatoService, ContatoService>();
+      services.AddScoped<IContatoRepository, ContatoRepository>();
+
       services.AddScoped<ICstCarroceriaService, CstCarroceriaService>();
       services.AddScoped<ICstCarroceriaRepository, CstCarroceriaRepository>();
 
@@ -197,6 +200,9 @@ namespace Api {
 
       services.AddScoped<IMunicipioService, MunicipioService>();
       services.AddScoped<IMunicipioRepository, MunicipioRepository>();
+
+      services.AddScoped<INfEntregaService, NfEntregaService>();
+      services.AddScoped<INfEntregaRepository, NfEntregaRepository>();
 
       services.AddScoped<INFiscalService, NFiscalService>();
       services.AddScoped<INFiscalRepository, NFiscalRepository>();
