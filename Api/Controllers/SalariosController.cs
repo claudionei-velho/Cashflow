@@ -42,7 +42,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_salarios) {
-        Salario salario = await _salarios.GetByIdAsync(id);
+        Salario salario = await _salarios.GetFirstAsync(s => s.Id == id);
         if (salario == null) {
           return NotFound();
         }

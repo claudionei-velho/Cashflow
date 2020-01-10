@@ -42,7 +42,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_custos) {
-        CstPneu custo = await _custos.GetByIdAsync(id);
+        CstPneu custo = await _custos.GetFirstAsync(c => c.Id == id);
         if (custo == null) {
           return NotFound();
         }

@@ -41,7 +41,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_departamentos) {
-        Departamento departamento = await _departamentos.GetByIdAsync(id);
+        Departamento departamento = await _departamentos.GetFirstAsync(d => d.Id == id);
         if (departamento == null) {
           return NotFound();
         }

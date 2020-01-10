@@ -40,7 +40,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_vEquipamentos) {
-        VEquipamento vEquipamento = await _vEquipamentos.GetByIdAsync(id);
+        VEquipamento vEquipamento = await _vEquipamentos.GetFirstAsync(e => e.Id == id);
         if (vEquipamento == null) {
           return NotFound();
         }

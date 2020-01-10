@@ -40,7 +40,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_dSistemas) {
-        SistDespesa dSistema = await _dSistemas.GetByIdAsync(id);
+        SistDespesa dSistema = await _dSistemas.GetFirstAsync(d => d.Id == id);
         if (dSistema == null) {
           return NotFound();
         }

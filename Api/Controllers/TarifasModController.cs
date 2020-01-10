@@ -38,7 +38,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_tarifas) {
-        TarifaMod tarifa = await _tarifas.GetByIdAsync(id);
+        TarifaMod tarifa = await _tarifas.GetFirstAsync(t => t.Id == id);
         if (tarifa == null) {
           return NotFound();
         }

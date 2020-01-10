@@ -36,11 +36,11 @@ namespace Api.Controllers {
     }
 
     // GET: PSinteses/5
-    [HttpGet("{id}/{dia}")]
-    public async Task<IActionResult> Get(int id, int dia) {
+    [HttpGet("{id}/{dd}")]
+    public async Task<IActionResult> Get(int id, int dd) {
       using (_sinteses) {
         PSintese sintese = await _sinteses.GetFirstAsync(
-                                     p => p.EmpresaId == id && p.DiaId == dia);
+                                     p => p.EmpresaId == id && p.DiaId == dd);
         if (sintese == null) {
           return NotFound();
         }

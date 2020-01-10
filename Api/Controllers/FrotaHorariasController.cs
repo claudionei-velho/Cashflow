@@ -35,6 +35,18 @@ namespace Api.Controllers {
       }
     }
 
+    // GET: FrotaHorarias/5/5
+    [HttpGet("{id}/{hr}")]
+    public async Task<IActionResult> Get(int id, int hr) {
+      using (_frotaHorarias) {
+        FrotaHoraria frotaHoraria = await _frotaHorarias.GetFirstAsync(
+                                              f => (f.EmpresaId == id) && (f.Hora == hr));
+        if (frotaHoraria == null) {
+          return NotFound();
+        }
+        return Ok(_mapper.Map<FrotaHorariaDto>(frotaHoraria));
+      }
+    }
 
     [HttpGet, Route("List/{id}")]
     public async Task<IActionResult> List(int id) {

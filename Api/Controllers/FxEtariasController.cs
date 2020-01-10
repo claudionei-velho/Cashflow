@@ -36,7 +36,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_fxEtarias) {
-        FxEtaria fxEtaria = await _fxEtarias.GetByIdAsync(id);
+        FxEtaria fxEtaria = await _fxEtarias.GetFirstAsync(f => f.Id == id);
         if (fxEtaria == null) {
           return NotFound();
         }

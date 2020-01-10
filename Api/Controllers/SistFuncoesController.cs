@@ -43,7 +43,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_fSistemas) {
-        SistFuncao fSistema = await _fSistemas.GetByIdAsync(id);
+        SistFuncao fSistema = await _fSistemas.GetFirstAsync(f => f.Id == id);
         if (fSistema == null) {
           return NotFound();
         }

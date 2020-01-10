@@ -42,7 +42,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_turnos) {
-        Turno turno = await _turnos.GetByIdAsync(id);
+        Turno turno = await _turnos.GetFirstAsync(t => t.Id == id);
         if (turno == null) {
           return NotFound();
         }

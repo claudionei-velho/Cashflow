@@ -38,7 +38,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_bacias) {
-        Bacia bacia = await _bacias.GetByIdAsync(id);
+        Bacia bacia = await _bacias.GetFirstAsync(b => b.Id == id);
         if (bacia == null) {
           return NotFound();
         }

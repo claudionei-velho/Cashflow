@@ -41,7 +41,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_eEncargos) {
-        EEncargo eEncargo = await _eEncargos.GetByIdAsync(id);
+        EEncargo eEncargo = await _eEncargos.GetFirstAsync(e => e.Id == id);
         if (eEncargo == null) {
           return NotFound();
         }

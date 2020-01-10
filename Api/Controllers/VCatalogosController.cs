@@ -42,7 +42,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_catalogos) {
-        VCatalogo catalogo = await _catalogos.GetByIdAsync(id);
+        VCatalogo catalogo = await _catalogos.GetFirstAsync(c => c.Id == id);
         if (catalogo == null) {
           return NotFound();
         }

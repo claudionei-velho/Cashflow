@@ -36,7 +36,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_rhIndices) {
-        RhIndice rhIndice = await _rhIndices.GetByIdAsync(id);
+        RhIndice rhIndice = await _rhIndices.GetFirstAsync(i => i.Id == id);
         if (rhIndice == null) {
           return NotFound();
         }

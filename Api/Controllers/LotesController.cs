@@ -38,7 +38,7 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_lotes) {
-        Lote lote = await _lotes.GetByIdAsync(id);
+        Lote lote = await _lotes.GetFirstAsync(l => l.Id == id);
         if (lote == null) {
           return NotFound();
         }
