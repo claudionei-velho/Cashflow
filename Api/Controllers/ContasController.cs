@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,17 +74,18 @@ namespace Api.Controllers {
     // POST: Contas
     [HttpPost]
     public async Task<IActionResult> Post(ContaDto dto) {
+      Conta conta = new Conta();
       using (_contas) {
         ContaValidator validator = new ContaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _contas.Insert(_mapper.Map<Conta>(dto));
+          await _contas.Insert(conta = _mapper.Map<Conta>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<ContaDto>(conta));
     }
 
     // DELETE: Contas/5
@@ -94,9 +96,14 @@ namespace Api.Controllers {
         if (conta == null) {
           return NotFound();
         }
-        await _contas.Delete(conta);
-      }
-      return NoContent();
+        try { 
+          await _contas.Delete(conta);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{id}")]

@@ -8,6 +8,10 @@ namespace Api.Models {
     public int Mes { get; set; }
     public int CombustivelId { get; set; }
     public decimal Unitario { get; set; }
+    public decimal? Frete { get; private set; }
+
+    public decimal Custo => Unitario * (1 + (Frete ?? 0));
+
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties

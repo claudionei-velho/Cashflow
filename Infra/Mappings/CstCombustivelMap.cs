@@ -19,6 +19,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.Unitario).HasColumnName("Unitario")
           .IsRequired().HasColumnName("money");
 
+      builder.Property(t => t.Frete).HasColumnName("Frete").HasColumnType("numeric(9, 4)");
       builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)

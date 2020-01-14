@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: CstCombustiveis
     [HttpPost]
     public async Task<IActionResult> Post(CstCombustivelDto dto) {
+      CstCombustivel custo = new CstCombustivel();
       using (_custos) {
         CstCombustivelValidator validator = new CstCombustivelValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _custos.Insert(_mapper.Map<CstCombustivel>(dto));
+          await _custos.Insert(custo = _mapper.Map<CstCombustivel>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<CstCombustivelDto>(custo));
     }
 
     // DELETE: CstCombustiveis/5
@@ -95,9 +97,14 @@ namespace Api.Controllers {
         if (custo == null) {
           return NotFound();
         }
-        await _custos.Delete(custo);
-      }
-      return NoContent();
+        try { 
+          await _custos.Delete(custo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{id}")]

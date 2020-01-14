@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,17 +74,18 @@ namespace Api.Controllers {
     // POST: Embarcados
     [HttpPost]
     public async Task<IActionResult> Post(EmbarcadoDto dto) {
+      Embarcado embarcado = new Embarcado();
       using (_embarcados) {
         EmbarcadoValidator validator = new EmbarcadoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _embarcados.Insert(_mapper.Map<Embarcado>(dto));
+          await _embarcados.Insert(embarcado = _mapper.Map<Embarcado>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<EmbarcadoDto>(embarcado));
     }
 
     // DELETE: Embarcados/5
@@ -94,9 +96,14 @@ namespace Api.Controllers {
         if (embarcado == null) {
           return NotFound();
         }
-        await _embarcados.Delete(embarcado);
+        try { 
+          await _embarcados.Delete(embarcado);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

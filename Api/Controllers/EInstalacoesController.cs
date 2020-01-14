@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,17 +74,18 @@ namespace Api.Controllers {
     // POST: EInstalacoes
     [HttpPost]
     public async Task<IActionResult> Post(EInstalacaoDto dto) {
+      EInstalacao eInstalacao = new EInstalacao();
       using (_eInstalacoes) {
         EInstalacaoValidator validator = new EInstalacaoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _eInstalacoes.Insert(_mapper.Map<EInstalacao>(dto));
+          await _eInstalacoes.Insert(eInstalacao = _mapper.Map<EInstalacao>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<EInstalacaoDto>(eInstalacao));
     }
 
     // DELETE: EInstalacoes/5
@@ -94,9 +96,14 @@ namespace Api.Controllers {
         if (eInstalacao == null) {
           return NotFound();
         }
-        await _eInstalacoes.Delete(eInstalacao);
+        try { 
+          await _eInstalacoes.Delete(eInstalacao);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

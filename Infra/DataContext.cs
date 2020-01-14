@@ -129,6 +129,9 @@ namespace Infra {
       modelBuilder.Entity<CstCarroceria>().Ignore(p => p.Elevatoria);
       modelBuilder.Entity<CstCarroceria>().Ignore(p => p.Ponderado);
 
+      // Custo dos Combustiveis
+      modelBuilder.Entity<CstCombustivel>().Ignore(p => p.Custo);
+
       // Depreciacoes
       modelBuilder.Entity<Depreciacao>().Ignore(p => p.Coeficiente);
       modelBuilder.Entity<Depreciacao>().Ignore(p => p.Acumulado);

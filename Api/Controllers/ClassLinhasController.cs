@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: ClassLinhas
     [HttpPost]
     public async Task<IActionResult> Post(ClassLinhaDto dto) {
+      ClassLinha classLinha = new ClassLinha();
       using (_classLinhas) {
         if (dto == null) {
           return BadRequest();          
         }
-        await _classLinhas.Insert(_mapper.Map<ClassLinha>(dto));
+        await _classLinhas.Insert(classLinha = _mapper.Map<ClassLinha>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<ClassLinhaDto>(classLinha));
     }
 
     // DELETE: ClassLinhas/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (classLinha == null) {
           return NotFound();
         }
-        await _classLinhas.Delete(classLinha);
-      }
-      return NoContent();
+        try { 
+          await _classLinhas.Delete(classLinha);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("PagedList/{p}/{k}")]

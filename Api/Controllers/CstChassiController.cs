@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: CstChassis
     [HttpPost]
     public async Task<IActionResult> Post(CstChassiDto dto) {
+      CstChassi custo = new CstChassi();
       using (_custos) {
         CstChassiValidator validator = new CstChassiValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _custos.Insert(_mapper.Map<CstChassi>(dto));
+          await _custos.Insert(custo = _mapper.Map<CstChassi>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<CstChassiDto>(custo));
     }
 
     // DELETE: CstChassis/5
@@ -95,9 +97,14 @@ namespace Api.Controllers {
         if (custo == null) {
           return NotFound();
         }
-        await _custos.Delete(custo);
-      }
-      return NoContent();
+        try { 
+          await _custos.Delete(custo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{id}")]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,17 +71,18 @@ namespace Api.Controllers {
     // POST: Consorcios
     [HttpPost]
     public async Task<IActionResult> Post(ConsorcioDto dto) {
+      Consorcio consorcio = new Consorcio();
       using (_consorcios) {
         ConsorcioValidator validator = new ConsorcioValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _consorcios.Insert(_mapper.Map<Consorcio>(dto));
+          await _consorcios.Insert(consorcio = _mapper.Map<Consorcio>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<Consorcio>(consorcio));
     }
 
     // DELETE: Consorcios/5
@@ -91,9 +93,14 @@ namespace Api.Controllers {
         if (consorcio == null) {
           return NotFound();
         }
-        await _consorcios.Delete(consorcio);
-      }
-      return NoContent();
+        try { 
+          await _consorcios.Delete(consorcio);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{mn}")]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: EDominios
     [HttpPost]
     public async Task<IActionResult> Post(EDominioDto dto) {
+      EDominio eDominio = new EDominio();
       using (_eDominios) {
         if (dto == null) {
-          return BadRequest();          
+          return BadRequest();
         }
-        await _eDominios.Insert(_mapper.Map<EDominio>(dto));
+        await _eDominios.Insert(eDominio = _mapper.Map<EDominio>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<EDominioDto>(eDominio));
     }
 
     // DELETE: EDominios/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (eDominio == null) {
           return NotFound();
         }
-        await _eDominios.Delete(eDominio);
+        try {
+          await _eDominios.Delete(eDominio);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]
@@ -115,7 +122,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_eDominios) {
         return Ok(await _eDominios.SelectList(
-                            d => new { d.Id, d.Dominio.Denominacao }, 
+                            d => new { d.Id, d.Dominio.Denominacao },
                             d => d.EmpresaId == id
                         ).ToListAsync());
       }

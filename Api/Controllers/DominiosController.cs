@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: Dominios
     [HttpPost]
     public async Task<IActionResult> Post(DominioDto dto) {
+      Dominio dominio = new Dominio();
       using (_dominios) {
         if (dto == null) {
           return BadRequest();
         }
-        await _dominios.Insert(_mapper.Map<Dominio>(dto));
+        await _dominios.Insert(dominio = _mapper.Map<Dominio>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<DominioDto>(dominio));
     }
 
     // DELETE: Dominios/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (dominio == null) {
           return NotFound();
         }
-        await _dominios.Delete(dominio);
+        try { 
+          await _dominios.Delete(dominio);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("PagedList/{p}/{k}")]

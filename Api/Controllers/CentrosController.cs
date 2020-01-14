@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,17 +74,18 @@ namespace Api.Controllers {
     // POST: Centros
     [HttpPost]
     public async Task<IActionResult> Post(CentroDto dto) {
+      Centro centro = new Centro();
       using (_centros) {
         CentroValidator validator = new CentroValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _centros.Insert(_mapper.Map<Centro>(dto));
+          await _centros.Insert(centro = _mapper.Map<Centro>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<CentroDto>(centro));
     }
 
     // DELETE: Centros/5
@@ -94,9 +96,14 @@ namespace Api.Controllers {
         if (centro == null) {
           return NotFound();
         }
-        await _centros.Delete(centro);
-      }
-      return NoContent();
+        try { 
+          await _centros.Delete(centro);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }     
     }
 
     [HttpGet, Route("List/{id}")]

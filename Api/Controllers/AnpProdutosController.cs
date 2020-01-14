@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: AnpProdutos
     [HttpPost]
     public async Task<IActionResult> Post(AnpProdutoDto dto) {
+      AnpProduto anpProduto = new AnpProduto();
       using (_anpProdutos) {
         if (dto == null) {
           return BadRequest();
         }
-        await _anpProdutos.Insert(_mapper.Map<AnpProduto>(dto));
+        await _anpProdutos.Insert(anpProduto = _mapper.Map<AnpProduto>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<AnpProdutoDto>(anpProduto));
     }
 
     // DELETE: AnpProdutos/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (anpProduto == null) {
           return NotFound();
         }
-        await _anpProdutos.Delete(anpProduto);
+        try {
+          await _anpProdutos.Delete(anpProduto);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("PagedList/{p}/{k}")]
@@ -107,7 +114,7 @@ namespace Api.Controllers {
     [HttpGet, Route("Pages/{k?}")]
     public IActionResult Pages(int? k) {
       using (_anpProdutos) {
-        return Ok(new KeyValuePair<int, int>(_anpProdutos.Count(), 
+        return Ok(new KeyValuePair<int, int>(_anpProdutos.Count(),
                                              _anpProdutos.Pages(size: k ?? 16)));
       }
     }

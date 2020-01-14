@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -97,17 +98,18 @@ namespace Api.Controllers {
         }
       }
 
+      ESistema eSistema = new ESistema();
       using (_eSistemas) {
         ESistemaValidator validator = new ESistemaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _eSistemas.Insert(_mapper.Map<ESistema>(dto));
+          await _eSistemas.Insert(eSistema = _mapper.Map<ESistema>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<ESistemaDto>(eSistema));
     }
 
     // DELETE: ESistemas/5
@@ -118,9 +120,14 @@ namespace Api.Controllers {
         if (eSistema == null) {
           return NotFound();
         }
-        await _eSistemas.Delete(eSistema);
+        try { 
+          await _eSistemas.Delete(eSistema);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

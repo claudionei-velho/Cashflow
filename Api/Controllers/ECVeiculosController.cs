@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,7 +46,7 @@ namespace Api.Controllers {
         return Ok(_mapper.Map<ECVeiculoDto>(ecVeiculo));
       }
     }
-    
+
     // PUT: ECVeiculos/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, ECVeiculoDto dto) {
@@ -70,17 +71,18 @@ namespace Api.Controllers {
     // POST: ECVeiculos
     [HttpPost]
     public async Task<IActionResult> Post(ECVeiculoDto dto) {
+      ECVeiculo ecVeiculo = new ECVeiculo();
       using (_ecVeiculos) {
         ECVeiculoValidator validator = new ECVeiculoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _ecVeiculos.Insert(_mapper.Map<ECVeiculo>(dto));
+          await _ecVeiculos.Insert(ecVeiculo = _mapper.Map<ECVeiculo>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
-      return Ok();
+      return Ok(_mapper.Map<ECVeiculoDto>(ecVeiculo));
     }
 
     // DELETE: ECVeiculos/5
@@ -91,9 +93,14 @@ namespace Api.Controllers {
         if (ecVeiculo == null) {
           return NotFound();
         }
-        await _ecVeiculos.Delete(ecVeiculo);
+        try {
+          await _ecVeiculos.Delete(ecVeiculo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]
@@ -128,7 +135,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_ecVeiculos) {
         return Ok(await _ecVeiculos.SelectList(
-                           v => new { v.Id, v.CVeiculo.Classe }, 
+                           v => new { v.Id, v.CVeiculo.Classe },
                            v => v.EmpresaId == id
                         ).ToListAsync());
       }

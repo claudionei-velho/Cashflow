@@ -8,6 +8,10 @@ namespace Domain.Models {
     public int Mes { get; private set; }
     public int CombustivelId { get; private set; }
     public decimal Unitario { get; private set; }
+    public decimal? Frete { get; private set; }
+
+    public decimal Custo => Unitario * (1 + (Frete ?? 0));
+
     public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties

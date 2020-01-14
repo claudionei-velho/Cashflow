@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Cargos
     [HttpPost]
     public async Task<IActionResult> Post(CargoDto dto) {
+      Cargo cargo = new Cargo();
       using (_cargos) {
         CargoValidator validator = new CargoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _cargos.Insert(_mapper.Map<Cargo>(dto));
+          await _cargos.Insert(cargo = _mapper.Map<Cargo>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<CargoDto>(cargo));
     }
 
     // DELETE: Cargos/5
@@ -93,9 +95,14 @@ namespace Api.Controllers {
         if (cargo == null) {
           return NotFound();
         }
-        await _cargos.Delete(cargo);
-      }
-      return NoContent();
+        try { 
+          await _cargos.Delete(cargo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{id}")]

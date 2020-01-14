@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: CVeiculos
     [HttpPost]
     public async Task<IActionResult> Post(CVeiculoDto dto) {
+      CVeiculo cVeiculo = new CVeiculo();
       using (_cVeiculos) {
         if (dto == null) {
           return BadRequest();
         }
-        await _cVeiculos.Insert(_mapper.Map<CVeiculo>(dto));
+        await _cVeiculos.Insert(cVeiculo = _mapper.Map<CVeiculo>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<CVeiculoDto>(cVeiculo));
     }
 
     // DELETE: CVeiculos/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (cVeiculo == null) {
           return NotFound();
         }
-        await _cVeiculos.Delete(cVeiculo);
+        try {
+          await _cVeiculos.Delete(cVeiculo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("PagedList/{p}/{k}")]

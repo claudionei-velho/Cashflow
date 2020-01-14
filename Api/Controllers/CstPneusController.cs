@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: CstPneus/5
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: CstPneus
     [HttpPost]
     public async Task<IActionResult> Post(CstPneuDto dto) {
+      CstPneu custo = new CstPneu();
       using (_custos) {
         CstPneuValidator validator = new CstPneuValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _custos.Insert(_mapper.Map<CstPneu>(dto));
+          await _custos.Insert(custo = _mapper.Map<CstPneu>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
-      return Ok();
+      return Ok(_mapper.Map<CstPneuDto>(custo));
     }
 
     // DELETE: CstPneus/5
@@ -95,9 +97,14 @@ namespace Api.Controllers {
         if (custo == null) {
           return NotFound();
         }
-        await _custos.Delete(custo);
+        try {
+          await _custos.Delete(custo);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: CLinhas
     [HttpPost]
     public async Task<IActionResult> Post(CLinhaDto dto) {
+      CLinha cLinha = new CLinha();
       using (_cLinhas) {
         if (dto == null) {
           return BadRequest();
         }
-        await _cLinhas.Insert(_mapper.Map<CLinha>(dto));
+        await _cLinhas.Insert(cLinha = _mapper.Map<CLinha>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<CLinhaDto>(cLinha));
     }
 
     // DELETE: CLinhas/5
@@ -78,9 +80,14 @@ namespace Api.Controllers {
         if (cLinha == null) {
           return NotFound();
         }
-        await _cLinhas.Delete(cLinha);
-      }
-      return NoContent();
+        try { 
+          await _cLinhas.Delete(cLinha);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
     }
 
     [HttpGet, Route("List/{id}")]

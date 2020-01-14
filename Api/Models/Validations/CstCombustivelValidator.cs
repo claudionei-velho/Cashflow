@@ -9,6 +9,7 @@ namespace Api.Models.Validations {
       RuleFor(p => p.Ano).NotNull().WithMessage(x => Resources.AnoRequired);
       RuleFor(p => p.Mes).NotNull().WithMessage(x => Resources.MesRequired);
       RuleFor(p => p.Unitario).NotNull().WithMessage(x => Resources.UnitarioRequired);
+      RuleFor(p => p.Frete).GreaterThanOrEqualTo(0).ScalePrecision(9, 4);
     }
   }
 }

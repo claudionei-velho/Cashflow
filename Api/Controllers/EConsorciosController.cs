@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,17 +71,18 @@ namespace Api.Controllers {
     // POST: EConsorcios
     [HttpPost]
     public async Task<IActionResult> Post(EConsorcioDto dto) {
+      EConsorcio eConsorcio = new EConsorcio();
       using (_eConsorcios) {
         EConsorcioValidator validator = new EConsorcioValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _eConsorcios.Insert(_mapper.Map<EConsorcio>(dto));
+          await _eConsorcios.Insert(eConsorcio = _mapper.Map<EConsorcio>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<EConsorcioDto>(eConsorcio));
     }
 
     // DELETE: EConsorcios/5
@@ -91,9 +93,14 @@ namespace Api.Controllers {
         if (eConsorcio == null) {
           return NotFound();
         }
-        await _eConsorcios.Delete(eConsorcio);
+        try { 
+          await _eConsorcios.Delete(eConsorcio);
+          return NoContent();
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
-      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]
