@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Funcoes
     [HttpPost]
     public async Task<IActionResult> Post(FuncaoDto dto) {
+      Funcao funcao = new Funcao();
       using (_funcoes) {
         FuncaoValidator validator = new FuncaoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _funcoes.Insert(_mapper.Map<Funcao>(dto));
+          await _funcoes.Insert(funcao = _mapper.Map<Funcao>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
-      return Ok();
+      return Ok(_mapper.Map<Funcao>(funcao));
     }
 
     // DELETE: Funcoes/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (funcao == null) {
           return NotFound();
         }
-        await _funcoes.Delete(funcao);
+        try { 
+          await _funcoes.Delete(funcao);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

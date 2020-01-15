@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: FInstalacoes
     [HttpPost]
     public async Task<IActionResult> Post(FInstalacaoDto dto) {
+      FInstalacao fInstalacao = new FInstalacao();
       using (_fInstalacoes) {
         if (dto == null) {
           return BadRequest();
         }
-        await _fInstalacoes.Insert(_mapper.Map<FInstalacao>(dto));
+        await _fInstalacoes.Insert(fInstalacao = _mapper.Map<FInstalacao>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<FInstalacaoDto>(fInstalacao));
     }
 
     // DELETE: FInstalacoes/5
@@ -78,7 +80,12 @@ namespace Api.Controllers {
         if (fInstalacao == null) {
           return NotFound();
         }
-        await _fInstalacoes.Delete(fInstalacao);
+        try {
+          await _fInstalacoes.Delete(fInstalacao);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

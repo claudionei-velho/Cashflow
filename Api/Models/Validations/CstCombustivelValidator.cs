@@ -8,8 +8,9 @@ namespace Api.Models.Validations {
       RuleFor(p => p.EmpresaId).NotNull().WithMessage(x => Resources.EmpresaIdRequired);
       RuleFor(p => p.Ano).NotNull().WithMessage(x => Resources.AnoRequired);
       RuleFor(p => p.Mes).NotNull().WithMessage(x => Resources.MesRequired);
-      RuleFor(p => p.Unitario).NotNull().WithMessage(x => Resources.UnitarioRequired);
-      RuleFor(p => p.Frete).GreaterThanOrEqualTo(0).ScalePrecision(9, 4);
+      RuleFor(p => p.Unitario).NotNull().WithMessage(x => Resources.UnitarioRequired);      
+      RuleFor(p => p.Frete).GreaterThan(0).When(p => p.Frete != null)
+          .ScalePrecision(9, 4);
     }
   }
 }

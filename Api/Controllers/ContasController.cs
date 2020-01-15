@@ -96,14 +96,14 @@ namespace Api.Controllers {
         if (conta == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _contas.Delete(conta);
-          return NoContent();
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

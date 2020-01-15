@@ -97,14 +97,14 @@ namespace Api.Controllers {
         if (custo == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _custos.Delete(custo);
-          return NoContent();
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

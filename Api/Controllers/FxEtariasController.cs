@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: FxEtarias
     [HttpPost]
     public async Task<IActionResult> Post(FxEtariaDto dto) {
+      FxEtaria fxEtaria = new FxEtaria();
       using (_fxEtarias) {
         if (dto == null) {
           return BadRequest();
         }
-        await _fxEtarias.Insert(_mapper.Map<FxEtaria>(dto));
+        await _fxEtarias.Insert(fxEtaria = _mapper.Map<FxEtaria>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<FxEtariaDto>(fxEtaria));
     }
 
     // DELETE: FxEtarias/5
@@ -78,7 +80,12 @@ namespace Api.Controllers {
         if (fxEtaria == null) {
           return NotFound();
         }
-        await _fxEtarias.Delete(fxEtaria);
+        try { 
+          await _fxEtarias.Delete(fxEtaria);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

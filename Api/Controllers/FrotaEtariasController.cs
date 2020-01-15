@@ -29,8 +29,7 @@ namespace Api.Controllers {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
                       await _frotaEtarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.EtariaId)
+                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.EtariaId)
                             ).ToListAsync()));
       }
     }
@@ -67,8 +66,7 @@ namespace Api.Controllers {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
                       await _frotaEtarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.EtariaId)
+                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.EtariaId)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }

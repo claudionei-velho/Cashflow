@@ -93,14 +93,14 @@ namespace Api.Controllers {
         if (consorcio == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _consorcios.Delete(consorcio);
-          return NoContent();
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{mn}")]

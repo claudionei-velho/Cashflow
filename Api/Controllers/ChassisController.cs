@@ -97,13 +97,13 @@ namespace Api.Controllers {
           return NotFound();
         }
         try { 
-          await _chassis.Delete(chassi);
-          return NoContent();
+          await _chassis.Delete(chassi);          
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

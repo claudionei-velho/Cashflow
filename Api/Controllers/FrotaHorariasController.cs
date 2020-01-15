@@ -67,8 +67,7 @@ namespace Api.Controllers {
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
                       await _frotaHorarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.Hora)
+                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Hora)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }

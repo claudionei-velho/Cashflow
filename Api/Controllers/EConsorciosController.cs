@@ -94,12 +94,12 @@ namespace Api.Controllers {
           return NotFound();
         }
         try { 
-          await _eConsorcios.Delete(eConsorcio);
-          return NoContent();
+          await _eConsorcios.Delete(eConsorcio);          
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
+        return NoContent();
       }
     }
 

@@ -94,13 +94,13 @@ namespace Api.Controllers {
           return NotFound();
         }
         try { 
-          await _empresas.Delete(empresa);
-          return NoContent();
+          await _empresas.Delete(empresa);          
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
       }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{mn}")]

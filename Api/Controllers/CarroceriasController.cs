@@ -98,12 +98,12 @@ namespace Api.Controllers {
         }
         try {
           await _carrocerias.Delete(carroceria);
-          return NoContent();
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

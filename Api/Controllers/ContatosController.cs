@@ -95,14 +95,14 @@ namespace Api.Controllers {
         if (contato == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _contatos.Delete(contato);
-          return NoContent();
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

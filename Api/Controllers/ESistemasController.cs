@@ -121,13 +121,13 @@ namespace Api.Controllers {
           return NotFound();
         }
         try { 
-          await _eSistemas.Delete(eSistema);
-          return NoContent();
+          await _eSistemas.Delete(eSistema);          
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
       }
+      return NoContent();
     }
 
     [HttpGet, Route("List/{id}")]

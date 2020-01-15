@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Frotas
     [HttpPost]
     public async Task<IActionResult> Post(FrotaDto dto) {
+      Frota frota = new Frota();
       using (_frotas) {
         FrotaValidator validator = new FrotaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _frotas.Insert(_mapper.Map<Frota>(dto));
+          await _frotas.Insert(frota = _mapper.Map<Frota>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<FrotaDto>(frota));
     }
 
     // DELETE: Frotas/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (frota == null) {
           return NotFound();
         }
-        await _frotas.Delete(frota);
+        try { 
+          await _frotas.Delete(frota);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

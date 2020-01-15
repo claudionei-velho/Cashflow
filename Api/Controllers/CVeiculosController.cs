@@ -81,13 +81,13 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _cVeiculos.Delete(cVeiculo);
-          return NoContent();
+          await _cVeiculos.Delete(cVeiculo);          
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
       }
+      return NoContent();
     }
 
     [HttpGet, Route("PagedList/{p}/{k}")]
