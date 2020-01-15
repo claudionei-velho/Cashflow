@@ -76,17 +76,18 @@ namespace Api.Controllers {
     // POST: Horarios
     [HttpPost]
     public async Task<IActionResult> Post(HorarioDto dto) {
+      Horario horario = new Horario();
       using (_horarios) {
         HorarioValidator validator = new HorarioValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _horarios.Insert(_mapper.Map<Horario>(dto));
+          await _horarios.Insert(horario = _mapper.Map<Horario>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<HorarioDto>(horario));
     }
 
     // DELETE: Horarios/5
@@ -97,7 +98,12 @@ namespace Api.Controllers {
         if (horario == null) {
           return NotFound();
         }
-        await _horarios.Delete(horario);
+        try { 
+          await _horarios.Delete(horario);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

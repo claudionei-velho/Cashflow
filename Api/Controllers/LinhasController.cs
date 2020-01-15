@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Linhas
     [HttpPost]
     public async Task<IActionResult> Post(LinhaDto dto) {
+      Linha linha = new Linha();
       using (_linhas) {
         LinhaValidator validator = new LinhaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _linhas.Insert(_mapper.Map<Linha>(dto));
+          await _linhas.Insert(linha = _mapper.Map<Linha>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<LinhaDto>(linha));
     }
 
     // DELETE: Linhas/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (linha == null) {
           return NotFound();
         }
-        await _linhas.Delete(linha);
+        try { 
+          await _linhas.Delete(linha);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

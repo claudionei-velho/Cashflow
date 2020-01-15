@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: NfEntregas
     [HttpPost]
     public async Task<IActionResult> Post(NfEntregaDto dto) {
+      NfEntrega entrega = new NfEntrega();
       using (_entregas) {
         NfEntregaValidator validator = new NfEntregaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _entregas.Insert(_mapper.Map<NfEntrega>(dto));
+          await _entregas.Insert(entrega = _mapper.Map<NfEntrega>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<NfEntregaDto>(entrega));
     }
 
     // DELETE: NfEntregas/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (entrega == null) {
           return NotFound();
         }
-        await _entregas.Delete(entrega);
+        try { 
+          await _entregas.Delete(entrega);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

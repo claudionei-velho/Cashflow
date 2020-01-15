@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Setores
     [HttpPost]
     public async Task<IActionResult> Post(SetorDto dto) {
+      Setor setor = new Setor();
       using (_setores) {
         SetorValidator validator = new SetorValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _setores.Insert(_mapper.Map<Setor>(dto));
+          await _setores.Insert(setor = _mapper.Map<Setor>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<SetorDto>(setor));
     }
 
     // DELETE: Setores/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (setor == null) {
           return NotFound();
         }
-        await _setores.Delete(setor);
+        try { 
+          await _setores.Delete(setor);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,17 +74,18 @@ namespace Api.Controllers {
     // POST: NFiscais
     [HttpPost]
     public async Task<IActionResult> Post(NFiscalDto dto) {
+      NFiscal nota = new NFiscal();
       using (_notas) {
         NFiscalValidator validator = new NFiscalValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _notas.Insert(_mapper.Map<NFiscal>(dto));
+          await _notas.Insert(nota = _mapper.Map<NFiscal>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<NFiscal>(nota));
     }
 
     // DELETE: NFiscais/5
@@ -94,7 +96,12 @@ namespace Api.Controllers {
         if (nota == null) {
           return NotFound();
         }
-        await _notas.Delete(nota);
+        try { 
+          await _notas.Delete(nota);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

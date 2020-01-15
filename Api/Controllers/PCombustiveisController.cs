@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Api.Controllers {
       _mapper = mapper;
     }
 
-    // GET: Planos
+    // GET: PCombustiveis
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_pCombustiveis) {
@@ -36,7 +37,7 @@ namespace Api.Controllers {
       }      
     }
 
-    // GET: Planos/5
+    // GET: PCombustiveis/5
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_pCombustiveis) {
@@ -48,7 +49,7 @@ namespace Api.Controllers {
       }
     }
 
-    // PUT: Planos/5
+    // PUT: PCombustiveis/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, PCombustivelDto dto) {
       using (_pCombustiveis) {
@@ -69,23 +70,24 @@ namespace Api.Controllers {
       return Ok();
     }
 
-    // POST: Planos
+    // POST: PCombustiveis
     [HttpPost]
     public async Task<IActionResult> Post(PCombustivelDto dto) {
+      PCombustivel pCombustivel = new PCombustivel();
       using (_pCombustiveis) {
         PCombustivelValidator validator = new PCombustivelValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _pCombustiveis.Insert(_mapper.Map<PCombustivel>(dto));
+          await _pCombustiveis.Insert(pCombustivel = _mapper.Map<PCombustivel>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<PCombustivelDto>(pCombustivel));
     }
 
-    // DELETE: Planos/5
+    // DELETE: PCombustiveis/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_pCombustiveis) {
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (pCombustivel == null) {
           return NotFound();
         }
-        await _pCombustiveis.Delete(pCombustivel);
+        try { 
+          await _pCombustiveis.Delete(pCombustivel);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

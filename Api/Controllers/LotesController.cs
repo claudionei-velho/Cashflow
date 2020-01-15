@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,17 +71,18 @@ namespace Api.Controllers {
     // POST: Lotes
     [HttpPost]
     public async Task<IActionResult> Post(LoteDto dto) {
+      Lote lote = new Lote();
       using (_lotes) {
         LoteValidator validator = new LoteValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _lotes.Insert(_mapper.Map<Lote>(dto));
+          await _lotes.Insert(lote = _mapper.Map<Lote>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<LoteDto>(lote));
     }
 
     // DELETE: Lotes/5
@@ -91,7 +93,12 @@ namespace Api.Controllers {
         if (lote == null) {
           return NotFound();
         }
-        await _lotes.Delete(lote);
+        try { 
+          await _lotes.Delete(lote);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

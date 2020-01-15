@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: Planos
     [HttpPost]
     public async Task<IActionResult> Post(PlanoDto dto) {
+      Plano plano = new Plano();
       using (_planos) {
         PlanoValidator validator = new PlanoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _planos.Insert(_mapper.Map<Plano>(dto));
+          await _planos.Insert(plano = _mapper.Map<Plano>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<PlanoDto>(plano));
     }
 
     // DELETE: Planos/5
@@ -95,7 +97,12 @@ namespace Api.Controllers {
         if (plano == null) {
           return NotFound();
         }
-        await _planos.Delete(plano);
+        try { 
+          await _planos.Delete(plano);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

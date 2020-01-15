@@ -110,7 +110,8 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
                       await _contatos.GetData(
-                                c => c.EmpresaId == id, c => c.OrderBy(q => q.Nome)
+                                c => c.EmpresaId == id, 
+                                c => c.OrderBy(q => q.Nome)
                             ).ToListAsync()));
       }
     }
@@ -123,7 +124,7 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
                       await _contatos.GetData(
-                                order: c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Nome)
+                                order: c => c.OrderBy(q => q.Nome)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -133,7 +134,7 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(await _contatos.SelectList(
                             c => new { c.Id, c.Empresa.Fantasia, c.Nome },
-                            order: c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Nome)
+                            order: c => c.OrderBy(q => q.Nome)
                         ).ToListAsync());
       }
     }

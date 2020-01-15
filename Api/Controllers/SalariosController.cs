@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: Salarios
     [HttpPost]
     public async Task<IActionResult> Post(SalarioDto dto) {
+      Salario salario = new Salario();
       using (_salarios) {
         SalarioValidator validator = new SalarioValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _salarios.Insert(_mapper.Map<Salario>(dto));
+          await _salarios.Insert(salario = _mapper.Map<Salario>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<SalarioDto>(salario));
     }
 
     // DELETE: Salarios/5
@@ -95,7 +97,12 @@ namespace Api.Controllers {
         if (salario == null) {
           return NotFound();
         }
-        await _salarios.Delete(salario);
+        try { 
+          await _salarios.Delete(salario);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

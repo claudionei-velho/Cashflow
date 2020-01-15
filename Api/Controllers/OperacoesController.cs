@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: Operacoes
     [HttpPost]
     public async Task<IActionResult> Post(OperacaoDto dto) {
+      Operacao operacao = new Operacao();
       using (_operacoes) {
         if (dto == null) {
           return BadRequest();
         }
-        await _operacoes.Insert(_mapper.Map<Operacao>(dto));
+        await _operacoes.Insert(operacao = _mapper.Map<Operacao>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<OperacaoDto>(operacao));
     }
 
     // DELETE: Operacoes/5
@@ -78,7 +80,12 @@ namespace Api.Controllers {
         if (operacao == null) {
           return NotFound();
         }
-        await _operacoes.Delete(operacao);
+        try { 
+          await _operacoes.Delete(operacao);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

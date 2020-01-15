@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Api.Controllers {
       _mapper = mapper;
     }
 
-    // GET: Produtos
+    // GET: Premissas
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_premissas) {
@@ -36,7 +37,7 @@ namespace Api.Controllers {
       }      
     }
 
-    // GET: Produtos/5
+    // GET: Premissas/5
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_premissas) {
@@ -48,7 +49,7 @@ namespace Api.Controllers {
       }
     }
 
-    // PUT: Produtos/5
+    // PUT: Premissas/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, PremissaDto dto) {
       using (_premissas) {
@@ -69,23 +70,24 @@ namespace Api.Controllers {
       return Ok();
     }
 
-    // POST: Produtos
+    // POST: Premissas
     [HttpPost]
     public async Task<IActionResult> Post(PremissaDto dto) {
+      Premissa premissa = new Premissa();
       using (_premissas) {
         PremissaValidator validator = new PremissaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _premissas.Insert(_mapper.Map<Premissa>(dto));
+          await _premissas.Insert(premissa = _mapper.Map<Premissa>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<PremissaDto>(premissa));
     }
 
-    // DELETE: Produtos/5
+    // DELETE: Premissas/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_premissas) {
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (premissa == null) {
           return NotFound();
         }
-        await _premissas.Delete(premissa);
+        try { 
+          await _premissas.Delete(premissa);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

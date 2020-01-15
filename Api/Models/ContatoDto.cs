@@ -9,8 +9,5 @@ namespace Api.Models {
     public string Telefone { get; set; }
     public string Email { get; set; }
     public DateTime? Cadastro { get; set; }
-
-    // Navigation Properties
-    public EmpresaDto Empresa { get; private set; }
   }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Api.Controllers {
       _mapper = mapper;
     }
 
-    // GET: Planos
+    // GET: PCoeficientes
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_pCoeficientes) {
@@ -36,7 +37,7 @@ namespace Api.Controllers {
       }      
     }
 
-    // GET: Planos/5
+    // GET: PCoeficientes/5
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_pCoeficientes) {
@@ -48,7 +49,7 @@ namespace Api.Controllers {
       }
     }
 
-    // PUT: Planos/5
+    // PUT: PCoeficientes/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, PCoeficienteDto dto) {
       using (_pCoeficientes) {
@@ -69,23 +70,24 @@ namespace Api.Controllers {
       return Ok();
     }
 
-    // POST: Planos
+    // POST: PCoeficientes
     [HttpPost]
     public async Task<IActionResult> Post(PCoeficienteDto dto) {
+      PCoeficiente pCoeficiente = new PCoeficiente();
       using (_pCoeficientes) {
         PCoeficienteValidator validator = new PCoeficienteValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _pCoeficientes.Insert(_mapper.Map<PCoeficiente>(dto));
+          await _pCoeficientes.Insert(pCoeficiente = _mapper.Map<PCoeficiente>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<PCoeficienteDto>(pCoeficiente));
     }
 
-    // DELETE: Planos/5
+    // DELETE: PCoeficientes/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_pCoeficientes) {
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (pCoeficiente == null) {
           return NotFound();
         }
-        await _pCoeficientes.Delete(pCoeficiente);
+        try { 
+          await _pCoeficientes.Delete(pCoeficiente);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

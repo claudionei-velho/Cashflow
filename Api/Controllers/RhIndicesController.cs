@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: RhIndices
     [HttpPost]
     public async Task<IActionResult> Post(RhIndiceDto dto) {
+      RhIndice rhIndice = new RhIndice();
       using (_rhIndices) {
         if (dto == null) {
           return BadRequest();
         }
-        await _rhIndices.Insert(_mapper.Map<RhIndice>(dto));
+        await _rhIndices.Insert(rhIndice = _mapper.Map<RhIndice>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<RhIndiceDto>(rhIndice));
     }
 
     // DELETE: RhIndices/5
@@ -78,7 +80,12 @@ namespace Api.Controllers {
         if (rhIndice == null) {
           return NotFound();
         }
-        await _rhIndices.Delete(rhIndice);
+        try { 
+          await _rhIndices.Delete(rhIndice);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: NfReferencias
     [HttpPost]
     public async Task<IActionResult> Post(NfReferenciaDto dto) {
+      NfReferencia nota = new NfReferencia();
       using (_referencias) {
         NfReferenciaValidator validator = new NfReferenciaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _referencias.Insert(_mapper.Map<NfReferencia>(dto));
+          await _referencias.Insert(nota = _mapper.Map<NfReferencia>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<NfReferenciaDto>(nota));
     }
 
     // DELETE: NfReferencias/5
@@ -93,7 +95,12 @@ namespace Api.Controllers {
         if (nota == null) {
           return NotFound();
         }
-        await _referencias.Delete(nota);
+        try { 
+          await _referencias.Delete(nota);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

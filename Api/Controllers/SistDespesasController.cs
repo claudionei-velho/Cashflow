@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace Api.Controllers {
     // GET: SistDespesas
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_dSistemas) {      
+      using (_dSistemas) {
         return Ok(_mapper.Map<IEnumerable<SistDespesaDto>>(
                       await _dSistemas.GetData(
                                 order: d => d.OrderBy(q => q.SistemaId).ThenBy(q => q.Item)
@@ -40,11 +41,11 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_dSistemas) {
-        SistDespesa dSistema = await _dSistemas.GetFirstAsync(d => d.Id == id);
-        if (dSistema == null) {
+        SistDespesa despesa = await _dSistemas.GetFirstAsync(d => d.Id == id);
+        if (despesa == null) {
           return NotFound();
         }
-        return Ok(_mapper.Map<SistDespesaDto>(dSistema));
+        return Ok(_mapper.Map<SistDespesaDto>(despesa));
       }
     }
 
@@ -72,28 +73,34 @@ namespace Api.Controllers {
     // POST: SistDespesas
     [HttpPost]
     public async Task<IActionResult> Post(SistDespesaDto dto) {
+      SistDespesa despesa = new SistDespesa();
       using (_dSistemas) {
         SistDespesaValidator validator = new SistDespesaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _dSistemas.Insert(_mapper.Map<SistDespesa>(dto));
+          await _dSistemas.Insert(despesa = _mapper.Map<SistDespesa>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<SistDespesa>(despesa));
     }
 
     // DELETE: SistDespesas/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_dSistemas) {
-        SistDespesa dSistema = await _dSistemas.GetByIdAsync(id);
-        if (dSistema == null) {
+        SistDespesa despesa = await _dSistemas.GetByIdAsync(id);
+        if (despesa == null) {
           return NotFound();
         }
-        await _dSistemas.Delete(dSistema);
+        try {
+          await _dSistemas.Delete(despesa);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }
