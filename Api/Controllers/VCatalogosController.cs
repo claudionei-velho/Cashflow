@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,8 +33,8 @@ namespace Api.Controllers {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
                       await _catalogos.GetData(
                                 order: c => c.OrderBy(q => q.EmpresaId)
-                                             .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                             .ThenBy(q => q.Id)
+                                             .ThenByDescending(q => q.Ano)
+                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
       }      
     }
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: VEquipamentos
     [HttpPost]
     public async Task<IActionResult> Post(VCatalogoDto dto) {
+      VCatalogo catalogo = new VCatalogo();
       using (_catalogos) {
         VCatalogoValidator validator = new VCatalogoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _catalogos.Insert(_mapper.Map<VCatalogo>(dto));
+          await _catalogos.Insert(catalogo = _mapper.Map<VCatalogo>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<VCatalogoDto>(catalogo));
     }
 
     // DELETE: VEquipamentos/5
@@ -95,7 +97,12 @@ namespace Api.Controllers {
         if (catalogo == null) {
           return NotFound();
         }
-        await _catalogos.Delete(catalogo);
+        try { 
+          await _catalogos.Delete(catalogo);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }
@@ -107,8 +114,8 @@ namespace Api.Controllers {
                       await _catalogos.GetData(
                                 c => c.EmpresaId == id,
                                 c => c.OrderBy(q => q.EmpresaId)
-                                      .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                      .ThenBy(q => q.Id)
+                                      .ThenByDescending(q => q.Ano)
+                                      .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
       }
     }
@@ -122,8 +129,8 @@ namespace Api.Controllers {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
                       await _catalogos.GetData(
                                 order: c => c.OrderBy(q => q.EmpresaId)
-                                             .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                             .ThenBy(q => q.Id)
+                                             .ThenByDescending(q => q.Ano)
+                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -134,8 +141,8 @@ namespace Api.Controllers {
         return Ok(await _catalogos.SelectList(
                             c => new { c.Id, c.Empresa.Fantasia, c.Ano, c.Mes, c.CVeiculo.Classe },
                             order: c => c.OrderBy(q => q.EmpresaId)
-                                         .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                         .ThenBy(q => q.Id)
+                                         .ThenByDescending(q => q.Ano)
+                                         .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                         ).ToListAsync());
       }
     }
@@ -146,8 +153,8 @@ namespace Api.Controllers {
         return Ok(await _catalogos.SelectList(
                             c => new { c.Id, c.Empresa.Fantasia, c.Ano, c.Mes, c.CVeiculo.Classe },
                             v => v.EmpresaId == id,
-                            c => c.OrderByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                  .ThenBy(q => q.Id)
+                            c => c.OrderByDescending(q => q.Ano)
+                                  .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                         ).ToListAsync());
       }
     }

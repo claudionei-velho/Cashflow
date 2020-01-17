@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,24 +62,30 @@ namespace Api.Controllers {
     // POST: UComerciais
     [HttpPost]
     public async Task<IActionResult> Post(UComercialDto dto) {
+      UComercial unidade = new UComercial();
       using (_ucomerciais) {
         if (dto == null) {
           return BadRequest();
         }
-        await _ucomerciais.Insert(_mapper.Map<UComercial>(dto));
+        await _ucomerciais.Insert(unidade = _mapper.Map<UComercial>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<UComercial>(unidade));
     }
 
     // DELETE: UComerciais/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id) {
       using (_ucomerciais) {
-        UComercial ucomercial = await _ucomerciais.GetByIdAsync(id);
-        if (ucomercial == null) {
+        UComercial unidade = await _ucomerciais.GetByIdAsync(id);
+        if (unidade == null) {
           return NotFound();
         }
-        await _ucomerciais.Delete(ucomercial);
+        try { 
+          await _ucomerciais.Delete(unidade);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

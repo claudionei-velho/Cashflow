@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,17 +73,18 @@ namespace Api.Controllers {
     // POST: Tarifas
     [HttpPost]
     public async Task<IActionResult> Post(TarifaDto dto) {
+      Tarifa tarifa = new Tarifa();
       using (_tarifas) {
         TarifaValidator validator = new TarifaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _tarifas.Insert(_mapper.Map<Tarifa>(dto));
+          await _tarifas.Insert(tarifa = _mapper.Map<Tarifa>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok();
+      return Ok(_mapper.Map<TarifaDto>(tarifa));
     }
 
     // DELETE: Tarifas/5
@@ -93,8 +95,13 @@ namespace Api.Controllers {
         if (tarifa == null) {
           return NotFound();
         }
-        await _tarifas.Delete(tarifa);
-      }
+        try { 
+          await _tarifas.Delete(tarifa);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
+      }      
       return NoContent();
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,14 @@ namespace Api.Controllers {
     // POST: Vias
     [HttpPost]
     public async Task<IActionResult> Post(ViaDto dto) {
+      Via via = new Via();
       using (_vias) {
         if (dto == null) {
           return BadRequest();
         }
-        await _vias.Insert(_mapper.Map<Via>(dto));
+        await _vias.Insert(via = _mapper.Map<Via>(dto));
       }
-      return Ok();
+      return Ok(_mapper.Map<ViaDto>(via));
     }
 
     // DELETE: Vias/5
@@ -78,7 +80,12 @@ namespace Api.Controllers {
         if (via == null) {
           return NotFound();
         }
-        await _vias.Delete(via);
+        try { 
+          await _vias.Delete(via);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

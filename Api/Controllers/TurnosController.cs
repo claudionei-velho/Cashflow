@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,17 +75,18 @@ namespace Api.Controllers {
     // POST: Turnos
     [HttpPost]
     public async Task<IActionResult> Post(TurnoDto dto) {
+      Turno turno = new Turno();
       using (_turnos) {
         TurnoValidator validator = new TurnoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _turnos.Insert(_mapper.Map<Turno>(dto));
+          await _turnos.Insert(turno = _mapper.Map<Turno>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<TurnoDto>(turno));
     }
 
     // DELETE: Turnos/5
@@ -95,7 +97,12 @@ namespace Api.Controllers {
         if (turno == null) {
           return NotFound();
         }
-        await _turnos.Delete(turno);
+        try { 
+          await _turnos.Delete(turno);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

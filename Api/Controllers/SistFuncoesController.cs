@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,11 +44,11 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_fSistemas) {
-        SistFuncao fSistema = await _fSistemas.GetFirstAsync(f => f.Id == id);
-        if (fSistema == null) {
+        SistFuncao funcao = await _fSistemas.GetFirstAsync(f => f.Id == id);
+        if (funcao == null) {
           return NotFound();
         }
-        return Ok(_mapper.Map<SistFuncaoDto>(fSistema));
+        return Ok(_mapper.Map<SistFuncaoDto>(funcao));
       }
     }
 
@@ -87,28 +88,34 @@ namespace Api.Controllers {
         }
       }
 
+      SistFuncao funcao = new SistFuncao();
       using (_fSistemas) {
         SistFuncaoValidator validator = new SistFuncaoValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _fSistemas.Insert(_mapper.Map<SistFuncao>(dto));
+          await _fSistemas.Insert(funcao = _mapper.Map<SistFuncao>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<SistFuncaoDto>(funcao));
     }
 
     // DELETE: SistFuncoes/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_fSistemas) {
-        SistFuncao fSistema = await _fSistemas.GetByIdAsync(id);
-        if (fSistema == null) {
+        SistFuncao funcao = await _fSistemas.GetByIdAsync(id);
+        if (funcao == null) {
           return NotFound();
         }
-        await _fSistemas.Delete(fSistema);
+        try { 
+          await _fSistemas.Delete(funcao);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }

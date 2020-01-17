@@ -11,6 +11,7 @@ using FluentValidation;
 
 using Api.Models;
 using Api.Models.Validations;
+using Domain.Extensions;
 using Domain.Interfaces.Services;
 using Domain.Models;
 
@@ -110,21 +111,22 @@ namespace Api.Controllers {
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
                       await _linhas.GetData(
-                                l => l.EmpresaId == id,
+                                _linhas.SearchBy(ForeignKey.EmpresaId, id),
                                 l => l.OrderBy(q => q.Prefixo)
                             ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{p}/{k}/{id?}")]
+    public async Task<IActionResult> PagedList(int p, int k, int? id) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
                       await _linhas.GetData(
-                                order: l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
+                                _linhas.SearchBy(ForeignKey.EmpresaId, id),
+                                l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -144,17 +146,18 @@ namespace Api.Controllers {
       using (_linhas) {
         return Ok(await _linhas.SelectList(
                             l => new { l.Id, l.Prefixo, l.Denominacao, l.Descricao },
-                            l => l.EmpresaId == id,
+                            _linhas.SearchBy(ForeignKey.EmpresaId, id),
                             l => l.OrderBy(q => q.Prefixo)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int? k) {
       using (_linhas) {
-        return Ok(new KeyValuePair<int, int>(_linhas.Count(),
-                                             _linhas.Pages(size: k ?? 16)));
+        return Ok(new KeyValuePair<int, int>(
+                          _linhas.Count(_linhas.SearchBy(ForeignKey.EmpresaId, id)),
+                          _linhas.Pages(_linhas.SearchBy(ForeignKey.EmpresaId, id), k ?? 16)));
       }
     }
   }

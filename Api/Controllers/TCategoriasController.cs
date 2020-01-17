@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,11 +42,11 @@ namespace Api.Controllers {
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
       using (_tCategorias) {
-        TCategoria tCategoria = await _tCategorias.GetFirstAsync(c => c.Id == id);
-        if (tCategoria == null) {
+        TCategoria categoria = await _tCategorias.GetFirstAsync(c => c.Id == id);
+        if (categoria == null) {
           return NotFound();
         }
-        return Ok(_mapper.Map<TCategoriaDto>(tCategoria));
+        return Ok(_mapper.Map<TCategoriaDto>(categoria));
       }
     }
 
@@ -73,28 +74,34 @@ namespace Api.Controllers {
     // POST: TCategorias
     [HttpPost]
     public async Task<IActionResult> Post(TCategoriaDto dto) {
+      TCategoria categoria = new TCategoria();
       using (_tCategorias) {
         TCategoriaValidator validator = new TCategoriaValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _tCategorias.Insert(_mapper.Map<TCategoria>(dto));
+          await _tCategorias.Insert(categoria = _mapper.Map<TCategoria>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }
       }
-      return Ok();
+      return Ok(_mapper.Map<TCategoriaDto>(categoria));
     }
 
     // DELETE: TCategorias/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
       using (_tCategorias) {
-        TCategoria tCategoria = await _tCategorias.GetByIdAsync(id);
-        if (tCategoria == null) {
+        TCategoria categoria = await _tCategorias.GetByIdAsync(id);
+        if (categoria == null) {
           return NotFound();
         }
-        await _tCategorias.Delete(tCategoria);
+        try { 
+          await _tCategorias.Delete(categoria);
+        }
+        catch (Exception ex) {
+          return BadRequest(ex.Message);
+        }
       }
       return NoContent();
     }
