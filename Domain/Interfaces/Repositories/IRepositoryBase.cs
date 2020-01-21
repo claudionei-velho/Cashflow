@@ -15,7 +15,6 @@ namespace Domain.Interfaces.Repositories {
     TEntity GetById(object id);
     Task<TEntity> GetByIdAsync(int id);
     Task<TEntity> GetByIdAsync(object id);
-
     TEntity GetFirst(Expression<Func<TEntity, bool>> condition);
     Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition);
 

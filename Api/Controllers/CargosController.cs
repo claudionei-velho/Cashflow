@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ namespace Api.Controllers {
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, CargoDto dto) {
       using (_cargos) {
-        if (_cargos.Exists(t => t.Id == id)) {
+        if (_cargos.Exists(c => c.Id == id)) {
           CargoValidator validator = new CargoValidator();
           try {
             validator.ValidateAndThrow(dto);
@@ -109,19 +110,22 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_cargos) {
         return Ok(_mapper.Map<IEnumerable<CargoDto>>(
-                      await _cargos.GetData(t => t.EmpresaId == id).ToListAsync()));
+                      await _cargos.GetData(
+                                _cargos.GetExpression(id)
+                            ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_cargos) {
         return Ok(_mapper.Map<IEnumerable<CargoDto>>(
                       await _cargos.GetData(
-                                order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
+                                _cargos.GetExpression(id),
+                                c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Denominacao)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -131,7 +135,7 @@ namespace Api.Controllers {
       using (_cargos) {
         return Ok(await _cargos.SelectList(
                             c => new { c.Id, c.Codigo, c.Titulo },
-                            order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
+                            order: c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Denominacao)
                         ).ToListAsync());
       }
     }
@@ -141,16 +145,18 @@ namespace Api.Controllers {
       using (_cargos) {
         return Ok(await _cargos.SelectList(
                             c => new { c.Id, c.Codigo, c.Titulo },
-                            c => c.EmpresaId == id
+                            _cargos.GetExpression(id),
+                            c => c.OrderBy(q => q.Denominacao)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k = 8) {
       using (_cargos) {
-        return Ok(new KeyValuePair<int, int>(_cargos.Count(),
-                                             _cargos.Pages(size: k ?? 16)));
+        Expression<Func<Cargo, bool>> filter = _cargos.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _cargos.Count(filter), _cargos.Pages(filter, k)));
       }
     }
   }

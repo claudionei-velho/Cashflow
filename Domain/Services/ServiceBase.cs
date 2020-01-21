@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using Domain.Extensions;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 
@@ -89,6 +90,18 @@ namespace Domain.Services {
       catch (DivideByZeroException ex) {
         throw new Exception(ex.Message);
       }
+    }
+
+    public virtual Expression<Func<TEntity, bool>> GetExpression(int? id) {
+      throw new NotImplementedException();
+    }
+
+    public virtual Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, int? id) {
+      throw new NotImplementedException();
+    }
+
+    public virtual Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, object id) {
+      throw new NotImplementedException();
     }
 
     public async Task Insert(TEntity obj) {

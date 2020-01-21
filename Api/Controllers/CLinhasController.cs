@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -94,18 +95,22 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_cLinhas) {
         return Ok(_mapper.Map<IEnumerable<CLinhaDto>>(
-                      await _cLinhas.GetData(c => c.EmpresaId == id).ToListAsync()));
+                      await _cLinhas.GetData(
+                                _cLinhas.GetExpression(id)
+                            ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_cLinhas) {
         return Ok(_mapper.Map<IEnumerable<CLinhaDto>>(
-                      await _cLinhas.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _cLinhas.GetData(
+                                _cLinhas.GetExpression(id)
+                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
 
@@ -123,16 +128,17 @@ namespace Api.Controllers {
       using (_cLinhas) {
         return Ok(await _cLinhas.SelectList(
                             c => new { c.Id, c.ClassLinha.Denominacao }, 
-                            c => c.EmpresaId == id
+                            _cLinhas.GetExpression(id)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k = 8) {
       using (_cLinhas) {
-        return Ok(new KeyValuePair<int, int>(_cLinhas.Count(),
-                                             _cLinhas.Pages(size: k ?? 16)));
+        Expression<Func<CLinha, bool>> filter = _cLinhas.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _cLinhas.Count(filter), _cLinhas.Pages(filter, k)));
       }
     }
   }

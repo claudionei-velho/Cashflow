@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -111,22 +112,22 @@ namespace Api.Controllers {
       using (_centros) {
         return Ok(_mapper.Map<IEnumerable<CentroDto>>(
                       await _centros.GetData(
-                                c => c.EmpresaId == id,
+                                _centros.GetExpression(id),
                                 c => c.OrderBy(q => q.Classificacao)
                             ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_centros) {
         return Ok(_mapper.Map<IEnumerable<CentroDto>>(
                       await _centros.GetData(
-                                order: c => c.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.Classificacao)
+                                _centros.GetExpression(id),
+                                c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Classificacao)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -147,17 +148,18 @@ namespace Api.Controllers {
       using (_centros) {
         return Ok(await _centros.SelectList(
                             c => new { c.Id, c.Classificacao, c.Denominacao },
-                            c => c.EmpresaId == id,
+                            _centros.GetExpression(id),
                             c => c.OrderBy(q => q.Classificacao)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k = 8) {
       using (_centros) {
-        return Ok(new KeyValuePair<int, int>(_centros.Count(),
-                                             _centros.Pages(size: k ?? 16)));
+        Expression<Func<Centro, bool>> filter = _centros.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _centros.Count(filter), _centros.Pages(filter, k)));
       }
     }
   }

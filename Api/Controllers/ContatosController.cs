@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -110,21 +111,22 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
                       await _contatos.GetData(
-                                c => c.EmpresaId == id, 
+                                _contatos.GetExpression(id), 
                                 c => c.OrderBy(q => q.Nome)
                             ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
                       await _contatos.GetData(
-                                order: c => c.OrderBy(q => q.Nome)
+                                _contatos.GetExpression(id),
+                                order: c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Nome)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -144,17 +146,18 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(await _contatos.SelectList(
                             c => new { c.Id, c.Empresa.Fantasia, c.Nome },
-                            c => c.EmpresaId == id,
+                            _contatos.GetExpression(id),
                             c => c.OrderBy(q => q.Nome)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k = 8) {
       using (_contatos) {
-        return Ok(new KeyValuePair<int, int>(_contatos.Count(),
-                                             _contatos.Pages(size: k ?? 16)));
+        Expression<Func<Contato, bool>> filter = _contatos.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _contatos.Count(filter), _contatos.Pages(filter, k)));
       }
     }
   }

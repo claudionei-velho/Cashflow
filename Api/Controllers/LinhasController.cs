@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,6 @@ using FluentValidation;
 
 using Api.Models;
 using Api.Models.Validations;
-using Domain.Extensions;
 using Domain.Interfaces.Services;
 using Domain.Models;
 
@@ -111,21 +111,21 @@ namespace Api.Controllers {
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
                       await _linhas.GetData(
-                                _linhas.SearchBy(ForeignKey.EmpresaId, id),
+                                _linhas.GetExpression(id),
                                 l => l.OrderBy(q => q.Prefixo)
                             ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}/{id?}")]
-    public async Task<IActionResult> PagedList(int p, int k, int? id) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
                       await _linhas.GetData(
-                                _linhas.SearchBy(ForeignKey.EmpresaId, id),
+                                _linhas.GetExpression(id),
                                 l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
@@ -146,18 +146,18 @@ namespace Api.Controllers {
       using (_linhas) {
         return Ok(await _linhas.SelectList(
                             l => new { l.Id, l.Prefixo, l.Denominacao, l.Descricao },
-                            _linhas.SearchBy(ForeignKey.EmpresaId, id),
+                            _linhas.GetExpression(id),
                             l => l.OrderBy(q => q.Prefixo)
                         ).ToListAsync());
       }
     }
 
     [HttpGet, Route("Pages/{id?}/{k?}")]
-    public IActionResult Pages(int? id, int? k) {
+    public IActionResult Pages(int? id, int k = 8) {
       using (_linhas) {
+        Expression<Func<Linha, bool>> filter = _linhas.GetExpression(id);
         return Ok(new KeyValuePair<int, int>(
-                          _linhas.Count(_linhas.SearchBy(ForeignKey.EmpresaId, id)),
-                          _linhas.Pages(_linhas.SearchBy(ForeignKey.EmpresaId, id), k ?? 16)));
+                          _linhas.Count(filter), _linhas.Pages(filter, k)));
       }
     }
   }

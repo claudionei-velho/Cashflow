@@ -14,16 +14,22 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public Expression<Func<Linha, bool>> SearchBy(ForeignKey key = 0, object id = null) {
-      if (key == 0 || id == null) {
-        return null;
+    public override Expression<Func<Linha, bool>> GetExpression(int? id) {
+      if (id != null) {
+        return l => l.EmpresaId == id;
       }
+      return null;
+    }
 
-      return key switch {
-        ForeignKey.MunicipioId => l => l.Empresa.MunicipioId == (int)id,
-        ForeignKey.EmpresaId => l => l.EmpresaId == (int)id,
-        _ => null,
-      };
+    public override Expression<Func<Linha, bool>> GetExpression(ForeignKey key, int? id) {
+      if (key > 0 && id != null) {
+        return key switch {
+          ForeignKey.MunicipioId => l => l.Empresa.MunicipioId == id,
+          ForeignKey.EmpresaId => l => l.EmpresaId == id,
+          _ => null,
+        };
+      }
+      return null;
     }
 
     protected override void Dispose(bool disposing) {

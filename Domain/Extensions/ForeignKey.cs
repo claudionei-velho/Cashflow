@@ -2,7 +2,7 @@
 
 namespace Domain.Extensions {
   [Flags]
-  public enum ForeignKey {
+  public enum ForeignKey : byte {
     MunicipioId = 1,
     EmpresaId = 2
   }

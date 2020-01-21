@@ -3,6 +3,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using Domain.Extensions;
+
 namespace Domain.Interfaces.Services {
   public interface IServiceBase<TEntity> : IDisposable where TEntity : class {
     IQueryable<TEntity> GetData(Expression<Func<TEntity, bool>> condition = null,
@@ -15,7 +17,6 @@ namespace Domain.Interfaces.Services {
     TEntity GetById(object id);
     Task<TEntity> GetByIdAsync(int id);
     Task<TEntity> GetByIdAsync(object id);
-
     TEntity GetFirst(Expression<Func<TEntity, bool>> condition);
     Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition);
 
@@ -26,6 +27,10 @@ namespace Domain.Interfaces.Services {
     Task<int> CountAsync(Expression<Func<TEntity, bool>> condition = null);
     int Pages(Expression<Func<TEntity, bool>> condition = null, int size = 0);
     Task<int> PagesAsync(Expression<Func<TEntity, bool>> condition = null, int size = 0);
+
+    Expression<Func<TEntity, bool>> GetExpression(int? id);
+    Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, int? id);
+    Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, object id);
 
     Task Insert(TEntity obj);
     Task Update(TEntity obj);
