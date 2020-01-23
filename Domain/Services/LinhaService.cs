@@ -14,14 +14,14 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public override Expression<Func<Linha, bool>> GetExpression(int? id) {
+    public Expression<Func<Linha, bool>> GetExpression(int? id) {
       if (id != null) {
         return l => l.EmpresaId == id;
       }
       return null;
     }
 
-    public override Expression<Func<Linha, bool>> GetExpression(ForeignKey key, int? id) {
+    public Expression<Func<Linha, bool>> GetExpression(ForeignKey key, int? id) {
       if (key > 0 && id != null) {
         return key switch {
           ForeignKey.MunicipioId => l => l.Empresa.MunicipioId == id,

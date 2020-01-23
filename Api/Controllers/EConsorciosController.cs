@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -108,20 +109,23 @@ namespace Api.Controllers {
       using (_eConsorcios) {
         return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
                       await _eConsorcios.GetData(
-                                c => c.ConsorcioId == id, 
+                                _eConsorcios.GetExpression(id),
                                 c => c.OrderByDescending(q => q.Ratio)
                             ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_eConsorcios) {
         return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
-                      await _eConsorcios.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _eConsorcios.GetData(
+                                _eConsorcios.GetExpression(id),
+                                c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio)
+                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
 
@@ -140,17 +144,18 @@ namespace Api.Controllers {
       using (_eConsorcios) {
         return Ok(await _eConsorcios.SelectList(
                             c => new { c.Id, c.Consorcio.Razao, c.Empresa.Fantasia },
-                            c => c.ConsorcioId == id,
+                            _eConsorcios.GetExpression(id),
                             c => c.OrderByDescending(q => q.Ratio)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k) {
       using (_eConsorcios) {
-        return Ok(new KeyValuePair<int, int>(_eConsorcios.Count(), 
-                                             _eConsorcios.Pages(size: k ?? 16)));
+        Expression<Func<EConsorcio, bool>> filter = _eConsorcios.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _eConsorcios.Count(filter), _eConsorcios.Pages(filter, k)));
       }
     }
   }

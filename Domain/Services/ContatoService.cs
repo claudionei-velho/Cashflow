@@ -13,7 +13,7 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public override Expression<Func<Contato, bool>> GetExpression(int? id) {
+    public Expression<Func<Contato, bool>> GetExpression(int? id) {
       if (id != null) {
         return c => c.EmpresaId == id;
       }

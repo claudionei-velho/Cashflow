@@ -92,18 +92,6 @@ namespace Domain.Services {
       }
     }
 
-    public virtual Expression<Func<TEntity, bool>> GetExpression(int? id) {
-      throw new NotImplementedException();
-    }
-
-    public virtual Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, int? id) {
-      throw new NotImplementedException();
-    }
-
-    public virtual Expression<Func<TEntity, bool>> GetExpression(ForeignKey key, object id) {
-      throw new NotImplementedException();
-    }
-
     public async Task Insert(TEntity obj) {
       try {
         await _repository.Insert(obj);

@@ -13,6 +13,13 @@ namespace Domain.Services {
       _repository = repository;
     }
 
+    public Expression<Func<EConsorcio, bool>> GetExpression(int? id) {
+      if (id != null) {
+        return ec => ec.ConsorcioId == id;
+      }
+      return null;
+    }
+
     public decimal? TotalRatio(Expression<Func<EConsorcio, bool>> condition = null) {
       return _repository.TotalRatio(condition);
     }

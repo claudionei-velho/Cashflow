@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -112,7 +113,7 @@ namespace Api.Controllers {
       using (_custos) {
         return Ok(_mapper.Map<IEnumerable<CstCarroceriaDto>>(
                       await _custos.GetData(
-                                c => c.EmpresaId == id,
+                                _custos.GetExpression(id),
                                 c => c.OrderBy(q => q.EmpresaId)
                                       .ThenByDescending(q => q.Ano)
                                       .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
@@ -120,17 +121,18 @@ namespace Api.Controllers {
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{id?}/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int? id, int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_custos) {
         return Ok(_mapper.Map<IEnumerable<CstCarroceriaDto>>(
                       await _custos.GetData(
-                                order: c => c.OrderBy(q => q.EmpresaId)
-                                             .ThenByDescending(q => q.Ano)
-                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
+                                _custos.GetExpression(id),
+                                c => c.OrderBy(q => q.EmpresaId)
+                                      .ThenByDescending(q => q.Ano)
+                                      .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
@@ -152,18 +154,19 @@ namespace Api.Controllers {
       using (_custos) {
         return Ok(await _custos.SelectList(
                             c => new { c.Id, c.Empresa.Fantasia, c.Ano, c.Mes, c.CVeiculo.Classe },
-                            c => c.EmpresaId == id,
+                            _custos.GetExpression(id),
                             c => c.OrderByDescending(q => q.Ano)
                                   .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                         ).ToListAsync());
       }
     }
 
-    [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    [HttpGet, Route("Pages/{id?}/{k?}")]
+    public IActionResult Pages(int? id, int k = 8) {
       using (_custos) {
-        return Ok(new KeyValuePair<int, int>(_custos.Count(),
-                                             _custos.Pages(size: k ?? 16)));
+        Expression<Func<CstCarroceria, bool>> filter = _custos.GetExpression(id);
+        return Ok(new KeyValuePair<int, int>(
+                          _custos.Count(filter), _custos.Pages(filter, k)));
       }
     }
   }
