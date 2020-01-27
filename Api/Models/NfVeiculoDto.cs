@@ -1,7 +1,7 @@
 ﻿using Domain.Lists;
 
-namespace Domain.Models {
-  public class NfVeiculo {
+namespace Api.Models {
+  public class NfVeiculoDto {
     public int Id { get; private set; }
     public int NotaId { get; private set; }
     public int ItemId { get; private set; }
@@ -41,6 +41,6 @@ namespace Domain.Models {
     public string RestricaoCap => new Restricao().Items[RestricaoId];
 
     // Navigation Properties
-    public NFiscal NFiscal { get; private set; }
+    public NFiscalDto NFiscal { get; private set; }
   }
 }

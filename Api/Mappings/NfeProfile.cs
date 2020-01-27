@@ -14,6 +14,7 @@ namespace Api.Mappings {
       CreateMap<NfEntregaDto, NfEntrega>().ReverseMap();
       CreateMap<NFiscalDto, NFiscal>().ReverseMap();
       CreateMap<NfReferenciaDto, NfReferencia>().ReverseMap();
+      CreateMap<NfVeiculoDto, NfVeiculo>().ReverseMap();
 
       CreateMap<UComercialDto, UComercial>().ReverseMap();
     }

@@ -70,6 +70,7 @@ namespace Infra {
     public DbSet<NfEntrega> NfEntregas { get; private set; }
     public DbSet<NFiscal> NFiscais { get; private set; }
     public DbSet<NfReferencia> NfReferencias { get; private set; }
+    public DbSet<NfVeiculo> NfVeiculos { get; private set; }
     public DbSet<Operacao> Operacoes { get; private set; }
     public DbSet<Operacional> Operacionais { get; private set; }
     public DbSet<OpLinha> OperLinhas { get; private set; }
@@ -164,6 +165,14 @@ namespace Infra {
       // NF-e: Notas Fiscais
       modelBuilder.Entity<NFiscal>().Ignore(p => p.FPagamentoCap);
       modelBuilder.Entity<NFiscal>().Ignore(p => p.FinalidadeCap);
+
+      // NF-e: Aquisicao de Veiculos
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.CombustivelCap);
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.TVeiculoCap);
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.EVeiculoCap);
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.CondicaoCap);
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.CorDenatranCap);
+      modelBuilder.Entity<NfVeiculo>().Ignore(p => p.RestricaoCap);
 
       // Plano Operacional
       modelBuilder.Entity<Operacional>().Ignore(p => p.PercursoUtil);

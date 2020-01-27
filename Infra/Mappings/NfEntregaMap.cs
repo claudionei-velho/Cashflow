@@ -21,7 +21,6 @@ namespace Infra.Mappings {
       builder.Property(t => t.Complemento).HasColumnName("Complemento").HasMaxLength(64);
       builder.Property(t => t.Bairro).HasColumnName("Bairro").HasMaxLength(32);
       builder.Property(t => t.MunicipioId).HasColumnName("MunicipioId").IsRequired();
-      builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Municipio)

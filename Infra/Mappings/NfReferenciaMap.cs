@@ -25,7 +25,6 @@ namespace Infra.Mappings {
       builder.Property(t => t.Modelo).HasColumnName("Modelo").IsRequired();
       builder.Property(t => t.Serie).HasColumnName("Serie").IsRequired();
       builder.Property(t => t.Numero).HasColumnName("Numero").IsRequired();
-      builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Fornecedor)
