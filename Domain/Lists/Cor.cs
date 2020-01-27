@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Lists {
   public class Cor : ListBase {
     public Cor() {
       Items = new Dictionary<int, string>() {
+        {  0, string.Empty },
         {  1, "AMARELO" },
         {  2, "AZUL" },
         {  3, "BEGE" },
@@ -21,6 +23,10 @@ namespace Domain.Lists {
         { 15, "VERMELHA" },
         { 16, "FANTASIA" }
       };
+    }
+
+    public override IEnumerable<KeyValuePair<int, string>> ToList() {
+      return Items.Where(p => p.Key > 0).ToList();
     }
   }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain.Models {
+﻿namespace Domain.Models {
   public class NfEntrega {
     public int Id { get; private set; }
     public int NotaId { get; private set; }
@@ -9,7 +7,6 @@ namespace Domain.Models {
     public string Complemento { get; private set; }
     public string Bairro { get; private set; }
     public int MunicipioId { get; private set; }
-    public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties
     public Municipio Municipio { get; private set; }

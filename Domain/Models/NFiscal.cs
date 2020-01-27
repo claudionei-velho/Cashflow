@@ -33,5 +33,6 @@ namespace Domain.Models {
 
     public ICollection<NfEntrega> NfEntregas { get; private set; }
     public ICollection<NfReferencia> NfReferencias { get; private set; }
+    public ICollection<NfVeiculo> NfVeiculos { get; private set; }
   }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain.Models {
+﻿namespace Domain.Models {
   public class NfReferencia {
     public int Id { get; private set; }
     public int NotaId { get; private set; }
@@ -11,7 +9,6 @@ namespace Domain.Models {
     public int Modelo { get; private set; }
     public int Serie { get; set; }
     public int Numero { get; private set; }
-    public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties
     public Fornecedor Fornecedor { get; private set; }
