@@ -28,8 +28,10 @@ namespace Api {
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
       // Database Connections
-      services.AddDbContextPool<DataContext>(options => 
-          options.UseSqlServer(Configuration.GetConnectionString("DataContext")));
+      services.AddDbContextPool<DataContext>(options => {          
+          options.UseSqlServer(Configuration.GetConnectionString("DataContext"));
+          options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+      });
 
       // Json Configuration
       services.AddControllers().AddNewtonsoftJson(options => {
@@ -210,6 +212,9 @@ namespace Api {
 
       services.AddScoped<INfReferenciaService, NfReferenciaService>();
       services.AddScoped<INfReferenciaRepository, NfReferenciaRepository>();
+
+      services.AddScoped<INfVeiculoService, NfVeiculoService>();
+      services.AddScoped<INfVeiculoRepository, NfVeiculoRepository>();
 
       services.AddScoped<IOperacaoService, OperacaoService>();
       services.AddScoped<IOperacaoRepository, OperacaoRepository>();

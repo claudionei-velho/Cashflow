@@ -15,7 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<PSintese> Get(Expression<Func<PSintese, bool>> condition = null, 
         Func<IQueryable<PSintese>, IOrderedQueryable<PSintese>> order = null) {
       try {
-        return base.Get(condition, order).Include(p => p.Empresa).AsNoTracking();
+        return base.Get(condition, order).Include(p => p.Empresa);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

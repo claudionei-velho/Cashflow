@@ -25,7 +25,7 @@ namespace Infra.Repositories {
     protected override IQueryable<FrotaHoraria> Get(Expression<Func<FrotaHoraria, bool>> condition = null, 
         Func<IQueryable<FrotaHoraria>, IOrderedQueryable<FrotaHoraria>> order = null) {
       try {
-        return base.Get(condition, order).Include(f => f.Empresa).AsNoTracking();
+        return base.Get(condition, order).Include(f => f.Empresa);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

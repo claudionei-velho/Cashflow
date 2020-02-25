@@ -141,6 +141,9 @@
   <data name="BaciaIdRequired" xml:space="preserve">
     <value>Informe a Bacia Operacional</value>
   </data>
+  <data name="BrutoRequired" xml:space="preserve">
+    <value>Informe o Peso Bruto (ton.)</value>
+  </data>
   <data name="CaptacaoRequired" xml:space="preserve">
     <value>Informe se Linha de Captação</value>
   </data>
@@ -186,6 +189,12 @@
   <data name="CombustivelIdRequired" xml:space="preserve">
     <value>Informe o Tipo de Combustível</value>
   </data>
+  <data name="CondicaoIdRequired" xml:space="preserve">
+    <value>Informe a Condição do Veículo</value>
+  </data>
+  <data name="CondicaoVinRequired" xml:space="preserve">
+    <value>Informe se o Veículo tem VIN (chassi) remarcado</value>
+  </data>
   <data name="ConsorcioDto" xml:space="preserve">
     <value>do Consórcio</value>
   </data>
@@ -200,6 +209,9 @@
   </data>
   <data name="ContatoDto" xml:space="preserve">
     <value>do Contato da Empresa</value>
+  </data>
+  <data name="CorDenatranRequired" xml:space="preserve">
+    <value>Código da Cor conforme Tabela Denatran</value>
   </data>
   <data name="CorRequired" xml:space="preserve">
     <value>Informe a Cor</value>
@@ -297,6 +309,9 @@
   <data name="EtariaIdRequired" xml:space="preserve">
     <value>Informe a Faixa Etária</value>
   </data>
+  <data name="EVeiculoIdRequired" xml:space="preserve">
+    <value>Informe a Espécie de Veículo</value>
+  </data>
   <data name="FantasiaRequired" xml:space="preserve">
     <value>Informe o Nome Fantasia</value>
   </data>
@@ -363,6 +378,9 @@
   <data name="IntegracaoRequired" xml:space="preserve">
     <value>Informe a Data de Integração</value>
   </data>
+  <data name="ItemIdRequired" xml:space="preserve">
+    <value>Informe o número do Item</value>
+  </data>
   <data name="ItemRequired" xml:space="preserve">
     <value>Informe o Item</value>
   </data>
@@ -374,6 +392,12 @@
   </data>
   <data name="LinhaIdRequired" xml:space="preserve">
     <value>Informe a Linha</value>
+  </data>
+  <data name="LiquidoRequired" xml:space="preserve">
+    <value>Informe o Peso Líquido (ton.)</value>
+  </data>
+  <data name="LotacaoRequired" xml:space="preserve">
+    <value>Informe a quantidade máxima de passageiros sentados</value>
   </data>
   <data name="LoteDto" xml:space="preserve">
     <value>do Lote</value>
@@ -407,6 +431,9 @@
   </data>
   <data name="NfReferenciaDto" xml:space="preserve">
     <value>da Nota Fiscal Referenciada</value>
+  </data>
+  <data name="NfVeiculoDto" xml:space="preserve">
+    <value>da Aquisição de Veículos</value>
   </data>
   <data name="NomeRequired" xml:space="preserve">
     <value>Informe o Nome</value>
@@ -474,6 +501,9 @@
   <data name="RenavamRequired" xml:space="preserve">
     <value>Informe o Renavam</value>
   </data>
+  <data name="RestricaoIdRequired" xml:space="preserve">
+    <value>Informe se Restrições</value>
+  </data>
   <data name="SabadosRequired" xml:space="preserve">
     <value>Informe se há Operação aos Sábados</value>
   </data>
@@ -528,11 +558,17 @@
   <data name="TituloRequired" xml:space="preserve">
     <value>Informe o Título</value>
   </data>
+  <data name="TracaoRequired" xml:space="preserve">
+    <value>Informe a Capacidade Máxima de Tração (ton.)</value>
+  </data>
   <data name="TransporteRequired" xml:space="preserve">
     <value>Informe se Linha de Transporte</value>
   </data>
   <data name="TurnoDto" xml:space="preserve">
     <value>do Turno</value>
+  </data>
+  <data name="TVeiculoIdRequired" xml:space="preserve">
+    <value>Informe o Tipo de Veículo</value>
   </data>
   <data name="UfIdRequired" xml:space="preserve">
     <value>Informe a U.F.</value>

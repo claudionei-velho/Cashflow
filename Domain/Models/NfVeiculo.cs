@@ -30,7 +30,7 @@ namespace Domain.Models {
 
     public char CondicaoVin { get; private set; }
     public int CondicaoId { get; private set; }
-    public string CondicaoCap => new Condicao().Items[CondicaoId];
+    public string CondicaoCap => new VCondicao().Items[CondicaoId];
 
     public int? Modelo { get; private set; }
     public int? CorDenatran { get; private set; }

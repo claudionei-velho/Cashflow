@@ -151,10 +151,10 @@ namespace Api.Controllers {
     }
 
     [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    public ActionResult<KeyValuePair<int, int>> Pages(int? k) {
       using (_referencias) {
-        return Ok(new KeyValuePair<int, int>(_referencias.Count(),
-                                             _referencias.Pages(size: k ?? 16)));
+        return new KeyValuePair<int, int>(_referencias.Count(),
+                                          _referencias.Pages(size: k ?? 8));
       }
     }
   }

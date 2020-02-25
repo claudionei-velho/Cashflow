@@ -133,6 +133,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe o Peso Bruto (ton.).
+        /// </summary>
+        public static string BrutoRequired {
+            get {
+                return ResourceManager.GetString("BrutoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se Linha de Captação.
         /// </summary>
         public static string CaptacaoRequired {
@@ -268,6 +277,24 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Condição do Veículo.
+        /// </summary>
+        public static string CondicaoIdRequired {
+            get {
+                return ResourceManager.GetString("CondicaoIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe se o Veículo tem VIN (chassi) remarcado.
+        /// </summary>
+        public static string CondicaoVinRequired {
+            get {
+                return ResourceManager.GetString("CondicaoVinRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to do Consórcio.
         /// </summary>
         public static string ConsorcioDto {
@@ -309,6 +336,15 @@ namespace Api.Properties {
         public static string ContatoDto {
             get {
                 return ResourceManager.GetString("ContatoDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Código da Cor conforme Tabela Denatran.
+        /// </summary>
+        public static string CorDenatranRequired {
+            get {
+                return ResourceManager.GetString("CorDenatranRequired", resourceCulture);
             }
         }
         
@@ -601,6 +637,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Espécie de Veículo.
+        /// </summary>
+        public static string EVeiculoIdRequired {
+            get {
+                return ResourceManager.GetString("EVeiculoIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Nome Fantasia.
         /// </summary>
         public static string FantasiaRequired {
@@ -799,6 +844,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe o número do Item.
+        /// </summary>
+        public static string ItemIdRequired {
+            get {
+                return ResourceManager.GetString("ItemIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Item.
         /// </summary>
         public static string ItemRequired {
@@ -831,6 +885,24 @@ namespace Api.Properties {
         public static string LinhaIdRequired {
             get {
                 return ResourceManager.GetString("LinhaIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Peso Líquido (ton.).
+        /// </summary>
+        public static string LiquidoRequired {
+            get {
+                return ResourceManager.GetString("LiquidoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a quantidade máxima de passageiros sentados.
+        /// </summary>
+        public static string LotacaoRequired {
+            get {
+                return ResourceManager.GetString("LotacaoRequired", resourceCulture);
             }
         }
         
@@ -930,6 +1002,15 @@ namespace Api.Properties {
         public static string NfReferenciaDto {
             get {
                 return ResourceManager.GetString("NfReferenciaDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to da Aquisição de Veículos.
+        /// </summary>
+        public static string NfVeiculoDto {
+            get {
+                return ResourceManager.GetString("NfVeiculoDto", resourceCulture);
             }
         }
         
@@ -1132,6 +1213,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe se Restrições.
+        /// </summary>
+        public static string RestricaoIdRequired {
+            get {
+                return ResourceManager.GetString("RestricaoIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se há Operação aos Sábados.
         /// </summary>
         public static string SabadosRequired {
@@ -1294,6 +1384,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Capacidade Máxima de Tração (ton.).
+        /// </summary>
+        public static string TracaoRequired {
+            get {
+                return ResourceManager.GetString("TracaoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe se Linha de Transporte.
         /// </summary>
         public static string TransporteRequired {
@@ -1308,6 +1407,15 @@ namespace Api.Properties {
         public static string TurnoDto {
             get {
                 return ResourceManager.GetString("TurnoDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Tipo de Veículo.
+        /// </summary>
+        public static string TVeiculoIdRequired {
+            get {
+                return ResourceManager.GetString("TVeiculoIdRequired", resourceCulture);
             }
         }
         

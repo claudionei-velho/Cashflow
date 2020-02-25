@@ -43,10 +43,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get(int id) {
       using (_linhas) {
         Linha linha = await _linhas.GetFirstAsync(l => l.Id == id);
-        if (linha == null) {
-          return NotFound();
-        }
-        return Ok(_mapper.Map<LinhaDto>(linha));
+        return linha == null ? NotFound() : (IActionResult)Ok(_mapper.Map<LinhaDto>(linha));
       }
     }
 

@@ -29,5 +29,6 @@ namespace Domain.Interfaces.Services {
     Task Insert(TEntity obj);
     Task Update(TEntity obj);
     Task Delete(TEntity obj);
+    Task AddOrUpdate(TEntity obj);
   }
 }

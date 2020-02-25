@@ -16,7 +16,7 @@ namespace Infra.Repositories {
         Func<IQueryable<Operacional>, IOrderedQueryable<Operacional>> order = null) {                
       try {
         return base.Get(condition, order).Include(p => p.Empresa)
-                   .Include(p => p.Linha).Include(p => p.Atendimento).AsNoTracking();
+                   .Include(p => p.Linha).Include(p => p.Atendimento);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

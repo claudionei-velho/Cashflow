@@ -153,11 +153,11 @@ namespace Api.Controllers {
     }
 
     [HttpGet, Route("Pages/{id?}/{k?}")]
-    public IActionResult Pages(int? id, int k = 8) {
+    public ActionResult<KeyValuePair<int, int>> Pages(int? id, int k = 8) {
       using (_contatos) {
         Expression<Func<Contato, bool>> filter = _contatos.GetExpression(id);
-        return Ok(new KeyValuePair<int, int>(
-                          _contatos.Count(filter), _contatos.Pages(filter, k)));
+        return new KeyValuePair<int, int>(_contatos.Count(filter), 
+                                          _contatos.Pages(filter, k));
       }
     }
   }

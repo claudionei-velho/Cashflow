@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-using Domain.Extensions;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 
@@ -113,6 +112,15 @@ namespace Domain.Services {
     public async Task Delete(TEntity obj) {
       try {
         await _repository.Delete(obj);
+      }
+      catch (Exception ex) {
+        throw new Exception(ex.Message);
+      }
+    }
+
+    public async Task AddOrUpdate(TEntity obj) {
+      try {
+        await _repository.AddOrUpdate(obj);
       }
       catch (Exception ex) {
         throw new Exception(ex.Message);

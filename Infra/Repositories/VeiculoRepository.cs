@@ -56,17 +56,16 @@ namespace Infra.Repositories {
         if (condition == null) {
           condition = v => !v.Inativo;
         }
-        return base.Get(condition, order)
-                   .Include(v => v.Empresa).Include(v => v.CVeiculo)
-                   .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero).AsNoTracking();
+        return base.Get(condition, order).Include(v => v.Empresa).Include(v => v.CVeiculo)
+                   .OrderBy(v => v.EmpresaId).ThenBy(v => v.Numero);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);
       }
     }
 
-    private IQueryable<Veiculo> GetListVeiculos(int[] list) {
-      return from v in Get() where !list.Contains(v.Id) select v;
-    }
+    private IQueryable<Veiculo> GetListVeiculos(int[] list) => from v in Get()
+                                                               where !list.Contains(v.Id)
+                                                               select v;
   }
 }

@@ -15,8 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<CstCarroceria> Get(Expression<Func<CstCarroceria, bool>> condition = null,
         Func<IQueryable<CstCarroceria>, IOrderedQueryable<CstCarroceria>> order = null) {
       try {
-        return base.Get(condition, order).Include(c => c.Empresa)
-                   .Include(c => c.CVeiculo).AsNoTracking();
+        return base.Get(condition, order).Include(c => c.Empresa).Include(c => c.CVeiculo);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

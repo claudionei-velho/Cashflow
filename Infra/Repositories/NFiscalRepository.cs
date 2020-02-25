@@ -15,8 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<NFiscal> Get(Expression<Func<NFiscal, bool>> condition = null, 
         Func<IQueryable<NFiscal>, IOrderedQueryable<NFiscal>> order = null) {
       try {
-        return base.Get(condition, order).Include(nf => nf.Empresa)
-                   .Include(nf => nf.Fornecedor).AsNoTracking();
+        return base.Get(condition, order).Include(nf => nf.Empresa).Include(nf => nf.Fornecedor);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

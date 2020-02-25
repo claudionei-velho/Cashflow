@@ -15,8 +15,7 @@ namespace Infra.Repositories {
     protected override IQueryable<Horario> Get(Expression<Func<Horario, bool>> condition = null, 
         Func<IQueryable<Horario>, IOrderedQueryable<Horario>> order = null) {
       try {
-        return base.Get(condition, order).Include(h => h.Linha.Empresa)
-                   .Include(h => h.Atendimento).AsNoTracking();
+        return base.Get(condition, order).Include(h => h.Linha.Empresa).Include(h => h.Atendimento);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

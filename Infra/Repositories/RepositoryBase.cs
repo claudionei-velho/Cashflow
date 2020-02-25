@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using Domain.Interfaces.Repositories;
 
@@ -24,10 +27,10 @@ namespace Infra.Repositories {
     public IQueryable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns,
         Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
-      return Get(condition, order).Select(columns).AsNoTracking();
+      return Get(condition, order).Select(columns);
     }
 
-    public TEntity GetById(int id) {
+    public virtual TEntity GetById(int id) {
       try {
         return _context.Set<TEntity>().Find(id);
       }
@@ -36,7 +39,7 @@ namespace Infra.Repositories {
       }
     }
 
-    public TEntity GetById(object id) {
+    public virtual TEntity GetById(object id) {
       try {
         return _context.Set<TEntity>().Find(id);
       }
@@ -45,7 +48,7 @@ namespace Infra.Repositories {
       }
     }
 
-    public async Task<TEntity> GetByIdAsync(int id) {
+    public virtual async Task<TEntity> GetByIdAsync(int id) {
       try {
         return await _context.Set<TEntity>().FindAsync(id);
       }
@@ -54,7 +57,7 @@ namespace Infra.Repositories {
       }
     }
 
-    public async Task<TEntity> GetByIdAsync(object id) {
+    public virtual async Task<TEntity> GetByIdAsync(object id) {
       try {
         return await _context.Set<TEntity>().FindAsync(id);
       }
@@ -63,15 +66,15 @@ namespace Infra.Repositories {
       }
     }
 
-    public TEntity GetFirst(Expression<Func<TEntity, bool>> condition) {
-      return Get(condition).FirstOrDefault();
+    public virtual TEntity GetFirst(Expression<Func<TEntity, bool>> condition) {
+      return Get().FirstOrDefault(condition);
     }
 
-    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition) {
-      return await Get(condition).FirstOrDefaultAsync();
+    public virtual async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> condition) {
+      return await Get().FirstOrDefaultAsync(condition);
     }
 
-    public bool Exists(Expression<Func<TEntity, bool>> condition) {
+    public virtual bool Exists(Expression<Func<TEntity, bool>> condition) {
       try {
         return _context.Set<TEntity>().Any(condition);
       }
@@ -80,7 +83,7 @@ namespace Infra.Repositories {
       }
     }
 
-    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> condition) {
+    public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> condition) {
       try {
         return await _context.Set<TEntity>().AnyAsync(condition);
       }
@@ -102,6 +105,9 @@ namespace Infra.Repositories {
         try {
           _context.Set<TEntity>().Add(obj);
           await _context.SaveChangesAsync();
+        }
+        catch (ConstraintException ex) {
+          throw new Exception(ex.Message);
         }
         catch (DbException ex) {
           throw new Exception(ex.Message);
@@ -130,9 +136,33 @@ namespace Infra.Repositories {
           _context.Set<TEntity>().Remove(obj);
           await _context.SaveChangesAsync();
         }
+        catch (DeletedRowInaccessibleException ex) {
+          throw new Exception(ex.Message);
+        }
         catch (DbException ex) {
           throw new Exception(ex.Message);
         }
+      }
+    }
+
+    public async Task AddOrUpdate(TEntity obj) {
+      EntityEntry<TEntity> entityEntry = _context.Entry(obj);
+      string primaryKeyName = entityEntry.Context.Model.FindEntityType(typeof(TEntity))
+                                  .FindPrimaryKey().Properties.Select(x => x.Name).Single();
+
+      PropertyInfo primaryKeyField = obj.GetType().GetProperty(primaryKeyName);
+      if (primaryKeyField == null) {
+        throw new Exception($"{typeof(TEntity).FullName} does not have a primary key specified. Unable to exec AddOrUpdate call.");
+      }
+      object keyVal = primaryKeyField.GetValue(obj);
+
+      TEntity dbVal = await _context.Set<TEntity>().FindAsync(keyVal);
+      if (dbVal != null) {
+        _context.Entry(dbVal).CurrentValues.SetValues(obj);
+        await Update(dbVal);
+      }
+      else {
+        await Insert(obj);
       }
     }
 
@@ -144,9 +174,9 @@ namespace Infra.Repositories {
           query = query.Where(condition);
         }
         if (order != null) {
-          query = order(query);
+          return order(query);
         }
-        return query.AsNoTracking();
+        return query;
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

@@ -31,7 +31,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData().ToListAsync()));
+                      await _empresas.GetData(
+                                order: e => e.OrderBy(q => q.Fantasia)
+                            ).ToListAsync()));
       }
     }
 
@@ -103,23 +105,27 @@ namespace Api.Controllers {
       return NoContent();
     }
 
-    [HttpGet, Route("List/{mn}")]
-    public async Task<IActionResult> List(int mn) {
+    [HttpGet, Route("List/{mid}")]
+    public async Task<IActionResult> List(int mid) {
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData(e => e.MunicipioId == mn,
-                                              e => e.OrderBy(q => q.Fantasia)).ToListAsync()));
+                      await _empresas.GetData(
+                                e => e.MunicipioId == mid, 
+                                e => e.OrderBy(q => q.Fantasia)
+                            ).ToListAsync()));
       }
     }
 
-    [HttpGet, Route("PagedList/{p}/{k}")]
-    public async Task<IActionResult> PagedList(int p, int k) {
+    [HttpGet, Route("PagedList/{p?}/{k?}")]
+    public async Task<IActionResult> PagedList(int p = 1, int k = 8) {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _empresas.GetData(
+                                order: e => e.OrderBy(q => q.Fantasia)
+                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
 
@@ -134,10 +140,10 @@ namespace Api.Controllers {
     }
 
     [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    public ActionResult<KeyValuePair<int, int>> Pages(int? k) {
       using (_empresas) {
-        return Ok(new KeyValuePair<int, int>(_empresas.Count(), 
-                                             _empresas.Pages(size: k ?? 16)));
+        return new KeyValuePair<int, int>(_empresas.Count(),
+                                          _empresas.Pages(size: k ?? 8));
       }
     }
   }

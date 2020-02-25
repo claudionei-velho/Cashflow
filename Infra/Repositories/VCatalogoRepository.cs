@@ -16,7 +16,7 @@ namespace Infra.Repositories {
         Func<IQueryable<VCatalogo>, IOrderedQueryable<VCatalogo>> order = null) {                
       try {
         return base.Get(condition, order).Include(c => c.Empresa)
-                   .Include(c => c.CVeiculo).Include(c => c.Fornecedor).AsNoTracking();
+                   .Include(c => c.CVeiculo).Include(c => c.Fornecedor);
       }
       catch (DbException ex) {
         throw new Exception(ex.Message);

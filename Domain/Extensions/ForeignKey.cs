@@ -3,7 +3,7 @@
 namespace Domain.Extensions {
   [Flags]
   public enum ForeignKey : byte {
-    MunicipioId = 1,
-    EmpresaId = 2
+    MunicipioId = 0,
+    EmpresaId = 1
   }
 }

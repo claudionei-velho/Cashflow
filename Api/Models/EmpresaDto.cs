@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Api.Models {
   public class EmpresaDto {
@@ -26,5 +27,7 @@ namespace Api.Models {
     // Navigation Properties
     public MunicipioDto Cidade { get; private set; }
     public PaisDto Pais { get; private set; }
+
+    public ICollection<ContatoDto> Contatos { get; private set; }
   }
 }
