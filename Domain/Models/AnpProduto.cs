@@ -8,6 +8,7 @@ namespace Domain.Models {
 
     // Navigation Properties
     public ICollection<CstCombustivel> CstCombustiveis { get; private set; }
+    public ICollection<NfCombustivel> NfCombustiveis { get; private set; }
     public ICollection<PCombustivel> PCombustiveis { get; private set; }
   }
 }

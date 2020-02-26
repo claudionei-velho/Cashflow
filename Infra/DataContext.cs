@@ -67,6 +67,7 @@ namespace Infra {
     public DbSet<Lote> Lotes { get; private set; }
     public DbSet<Municipio> Municipios { get; private set; }
     public DbSet<Ncm> Ncms { get; private set; }
+    public DbSet<NfCombustivel> NfCombustiveis { get; private set; }
     public DbSet<NfEntrega> NfEntregas { get; private set; }
     public DbSet<NFiscal> NFiscais { get; private set; }
     public DbSet<NfReferencia> NfReferencias { get; private set; }
@@ -165,6 +166,9 @@ namespace Infra {
       // NF-e: Notas Fiscais
       modelBuilder.Entity<NFiscal>().Ignore(p => p.FPagamentoCap);
       modelBuilder.Entity<NFiscal>().Ignore(p => p.FinalidadeCap);
+
+      // NF-e: Aquisicao de Combustiveis
+      modelBuilder.Entity<NfCombustivel>().Ignore(p => p.ValorCide);
 
       // NF-e: Aquisicao de Veiculos
       modelBuilder.Entity<NfVeiculo>().Ignore(p => p.CombustivelCap);

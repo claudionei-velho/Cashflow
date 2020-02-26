@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AliquotaCideRequired" xml:space="preserve">
+    <value>Informe a Aliquota de Cálculo da CIDE</value>
+  </data>
   <data name="AnoMesRequired" xml:space="preserve">
     <value>Informe o Ano e Mês de Emissão</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="BaciaIdRequired" xml:space="preserve">
     <value>Informe a Bacia Operacional</value>
+  </data>
+  <data name="BaseCideRequired" xml:space="preserve">
+    <value>Informe a Base de Cálculo da CIDE</value>
   </data>
   <data name="BrutoRequired" xml:space="preserve">
     <value>Informe o Peso Bruto (ton.)</value>
@@ -423,6 +429,9 @@
   <data name="NcmIdRequired" xml:space="preserve">
     <value>Informe o Código NCM</value>
   </data>
+  <data name="NfCombustivelDto" xml:space="preserve">
+    <value>da Aquisição de Combustíveis</value>
+  </data>
   <data name="NfEntregaDto" xml:space="preserve">
     <value>do Local de Entrega</value>
   </data>
@@ -482,6 +491,9 @@
   </data>
   <data name="ProdutoDto" xml:space="preserve">
     <value>do Produto</value>
+  </data>
+  <data name="ProdutoIdRequired" xml:space="preserve">
+    <value>Informe o Produto</value>
   </data>
   <data name="PropositoIdRequired" xml:space="preserve">
     <value>Informe a Finalidade (Propósito)</value>
@@ -569,6 +581,9 @@
   </data>
   <data name="TVeiculoIdRequired" xml:space="preserve">
     <value>Informe o Tipo de Veículo</value>
+  </data>
+  <data name="UfConsumoRequired" xml:space="preserve">
+    <value>Informe a UF de consumo</value>
   </data>
   <data name="UfIdRequired" xml:space="preserve">
     <value>Informe a U.F.</value>

@@ -61,6 +61,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe a Aliquota de Cálculo da CIDE.
+        /// </summary>
+        public static string AliquotaCideRequired {
+            get {
+                return ResourceManager.GetString("AliquotaCideRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe o Ano e Mês de Emissão.
         /// </summary>
         public static string AnoMesRequired {
@@ -129,6 +138,15 @@ namespace Api.Properties {
         public static string BaciaIdRequired {
             get {
                 return ResourceManager.GetString("BaciaIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a Base de Cálculo da CIDE.
+        /// </summary>
+        public static string BaseCideRequired {
+            get {
+                return ResourceManager.GetString("BaseCideRequired", resourceCulture);
             }
         }
         
@@ -979,6 +997,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to da Aquisição de Combustíveis.
+        /// </summary>
+        public static string NfCombustivelDto {
+            get {
+                return ResourceManager.GetString("NfCombustivelDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to do Local de Entrega.
         /// </summary>
         public static string NfEntregaDto {
@@ -1155,6 +1182,15 @@ namespace Api.Properties {
         public static string ProdutoDto {
             get {
                 return ResourceManager.GetString("ProdutoDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe o Produto.
+        /// </summary>
+        public static string ProdutoIdRequired {
+            get {
+                return ResourceManager.GetString("ProdutoIdRequired", resourceCulture);
             }
         }
         
@@ -1416,6 +1452,15 @@ namespace Api.Properties {
         public static string TVeiculoIdRequired {
             get {
                 return ResourceManager.GetString("TVeiculoIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe a UF de consumo.
+        /// </summary>
+        public static string UfConsumoRequired {
+            get {
+                return ResourceManager.GetString("UfConsumoRequired", resourceCulture);
             }
         }
         

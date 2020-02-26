@@ -17,47 +17,47 @@ using Domain.Models;
 namespace Api.Controllers {
   [Route("[controller]")]
   [ApiController]
-  public class NfVeiculosController : ControllerBase {
-    private readonly INfVeiculoService _veiculos;
+  public class NfCombustiveisController : ControllerBase {
+    private readonly INfCombustivelService _combustiveis;
     private readonly IMapper _mapper;
 
-    public NfVeiculosController(INfVeiculoService veiculos, IMapper mapper) {
-      _veiculos = veiculos;
+    public NfCombustiveisController(INfCombustivelService combustiveis, IMapper mapper) {
+      _combustiveis = combustiveis;
       _mapper = mapper;
     }
 
-    // GET: NfVeiculos
+    // GET: NfCombustiveis
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_veiculos) {      
-        return Ok(_mapper.Map<IEnumerable<NfVeiculoDto>>(
-                      await _veiculos.GetData(
+      using (_combustiveis) {      
+        return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
+                      await _combustiveis.GetData(
                                 order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
                             ).ToListAsync()));
       }
     }
 
-    // GET: NfVeiculos/5
+    // GET: NfCombustiveis/5
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id) {
-      using (_veiculos) {
-        NfVeiculo veiculo = await _veiculos.GetFirstAsync(n => n.Id == id);
-        if (veiculo == null) {
+      using (_combustiveis) {
+        NfCombustivel combustivel = await _combustiveis.GetFirstAsync(n => n.Id == id);
+        if (combustivel == null) {
           return NotFound();
         }
-        return Ok(_mapper.Map<NfVeiculoDto>(veiculo));
+        return Ok(_mapper.Map<NfCombustivelDto>(combustivel));
       }
     }
 
-    // PUT: NfVeiculos/5
+    // PUT: NfCombustiveis/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, NfVeiculoDto dto) {
-      using (_veiculos) {
-        if (_veiculos.Exists(n => n.Id == id)) {
-          NfVeiculoValidator validator = new NfVeiculoValidator();
+    public async Task<IActionResult> Put(int id, NfCombustivelDto dto) {
+      using (_combustiveis) {
+        if (_combustiveis.Exists(n => n.Id == id)) {
+          NfCombustivelValidator validator = new NfCombustivelValidator();
           try {
             validator.ValidateAndThrow(dto);
-            await _veiculos.Update(_mapper.Map<NfVeiculo>(dto));
+            await _combustiveis.Update(_mapper.Map<NfCombustivel>(dto));
           }
           catch (ValidationException ex) {
             return BadRequest(ex.Errors);
@@ -70,33 +70,33 @@ namespace Api.Controllers {
       return Ok();
     }
 
-    // POST: NfVeiculos
+    // POST: NfCombustiveis
     [HttpPost]
-    public async Task<IActionResult> Post(NfVeiculoDto dto) {
-      NfVeiculo veiculo = new NfVeiculo();
-      using (_veiculos) {
-        NfVeiculoValidator validator = new NfVeiculoValidator();
+    public async Task<IActionResult> Post(NfCombustivelDto dto) {
+      NfCombustivel combustivel = new NfCombustivel();
+      using (_combustiveis) {
+        NfCombustivelValidator validator = new NfCombustivelValidator();
         try {
           validator.ValidateAndThrow(dto);
-          await _veiculos.Insert(veiculo = _mapper.Map<NfVeiculo>(dto));
+          await _combustiveis.Insert(combustivel = _mapper.Map<NfCombustivel>(dto));
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
         }        
       }
-      return Ok(_mapper.Map<NfVeiculoDto>(veiculo));
+      return Ok(_mapper.Map<NfCombustivelDto>(combustivel));
     }
 
-    // DELETE: NfVeiculos/5
+    // DELETE: NfCombustiveis/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) {
-      using (_veiculos) {
-        NfVeiculo veiculo = await _veiculos.GetByIdAsync(id);
-        if (veiculo == null) {
+      using (_combustiveis) {
+        NfCombustivel combustivel = await _combustiveis.GetByIdAsync(id);
+        if (combustivel == null) {
           return NotFound();
         }
         try { 
-          await _veiculos.Delete(veiculo);
+          await _combustiveis.Delete(combustivel);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
@@ -107,9 +107,9 @@ namespace Api.Controllers {
 
     [HttpGet, Route("List/{id}")]
     public async Task<IActionResult> List(int id) {
-      using (_veiculos) {
-        return Ok(_mapper.Map<IEnumerable<NfVeiculoDto>>(
-                      await _veiculos.GetData(
+      using (_combustiveis) {
+        return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
+                      await _combustiveis.GetData(
                                 n => n.NFiscal.EmpresaId == id,
                                 n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
                             ).ToListAsync()));
@@ -121,9 +121,9 @@ namespace Api.Controllers {
       if (p < 1 || k < 1) {
         return BadRequest();
       }
-      using (_veiculos) {
-        return Ok(_mapper.Map<IEnumerable<NfVeiculoDto>>(
-                      await _veiculos.GetData(
+      using (_combustiveis) {
+        return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
+                      await _combustiveis.GetData(
                                 order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
@@ -131,9 +131,9 @@ namespace Api.Controllers {
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
-      using (_veiculos) {
-        return Ok(await _veiculos.SelectList(
-                            n => new { n.Id, n.NFiscal.Numero, n.ChassiNo },
+      using (_combustiveis) {
+        return Ok(await _combustiveis.SelectList(
+                            n => new { n.Id, n.NFiscal.Numero, n.AnpProduto.Denominacao },
                             order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
                         ).ToListAsync());
       }
@@ -141,9 +141,9 @@ namespace Api.Controllers {
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
-      using (_veiculos) {
-        return Ok(await _veiculos.SelectList(
-                            n => new { n.Id, n.NFiscal.Numero, n.ChassiNo },
+      using (_combustiveis) {
+        return Ok(await _combustiveis.SelectList(
+                            n => new { n.Id, n.NFiscal.Numero, n.AnpProduto.Denominacao },
                             n => n.NFiscal.EmpresaId == id,
                             n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
                         ).ToListAsync());
@@ -152,9 +152,9 @@ namespace Api.Controllers {
 
     [HttpGet, Route("Pages/{k?}")]
     public ActionResult<KeyValuePair<int, int>> Pages(int? k) {
-      using (_veiculos) {
-        return new KeyValuePair<int, int>(_veiculos.Count(),
-                                          _veiculos.Pages(size: k ?? 8));
+      using (_combustiveis) {
+        return new KeyValuePair<int, int>(_combustiveis.Count(),
+                                          _combustiveis.Pages(size: k ?? 8));
       }
     }
   }

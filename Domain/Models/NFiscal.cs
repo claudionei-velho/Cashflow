@@ -11,7 +11,6 @@ namespace Domain.Models {
     public string ChaveNfe { get; private set; }    
     public string Natureza { get; private set; }
     public int FPagamentoId { get; private set; }
-
     public string FPagamentoCap => new FPagamento().Items[FPagamentoId];
 
     public int Modelo { get; private set; }
@@ -22,7 +21,6 @@ namespace Domain.Models {
     public int Operacao { get; private set; }
     public int Digito { get; private set; }
     public int Finalidade { get; private set; }
-
     public string FinalidadeCap => new NfProposito().Items[Finalidade];
 
     public DateTime? Cadastro { get; private set; }
@@ -31,8 +29,9 @@ namespace Domain.Models {
     public Empresa Empresa { get; private set; }
     public Fornecedor Fornecedor { get; private set; }
 
+    public ICollection<NfCombustivel> NfCOmbustiveis { get; private set; }
     public ICollection<NfEntrega> NfEntregas { get; private set; }
     public ICollection<NfReferencia> NfReferencias { get; private set; }
-    public ICollection<NfVeiculo> NfVeiculos { get; private set; }
+    public ICollection<NfVeiculo> NfVeiculos { get; private set; }    
   }
 }

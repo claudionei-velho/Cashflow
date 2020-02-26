@@ -204,6 +204,9 @@ namespace Api {
       services.AddScoped<IMunicipioService, MunicipioService>();
       services.AddScoped<IMunicipioRepository, MunicipioRepository>();
 
+      services.AddScoped<INfCombustivelService, NfCombustivelService>();
+      services.AddScoped<INfCombustivelRepository, NfCombustivelRepository>();
+
       services.AddScoped<INfEntregaService, NfEntregaService>();
       services.AddScoped<INfEntregaRepository, NfEntregaRepository>();
 
