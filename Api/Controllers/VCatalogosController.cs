@@ -36,7 +36,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: VEquipamentos/5
@@ -84,7 +84,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<VCatalogoDto>(catalogo));
     }
@@ -97,7 +97,7 @@ namespace Api.Controllers {
         if (catalogo == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _catalogos.Delete(catalogo);
         }
         catch (Exception ex) {

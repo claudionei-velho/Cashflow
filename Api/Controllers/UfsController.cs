@@ -31,7 +31,7 @@ namespace Api.Controllers {
                       await _ufs.GetData(
                                 order: u => u.OrderBy(p => p.Sigla)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Ufs/5
@@ -63,7 +63,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList() {
       using (_ufs) {
         return Ok(await _ufs.SelectList(
-                            u => new { u.Id, u.Sigla, u.Estado }, 
+                            u => new { u.Id, u.Sigla, u.Estado },
                             order: u => u.OrderBy(p => p.Sigla)
                         ).ToListAsync());
       }

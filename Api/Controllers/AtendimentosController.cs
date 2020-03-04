@@ -97,7 +97,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _atendimentos.Delete(atendimento);          
+          await _atendimentos.Delete(atendimento);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

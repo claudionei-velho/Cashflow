@@ -89,7 +89,7 @@ namespace Infra {
     public DbSet<Setor> Setores { get; private set; }
     public DbSet<Sistema> Sistemas { get; private set; }
     public DbSet<SistDespesa> SistDespesas { get; private set; }
-    public DbSet<SistFuncao> SistFuncoes { get; private set; }    
+    public DbSet<SistFuncao> SistFuncoes { get; private set; }
     public DbSet<Tarifa> Tarifas { get; private set; }
     public DbSet<TarifaMod> TarifasMod { get; private set; }
     public DbSet<TCategoria> TCategorias { get; private set; }
@@ -104,7 +104,7 @@ namespace Infra {
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
       modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
-      foreach (IMutableProperty property in 
+      foreach (IMutableProperty property in
                  modelBuilder.Model.GetEntityTypes().SelectMany(t => t.GetProperties())
                      .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?))) {
         property.SetColumnType("decimal(24, 6)");
@@ -210,7 +210,7 @@ namespace Infra {
     }
 
     public override int SaveChanges() {
-      foreach (EntityEntry entry in ChangeTracker.Entries().Where(entry => 
+      foreach (EntityEntry entry in ChangeTracker.Entries().Where(entry =>
                                         entry.Entity.GetType().GetProperty("Cadastro") != null)) {
         if (entry.State == EntityState.Added) {
           entry.Property("Cadastro").CurrentValue = DateTime.Now;
@@ -223,7 +223,7 @@ namespace Infra {
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) {
-      foreach (EntityEntry entry in ChangeTracker.Entries().Where(entry => 
+      foreach (EntityEntry entry in ChangeTracker.Entries().Where(entry =>
                                         entry.Entity.GetType().GetProperty("Cadastro") != null)) {
         if (entry.State == EntityState.Added) {
           entry.Property("Cadastro").CurrentValue = DateTime.Now;

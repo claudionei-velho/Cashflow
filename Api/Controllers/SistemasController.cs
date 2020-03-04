@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (sistema == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _sistemas.Delete(sistema);
         }
         catch (Exception ex) {

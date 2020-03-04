@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: NfCombustiveis
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_combustiveis) {      
+      using (_combustiveis) {
         return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
                       await _combustiveis.GetData(
                                 order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<NfCombustivelDto>(combustivel));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (combustivel == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _combustiveis.Delete(combustivel);
         }
         catch (Exception ex) {

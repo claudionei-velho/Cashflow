@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class OperacionalRepository : RepositoryBase<Operacional>, IOperacionalRepository {
     public OperacionalRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Operacional> Get(Expression<Func<Operacional, bool>> condition = null, 
-        Func<IQueryable<Operacional>, IOrderedQueryable<Operacional>> order = null) {                
+    protected override IQueryable<Operacional> Get(Expression<Func<Operacional, bool>> condition = null,
+        Func<IQueryable<Operacional>, IOrderedQueryable<Operacional>> order = null) {
       try {
         return base.Get(condition, order).Include(p => p.Empresa)
                    .Include(p => p.Linha).Include(p => p.Atendimento);

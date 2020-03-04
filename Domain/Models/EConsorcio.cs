@@ -10,7 +10,11 @@ namespace Domain.Models {
     public string Documento { get; private set; }
     public DateTime? Desintegracao { get; private set; }
 
-    public bool Ativo => Desintegracao == null;
+    public bool Ativo {
+      get {
+        return Desintegracao == null;
+      }
+    }
 
     public string Responsavel { get; private set; }
     public string CpfResponsavel { get; private set; }

@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: NFiscais
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_notas) {      
+      using (_notas) {
         return Ok(_mapper.Map<IEnumerable<NFiscalDto>>(
                       await _notas.GetData(
                                 order: n => n.OrderBy(q => q.EmpresaId)
@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<NFiscal>(nota));
     }
@@ -96,7 +96,7 @@ namespace Api.Controllers {
         if (nota == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _notas.Delete(nota);
         }
         catch (Exception ex) {

@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class InstalacaoRepository : RepositoryBase<Instalacao>, IInstalacaoRepository {
     public InstalacaoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Instalacao> Get(Expression<Func<Instalacao, bool>> condition = null, 
+    protected override IQueryable<Instalacao> Get(Expression<Func<Instalacao, bool>> condition = null,
         Func<IQueryable<Instalacao>, IOrderedQueryable<Instalacao>> order = null) {
       try {
         return base.Get(condition, order).Include(i => i.Empresa);

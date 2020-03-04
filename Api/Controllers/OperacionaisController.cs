@@ -31,7 +31,7 @@ namespace Api.Controllers {
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.LinhaId)
                                              .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     [HttpGet, Route("List/{id}")]

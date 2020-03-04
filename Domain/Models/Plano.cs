@@ -13,6 +13,6 @@ namespace Domain.Models {
 
     // Navigation Properties
     public Atendimento Atendimento { get; private set; }
-    public Linha Linha { get; private set; }    
+    public Linha Linha { get; private set; }
   }
 }

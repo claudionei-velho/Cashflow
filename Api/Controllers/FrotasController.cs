@@ -28,13 +28,13 @@ namespace Api.Controllers {
 
     // GET: Frotas
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_frotas) {
         return Ok(_mapper.Map<IEnumerable<FrotaDto>>(
                       await _frotas.GetData(
                                 order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Frotas/5
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (frota == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _frotas.Delete(frota);
         }
         catch (Exception ex) {
@@ -128,7 +128,7 @@ namespace Api.Controllers {
                             ).Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
-    
+
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_frotas) {

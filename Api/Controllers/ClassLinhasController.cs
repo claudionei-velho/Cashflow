@@ -43,7 +43,7 @@ namespace Api.Controllers {
         }
         return Ok(_mapper.Map<ClassLinhaDto>(classLinha));
       }
-    }    
+    }
 
     // PUT: ClassLinhas/5
     [HttpPut("{id}")]
@@ -65,7 +65,7 @@ namespace Api.Controllers {
       ClassLinha classLinha = new ClassLinha();
       using (_classLinhas) {
         if (dto == null) {
-          return BadRequest();          
+          return BadRequest();
         }
         await _classLinhas.Insert(classLinha = _mapper.Map<ClassLinha>(dto));
       }
@@ -80,8 +80,8 @@ namespace Api.Controllers {
         if (classLinha == null) {
           return NotFound();
         }
-        try { 
-          await _classLinhas.Delete(classLinha);          
+        try {
+          await _classLinhas.Delete(classLinha);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class HorarioRepository : RepositoryBase<Horario>, IHorarioRepository {
     public HorarioRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Horario> Get(Expression<Func<Horario, bool>> condition = null, 
+    protected override IQueryable<Horario> Get(Expression<Func<Horario, bool>> condition = null,
         Func<IQueryable<Horario>, IOrderedQueryable<Horario>> order = null) {
       try {
         return base.Get(condition, order).Include(h => h.Linha.Empresa).Include(h => h.Atendimento);

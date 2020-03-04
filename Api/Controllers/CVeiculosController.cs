@@ -81,7 +81,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _cVeiculos.Delete(cVeiculo);          
+          await _cVeiculos.Delete(cVeiculo);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

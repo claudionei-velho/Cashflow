@@ -30,7 +30,7 @@ namespace Api.Controllers {
       using (_rhIndices) {
         return Ok(_mapper.Map<IEnumerable<RhIndiceDto>>(
                       await _rhIndices.GetData().ToListAsync()));
-      }      
+      }
     }
 
     // GET: RhIndices/5
@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (rhIndice == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _rhIndices.Delete(rhIndice);
         }
         catch (Exception ex) {
@@ -100,7 +100,7 @@ namespace Api.Controllers {
                       await _rhIndices.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
       }
     }
-    
+
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_rhIndices) {
@@ -110,7 +110,7 @@ namespace Api.Controllers {
                         ).ToListAsync());
       }
     }
-    
+
     [HttpGet, Route("Pages/{k?}")]
     public IActionResult Pages(int? k) {
       using (_rhIndices) {

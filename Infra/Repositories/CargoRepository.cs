@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class CargoRepository : RepositoryBase<Cargo>, ICargoRepository {
     public CargoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Cargo> Get(Expression<Func<Cargo, bool>> condition = null, 
-        Func<IQueryable<Cargo>, IOrderedQueryable<Cargo>> order = null) {                
+    protected override IQueryable<Cargo> Get(Expression<Func<Cargo, bool>> condition = null,
+        Func<IQueryable<Cargo>, IOrderedQueryable<Cargo>> order = null) {
       try {
         return base.Get(condition, order).Include(c => c.Empresa);
       }

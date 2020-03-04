@@ -81,7 +81,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _anpProdutos.Delete(anpProduto);          
+          await _anpProdutos.Delete(anpProduto);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

@@ -14,7 +14,7 @@ namespace Infra.Mappings {
 
       builder.Property(t => t.Id).HasColumnName("Id");
       builder.Property(t => t.EmpresaId).HasColumnName("EmpresaId").IsRequired();
-      builder.Property(t => t.ClasseId).HasColumnName("ClasseId").IsRequired();      
+      builder.Property(t => t.ClasseId).HasColumnName("ClasseId").IsRequired();
       builder.Property(t => t.Minimo).HasColumnName("Minimo");
       builder.Property(t => t.Maximo).HasColumnName("Maximo");
       builder.Property(t => t.Passageirom2).HasColumnName("Passageirom2").IsRequired();

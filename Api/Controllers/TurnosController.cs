@@ -14,8 +14,6 @@ using Api.Models.Validations;
 using Domain.Interfaces.Services;
 using Domain.Models;
 
-using Newtonsoft.Json.Linq;
-
 namespace Api.Controllers {
   [Route("[controller]")]
   [ApiController]
@@ -36,7 +34,7 @@ namespace Api.Controllers {
                       await _turnos.GetData(
                                 order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Turnos/5
@@ -97,7 +95,7 @@ namespace Api.Controllers {
         if (turno == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _turnos.Delete(turno);
         }
         catch (Exception ex) {

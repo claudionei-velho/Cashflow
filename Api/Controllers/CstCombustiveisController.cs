@@ -37,7 +37,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: CstCombustiveis/5
@@ -85,7 +85,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<CstCombustivelDto>(custo));
     }
@@ -141,8 +141,13 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList() {
       using (_custos) {
         return Ok(await _custos.SelectList(
-                            c => new { c.Id, c.Empresa.Fantasia, c.Ano, 
-                                       c.Mes, c.Combustivel.Denominacao },
+                            c => new {
+                              c.Id,
+                              c.Empresa.Fantasia,
+                              c.Ano,
+                              c.Mes,
+                              c.Combustivel.Denominacao
+                            },
                             order: c => c.OrderBy(q => q.EmpresaId)
                                          .ThenByDescending(q => q.Ano)
                                          .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
@@ -154,8 +159,13 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_custos) {
         return Ok(await _custos.SelectList(
-                            c => new { c.Id, c.Empresa.Fantasia, c.Ano, 
-                                       c.Mes, c.Combustivel.Denominacao },
+                            c => new {
+                              c.Id,
+                              c.Empresa.Fantasia,
+                              c.Ano,
+                              c.Mes,
+                              c.Combustivel.Denominacao
+                            },
                             _custos.GetExpression(id),
                             c => c.OrderByDescending(q => q.Ano)
                                   .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)

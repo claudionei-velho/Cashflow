@@ -16,7 +16,7 @@ namespace Infra.Repositories {
       return base.Get(condition).Sum(p => p.Ratio);
     }
 
-    protected override IQueryable<EConsorcio> Get(Expression<Func<EConsorcio, bool>> condition = null, 
+    protected override IQueryable<EConsorcio> Get(Expression<Func<EConsorcio, bool>> condition = null,
         Func<IQueryable<EConsorcio>, IOrderedQueryable<EConsorcio>> order = null) {
       try {
         return base.Get(condition, order).Include(c => c.Consorcio)

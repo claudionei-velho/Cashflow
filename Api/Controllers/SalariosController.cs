@@ -36,7 +36,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
                                              .ThenBy(q => q.FuncaoId)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Salarios/5
@@ -84,7 +84,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<SalarioDto>(salario));
     }
@@ -97,7 +97,7 @@ namespace Api.Controllers {
         if (salario == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _salarios.Delete(salario);
         }
         catch (Exception ex) {

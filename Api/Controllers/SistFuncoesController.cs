@@ -37,7 +37,7 @@ namespace Api.Controllers {
                                 order: f => f.OrderBy(q => q.SistemaId).ThenBy(q => q.Item)
                             ).ToListAsync()));
 
-      }      
+      }
     }
 
     // GET: SistFuncoes/5
@@ -110,7 +110,7 @@ namespace Api.Controllers {
         if (funcao == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _fSistemas.Delete(funcao);
         }
         catch (Exception ex) {

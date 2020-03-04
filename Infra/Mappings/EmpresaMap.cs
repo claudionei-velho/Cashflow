@@ -7,7 +7,7 @@ namespace Infra.Mappings {
   internal class EmpresaMap : IEntityTypeConfiguration<Empresa> {
     public void Configure(EntityTypeBuilder<Empresa> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);        
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("Empresas");

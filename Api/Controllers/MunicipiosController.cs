@@ -31,7 +31,7 @@ namespace Api.Controllers {
                       await _municipios.GetData(
                                 order: m => m.OrderBy(p => p.Uf.Sigla).ThenBy(p => p.Nome)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Municipios/5

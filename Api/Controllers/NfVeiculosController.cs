@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: NfVeiculos
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_veiculos) {      
+      using (_veiculos) {
         return Ok(_mapper.Map<IEnumerable<NfVeiculoDto>>(
                       await _veiculos.GetData(
                                 order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<NfVeiculoDto>(veiculo));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (veiculo == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _veiculos.Delete(veiculo);
         }
         catch (Exception ex) {

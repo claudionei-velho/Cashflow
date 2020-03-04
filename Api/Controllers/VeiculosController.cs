@@ -28,14 +28,14 @@ namespace Api.Controllers {
 
     // GET: Veiculos
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_veiculos) {
         return Ok(_mapper.Map<IEnumerable<VeiculoDto>>(
                       await _veiculos.GetData(
                                 order: v => v.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Numero)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Veiculos/5
@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<VeiculoDto>(veiculo));
     }
@@ -96,7 +96,7 @@ namespace Api.Controllers {
         if (veiculo == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _veiculos.Delete(veiculo);
         }
         catch (Exception ex) {
@@ -167,7 +167,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> AddCarroceria(int id) {
       using (_veiculos) {
         return Ok(await _veiculos.GetNoCarroceria(
-                            v => v.EmpresaId == id, 
+                            v => v.EmpresaId == id,
                             v => v.OrderBy(q => q.Numero)
                         ).Select(v => new { v.Id, v.Numero }).ToListAsync());
       }

@@ -12,7 +12,11 @@ namespace Domain.Models {
     public int? Folguista { get; private set; }
     public int? Reserva { get; private set; }
 
-    public int Soma => Titular + (Ferista ?? 0) + (Folguista ?? 0) + (Reserva ?? 0);
+    public int Soma {
+      get {
+        return Titular + (Ferista ?? 0) + (Folguista ?? 0) + (Reserva ?? 0);
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

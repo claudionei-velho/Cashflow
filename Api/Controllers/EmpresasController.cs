@@ -95,8 +95,8 @@ namespace Api.Controllers {
         if (empresa == null) {
           return NotFound();
         }
-        try { 
-          await _empresas.Delete(empresa);          
+        try {
+          await _empresas.Delete(empresa);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
@@ -110,7 +110,7 @@ namespace Api.Controllers {
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
                       await _empresas.GetData(
-                                e => e.MunicipioId == mid, 
+                                e => e.MunicipioId == mid,
                                 e => e.OrderBy(q => q.Fantasia)
                             ).ToListAsync()));
       }

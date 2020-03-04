@@ -34,7 +34,7 @@ namespace Api.Controllers {
                       await _setores.GetData(
                                 order: s => s.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Setores/5
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<SetorDto>(setor));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (setor == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _setores.Delete(setor);
         }
         catch (Exception ex) {

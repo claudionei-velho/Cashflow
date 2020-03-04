@@ -10,13 +10,25 @@ namespace Api.Models {
     public string Marca { get; set; }
     public string Modelo { get; set; }
     public decimal? UnitAr { get; set; }
-    public bool ArCondicionado => UnitAr != null;
+    public bool ArCondicionado {
+      get {
+        return UnitAr != null;
+      }
+    }
 
     public decimal? UnitElevatoria { get; set; }
-    public bool Elevatoria => UnitElevatoria != null;
+    public bool Elevatoria {
+      get {
+        return UnitElevatoria != null;
+      }
+    }
 
     public decimal Unitario { get; set; }
-    public decimal Ponderado => (UnitAr ?? 0) + (UnitElevatoria ?? 0) + Unitario;
+    public decimal Ponderado {
+      get {
+        return (UnitAr ?? 0) + (UnitElevatoria ?? 0) + Unitario;
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

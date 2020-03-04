@@ -7,7 +7,7 @@ namespace Infra.Mappings {
   internal class OperLinhaMap : IEntityTypeConfiguration<OpLinha> {
     public void Configure(EntityTypeBuilder<OpLinha> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);        
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("OperLinhas");
@@ -15,7 +15,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.Denominacao).HasColumnName("Denominacao")
           .IsRequired().HasMaxLength(64);
 
-      builder.Property(t => t.Descricao).HasColumnName("Descricao").HasMaxLength(512);      
+      builder.Property(t => t.Descricao).HasColumnName("Descricao").HasMaxLength(512);
     }
   }
 }

@@ -32,7 +32,7 @@ namespace Api.Controllers {
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.DiaId)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: PSinteses/5

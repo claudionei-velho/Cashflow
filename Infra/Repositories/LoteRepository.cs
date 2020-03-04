@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class LoteRepository : RepositoryBase<Lote>, ILoteRepository {
     public LoteRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Lote> Get(Expression<Func<Lote, bool>> condition = null, 
+    protected override IQueryable<Lote> Get(Expression<Func<Lote, bool>> condition = null,
         Func<IQueryable<Lote>, IOrderedQueryable<Lote>> order = null) {
       try {
         return base.Get(condition, order).Include(l => l.Bacia.Municipio.Uf);

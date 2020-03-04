@@ -25,7 +25,7 @@ namespace Api.Controllers {
 
     // GET: FrotaHorarias
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
                       await _frotaHorarias.GetData(
@@ -53,7 +53,7 @@ namespace Api.Controllers {
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
                       await _frotaHorarias.GetData(
-                                f => f.EmpresaId == id, 
+                                f => f.EmpresaId == id,
                                 f => f.OrderBy(q => q.Hora)
                             ).ToListAsync()));
       }

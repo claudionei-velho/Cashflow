@@ -37,7 +37,7 @@ namespace Infra.Mappings {
 
       builder.HasOne(p => p.Linha)
           .WithMany(f => f.Operacionais).HasForeignKey(k => k.LinhaId).IsRequired()
-          .OnDelete(DeleteBehavior.Restrict);      
+          .OnDelete(DeleteBehavior.Restrict);
     }
   }
 }

@@ -10,13 +10,25 @@ namespace Domain.Models {
     public string Marca { get; private set; }
     public string Modelo { get; private set; }
     public decimal? UnitAr { get; private set; }
-    public bool ArCondicionado => UnitAr != null;
+    public bool ArCondicionado {
+      get {
+        return UnitAr != null;
+      }
+    }
 
     public decimal? UnitElevatoria { get; private set; }
-    public bool Elevatoria => UnitElevatoria != null;
+    public bool Elevatoria {
+      get {
+        return UnitElevatoria != null;
+      }
+    }
 
     public decimal Unitario { get; private set; }
-    public decimal Ponderado => (UnitAr ?? 0) + (UnitElevatoria ?? 0) + Unitario;
+    public decimal Ponderado {
+      get {
+        return (UnitAr ?? 0) + (UnitElevatoria ?? 0) + Unitario;
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

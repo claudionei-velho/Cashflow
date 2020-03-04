@@ -12,7 +12,11 @@ namespace Api.Models {
     public int? Folguista { get; set; }
     public int? Reserva { get; set; }
 
-    public int Soma => Titular + (Ferista ?? 0) + (Folguista ?? 0) + (Reserva ?? 0);
+    public int Soma {
+      get {
+        return Titular + (Ferista ?? 0) + (Folguista ?? 0) + (Reserva ?? 0);
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

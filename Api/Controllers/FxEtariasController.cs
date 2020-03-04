@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (fxEtaria == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _fxEtarias.Delete(fxEtaria);
         }
         catch (Exception ex) {

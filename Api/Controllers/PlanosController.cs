@@ -36,7 +36,7 @@ namespace Api.Controllers {
                                              .ThenBy(q => q.Linha.Prefixo)
                                              .ThenBy(q => q.Atendimento.Prefixo)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Planos/5
@@ -84,7 +84,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<PlanoDto>(plano));
     }
@@ -97,7 +97,7 @@ namespace Api.Controllers {
         if (plano == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _planos.Delete(plano);
         }
         catch (Exception ex) {
@@ -111,7 +111,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_planos) {
         return Ok(_mapper.Map<IEnumerable<PlanoDto>>(
-                      await _planos.GetData(                            
+                      await _planos.GetData(
                                 p => p.Linha.EmpresaId == id,
                                 p => p.OrderBy(q => q.Linha.Prefixo)
                                       .ThenBy(q => q.Atendimento.Prefixo)

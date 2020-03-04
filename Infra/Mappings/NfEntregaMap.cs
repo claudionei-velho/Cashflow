@@ -13,7 +13,7 @@ namespace Infra.Mappings {
       builder.ToTable("NfEntregas", "nfe");
 
       builder.Property(t => t.Id).HasColumnName("Id");
-      builder.Property(t => t.NotaId).HasColumnName("NotaId").IsRequired();      
+      builder.Property(t => t.NotaId).HasColumnName("NotaId").IsRequired();
       builder.Property(t => t.Endereco).HasColumnName("Endereco")
           .IsRequired().HasMaxLength(64);
 
@@ -29,7 +29,7 @@ namespace Infra.Mappings {
 
       builder.HasOne(t => t.NFiscal)
           .WithMany(f => f.NfEntregas).HasForeignKey(k => k.NotaId).IsRequired()
-          .OnDelete(DeleteBehavior.Restrict);      
+          .OnDelete(DeleteBehavior.Restrict);
     }
   }
 }

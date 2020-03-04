@@ -81,7 +81,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _eDominios.Delete(eDominio);          
+          await _eDominios.Delete(eDominio);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

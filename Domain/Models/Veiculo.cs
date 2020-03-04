@@ -12,7 +12,11 @@ namespace Domain.Models {
     public int Classe { get; private set; }
     public int? Categoria { get; private set; }
 
-    public string CategoriaCap => new Categoria().Items[Categoria ?? 0];
+    public string CategoriaCap {
+      get {
+        return new Categoria().Items[Categoria ?? 0];
+      }
+    }
 
     public string Placa { get; private set; }
     public string Renavam { get; private set; }
@@ -24,7 +28,7 @@ namespace Domain.Models {
     // Navigation Properties
     public Empresa Empresa { get; private set; }
     public CVeiculo CVeiculo { get; private set; }
-    
+
     public Chassi Chassis { get; private set; }
     public Carroceria Carrocerias { get; private set; }
     public ICollection<Embarcado> Embarcados { get; private set; }

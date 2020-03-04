@@ -81,8 +81,8 @@ namespace Api.Controllers {
         if (cLinha == null) {
           return NotFound();
         }
-        try { 
-          await _cLinhas.Delete(cLinha);          
+        try {
+          await _cLinhas.Delete(cLinha);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
@@ -127,7 +127,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_cLinhas) {
         return Ok(await _cLinhas.SelectList(
-                            c => new { c.Id, c.ClassLinha.Denominacao }, 
+                            c => new { c.Id, c.ClassLinha.Denominacao },
                             _cLinhas.GetExpression(id)
                         ).ToListAsync());
       }

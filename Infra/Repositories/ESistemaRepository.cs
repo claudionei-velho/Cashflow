@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class ESistemaRepository : RepositoryBase<ESistema>, IESistemaRepository {
     public ESistemaRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<ESistema> Get(Expression<Func<ESistema, bool>> condition = null, 
-        Func<IQueryable<ESistema>, IOrderedQueryable<ESistema>> order = null) {                
+    protected override IQueryable<ESistema> Get(Expression<Func<ESistema, bool>> condition = null,
+        Func<IQueryable<ESistema>, IOrderedQueryable<ESistema>> order = null) {
       try {
         return base.Get(condition, order).Include(e => e.Empresa).Include(e => e.Sistema);
       }

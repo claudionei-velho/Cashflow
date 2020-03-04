@@ -34,7 +34,7 @@ namespace Api.Controllers {
                       await _funcoes.GetData(
                                 order: f => f.OrderBy(q => q.Cargo.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Funcoes/5
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (funcao == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _funcoes.Delete(funcao);
         }
         catch (Exception ex) {

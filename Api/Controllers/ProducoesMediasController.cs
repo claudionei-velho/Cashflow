@@ -32,7 +32,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano)
                                              .ThenBy(q => q.TarifariaId)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     [HttpGet, Route("List/{id}")]

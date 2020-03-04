@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class VEquipamentoRepository : RepositoryBase<VEquipamento>, IVEquipamentoRepository {
     public VEquipamentoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<VEquipamento> Get(Expression<Func<VEquipamento, bool>> condition = null, 
-        Func<IQueryable<VEquipamento>, IOrderedQueryable<VEquipamento>> order = null) {                
+    protected override IQueryable<VEquipamento> Get(Expression<Func<VEquipamento, bool>> condition = null,
+        Func<IQueryable<VEquipamento>, IOrderedQueryable<VEquipamento>> order = null) {
       try {
         return base.Get(condition, order).Include(t => t.Empresa);
       }

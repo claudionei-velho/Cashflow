@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class TarifaRepository : RepositoryBase<Tarifa>, ITarifaRepository {
     public TarifaRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Tarifa> Get(Expression<Func<Tarifa, bool>> condition = null, 
-        Func<IQueryable<Tarifa>, IOrderedQueryable<Tarifa>> order = null) {                
+    protected override IQueryable<Tarifa> Get(Expression<Func<Tarifa, bool>> condition = null,
+        Func<IQueryable<Tarifa>, IOrderedQueryable<Tarifa>> order = null) {
       try {
         return base.Get(condition, order).Include(t => t.Empresa);
       }

@@ -7,7 +7,7 @@ namespace Infra.Mappings {
   internal class ConsorcioMap : IEntityTypeConfiguration<Consorcio> {
     public void Configure(EntityTypeBuilder<Consorcio> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);        
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("Consorcios");

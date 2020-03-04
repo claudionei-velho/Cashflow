@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class NfVeiculoRepository : RepositoryBase<NfVeiculo>, INfVeiculoRepository {
     public NfVeiculoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<NfVeiculo> Get(Expression<Func<NfVeiculo, bool>> condition = null, 
+    protected override IQueryable<NfVeiculo> Get(Expression<Func<NfVeiculo, bool>> condition = null,
         Func<IQueryable<NfVeiculo>, IOrderedQueryable<NfVeiculo>> order = null) {
       try {
         return base.Get(condition, order).Include(nf => nf.NFiscal);

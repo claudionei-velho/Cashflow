@@ -37,7 +37,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: CstChassis/5
@@ -85,7 +85,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<CstChassiDto>(custo));
     }

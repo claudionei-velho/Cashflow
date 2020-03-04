@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class ECVeiculoRepository : RepositoryBase<ECVeiculo>, IECVeiculoRepository {
     public ECVeiculoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<ECVeiculo> Get(Expression<Func<ECVeiculo, bool>> condition = null, 
-        Func<IQueryable<ECVeiculo>, IOrderedQueryable<ECVeiculo>> order = null) {                
+    protected override IQueryable<ECVeiculo> Get(Expression<Func<ECVeiculo, bool>> condition = null,
+        Func<IQueryable<ECVeiculo>, IOrderedQueryable<ECVeiculo>> order = null) {
       try {
         return base.Get(condition, order).Include(v => v.Empresa).Include(v => v.CVeiculo);
       }

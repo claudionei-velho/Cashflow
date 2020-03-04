@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<EEncargoDto>(eEncargo));
     }
@@ -96,8 +96,8 @@ namespace Api.Controllers {
         if (eEncargo == null) {
           return NotFound();
         }
-        try { 
-          await _eEncargos.Delete(eEncargo);          
+        try {
+          await _eEncargos.Delete(eEncargo);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

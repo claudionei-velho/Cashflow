@@ -25,7 +25,11 @@ namespace Domain.Models {
     public string Cnae { get; private set; }
     public int? TributarioId { get; private set; }
 
-    public string TributarioCap => new Tributario().Items[TributarioId ?? 0];
+    public string TributarioCap {
+      get {
+        return new Tributario().Items[TributarioId ?? 0];
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

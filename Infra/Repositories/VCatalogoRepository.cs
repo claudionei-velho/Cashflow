@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class VCatalogoRepository : RepositoryBase<VCatalogo>, IVCatalogoRepository {
     public VCatalogoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<VCatalogo> Get(Expression<Func<VCatalogo, bool>> condition = null, 
-        Func<IQueryable<VCatalogo>, IOrderedQueryable<VCatalogo>> order = null) {                
+    protected override IQueryable<VCatalogo> Get(Expression<Func<VCatalogo, bool>> condition = null,
+        Func<IQueryable<VCatalogo>, IOrderedQueryable<VCatalogo>> order = null) {
       try {
         return base.Get(condition, order).Include(c => c.Empresa)
                    .Include(c => c.CVeiculo).Include(c => c.Fornecedor);

@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: NfEntregas
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_entregas) {      
+      using (_entregas) {
         return Ok(_mapper.Map<IEnumerable<NfEntregaDto>>(
                       await _entregas.GetData(
                                 order: n => n.OrderBy(q => q.NotaId)
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<NfEntregaDto>(entrega));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (entrega == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _entregas.Delete(entrega);
         }
         catch (Exception ex) {

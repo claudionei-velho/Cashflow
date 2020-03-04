@@ -28,7 +28,7 @@ namespace Infra.Mappings {
 
       builder.HasOne(t => t.Linha)
           .WithMany(f => f.Planos).HasForeignKey(k => k.LinhaId).IsRequired()
-          .OnDelete(DeleteBehavior.Restrict);      
+          .OnDelete(DeleteBehavior.Restrict);
     }
   }
 }

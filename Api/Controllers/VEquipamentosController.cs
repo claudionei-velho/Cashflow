@@ -28,13 +28,13 @@ namespace Api.Controllers {
 
     // GET: VEquipamentos
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_vEquipamentos) {
         return Ok(_mapper.Map<IEnumerable<VEquipamentoDto>>(
                       await _vEquipamentos.GetData(
                                 order: v => v.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: VEquipamentos/5
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<VEquipamento>(vEquipamento));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (vEquipamento == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _vEquipamentos.Delete(vEquipamento);
         }
         catch (Exception ex) {

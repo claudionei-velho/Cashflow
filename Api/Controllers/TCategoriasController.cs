@@ -96,7 +96,7 @@ namespace Api.Controllers {
         if (categoria == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _tCategorias.Delete(categoria);
         }
         catch (Exception ex) {

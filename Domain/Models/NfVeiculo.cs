@@ -14,7 +14,11 @@ namespace Domain.Models {
     public decimal? Bruto { get; private set; }
     public string Serial { get; private set; }
     public int CombustivelId { get; private set; }
-    public string CombustivelCap => new Combustivel().Items[CombustivelId];
+    public string CombustivelCap {
+      get {
+        return new Combustivel().Items[CombustivelId];
+      }
+    }
 
     public string MotorNo { get; private set; }
     public decimal? Tracao { get; private set; }
@@ -23,22 +27,42 @@ namespace Domain.Models {
     public int? AnoFabrica { get; private set; }
     public string Pintura { get; private set; }
     public int TVeiculoId { get; private set; }
-    public string TVeiculoCap => new TVeiculo().Items[TVeiculoId];
+    public string TVeiculoCap {
+      get {
+        return new TVeiculo().Items[TVeiculoId];
+      }
+    }
 
     public int EVeiculoId { get; private set; }
-    public string EVeiculoCap => new EVeiculo().Items[EVeiculoId];
+    public string EVeiculoCap {
+      get {
+        return new EVeiculo().Items[EVeiculoId];
+      }
+    }
 
     public char CondicaoVin { get; private set; }
     public int CondicaoId { get; private set; }
-    public string CondicaoCap => new VCondicao().Items[CondicaoId];
+    public string CondicaoCap {
+      get {
+        return new VCondicao().Items[CondicaoId];
+      }
+    }
 
     public int? Modelo { get; private set; }
     public int? CorDenatran { get; private set; }
-    public string CorDenatranCap => new Cor().Items[CorDenatran ?? 0];
+    public string CorDenatranCap {
+      get {
+        return new Cor().Items[CorDenatran ?? 0];
+      }
+    }
 
     public int Lotacao { get; private set; }
     public int RestricaoId { get; private set; }
-    public string RestricaoCap => new Restricao().Items[RestricaoId];
+    public string RestricaoCap {
+      get {
+        return new Restricao().Items[RestricaoId];
+      }
+    }
 
     // Navigation Properties
     public NFiscal NFiscal { get; private set; }

@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: NfReferencias
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_referencias) {      
+      using (_referencias) {
         return Ok(_mapper.Map<IEnumerable<NfReferenciaDto>>(
                       await _referencias.GetData(
                                 order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.Numero)
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<NfReferenciaDto>(nota));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (nota == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _referencias.Delete(nota);
         }
         catch (Exception ex) {

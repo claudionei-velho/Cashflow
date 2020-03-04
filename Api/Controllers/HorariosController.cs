@@ -37,7 +37,7 @@ namespace Api.Controllers {
                                              .ThenBy(q => q.Linha.Prefixo).ThenBy(q => q.DiaId)
                                              .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Horarios/5
@@ -98,7 +98,7 @@ namespace Api.Controllers {
         if (horario == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _horarios.Delete(horario);
         }
         catch (Exception ex) {

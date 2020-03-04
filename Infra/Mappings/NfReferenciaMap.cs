@@ -13,7 +13,7 @@ namespace Infra.Mappings {
       builder.ToTable("NfReferencias", "nfe");
 
       builder.Property(t => t.Id).HasColumnName("Id");
-      builder.Property(t => t.NotaId).HasColumnName("NotaId").IsRequired();      
+      builder.Property(t => t.NotaId).HasColumnName("NotaId").IsRequired();
       builder.Property(t => t.ChaveNfeRef).HasColumnName("ChaveNfeRef")
           .IsRequired().HasMaxLength(64);
 

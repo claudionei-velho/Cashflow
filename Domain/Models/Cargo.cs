@@ -14,7 +14,7 @@ namespace Domain.Models {
 
     // Navigation Properties
     public Empresa Empresa { get; private set; }
-    
+
     public ICollection<Departamento> Departamentos { get; private set; }
     public ICollection<ESistema> ESistemas { get; private set; }
     public ICollection<Funcao> Funcoes { get; private set; }

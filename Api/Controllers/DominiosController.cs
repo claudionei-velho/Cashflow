@@ -80,8 +80,8 @@ namespace Api.Controllers {
         if (dominio == null) {
           return NotFound();
         }
-        try { 
-          await _dominios.Delete(dominio);          
+        try {
+          await _dominios.Delete(dominio);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

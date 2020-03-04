@@ -94,8 +94,8 @@ namespace Api.Controllers {
         if (eConsorcio == null) {
           return NotFound();
         }
-        try { 
-          await _eConsorcios.Delete(eConsorcio);          
+        try {
+          await _eConsorcios.Delete(eConsorcio);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

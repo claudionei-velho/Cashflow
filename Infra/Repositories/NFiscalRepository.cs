@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class NFiscalRepository : RepositoryBase<NFiscal>, INFiscalRepository {
     public NFiscalRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<NFiscal> Get(Expression<Func<NFiscal, bool>> condition = null, 
+    protected override IQueryable<NFiscal> Get(Expression<Func<NFiscal, bool>> condition = null,
         Func<IQueryable<NFiscal>, IOrderedQueryable<NFiscal>> order = null) {
       try {
         return base.Get(condition, order).Include(nf => nf.Empresa).Include(nf => nf.Fornecedor);

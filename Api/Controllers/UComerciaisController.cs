@@ -30,7 +30,7 @@ namespace Api.Controllers {
       using (_ucomerciais) {
         return Ok(_mapper.Map<IEnumerable<UComercialDto>>(
                       await _ucomerciais.GetData().ToListAsync()));
-      }      
+      }
     }
 
     // GET: UComerciais/5
@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (unidade == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _ucomerciais.Delete(unidade);
         }
         catch (Exception ex) {

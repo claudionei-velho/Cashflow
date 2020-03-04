@@ -10,8 +10,12 @@ namespace Domain.Models {
     public int? CentroId { get; private set; }
     public int? ContaId { get; private set; }
     public DateTime? Desvinculado { get; private set; }
-    
-    public bool Vigente => Desvinculado == null;
+
+    public bool Vigente {
+      get {
+        return Desvinculado == null;
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

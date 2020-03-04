@@ -31,7 +31,7 @@ namespace Api.Controllers {
                       await _paises.GetData(
                                 order: p => p.OrderBy(q => q.Nome)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Paises/5
@@ -50,7 +50,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList() {
       using (_paises) {
         return Ok(await _paises.SelectList(
-                            p => new { p.Id, p.Nome }, 
+                            p => new { p.Id, p.Nome },
                             order: p => p.OrderBy(q => q.Nome)
                         ).ToListAsync());
       }

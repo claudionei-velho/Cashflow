@@ -36,7 +36,7 @@ namespace Api.Controllers {
                                              .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
                                              .ThenBy(q => q.TarifariaId)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Producoes/5
@@ -50,7 +50,7 @@ namespace Api.Controllers {
         return Ok(_mapper.Map<ProducaoDto>(producao));
       }
     }
-    
+
     // PUT: Producoes/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, ProducaoDto dto) {
@@ -97,7 +97,7 @@ namespace Api.Controllers {
         if (producao == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _producoes.Delete(producao);
         }
         catch (Exception ex) {

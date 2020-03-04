@@ -3,29 +3,53 @@ using System.Linq.Expressions;
 
 namespace Domain.Extensions {
   public static class Predicate {
-    public static Func<bool> True() => () => true;
+    public static Func<bool> True() {
+      return () => true;
+    }
 
-    public static Func<T, bool> True<T>() => a => true;
+    public static Func<T, bool> True<T>() {
+      return a => true;
+    }
 
-    public static Func<T, T2, bool> True<T, T2>() => (a, b) => true;
+    public static Func<T, T2, bool> True<T, T2>() {
+      return (a, b) => true;
+    }
 
-    public static Func<bool> False() => () => false;
+    public static Func<bool> False() {
+      return () => false;
+    }
 
-    public static Func<T, bool> False<T>() => a => false;
+    public static Func<T, bool> False<T>() {
+      return a => false;
+    }
 
-    public static Func<T, T2, bool> False<T, T2>() => (a, b) => false;
+    public static Func<T, T2, bool> False<T, T2>() {
+      return (a, b) => false;
+    }
 
-    public static Expression<Func<bool>> TrueExpression() => () => true;
+    public static Expression<Func<bool>> TrueExpression() {
+      return () => true;
+    }
 
-    public static Expression<Func<T, bool>> TrueExpression<T>() => a => true;
+    public static Expression<Func<T, bool>> TrueExpression<T>() {
+      return a => true;
+    }
 
-    public static Expression<Func<T, T2, bool>> TrueExpression<T, T2>() => (a, b) => true;
+    public static Expression<Func<T, T2, bool>> TrueExpression<T, T2>() {
+      return (a, b) => true;
+    }
 
-    public static Expression<Func<bool>> FalseExpression() => () => false;
+    public static Expression<Func<bool>> FalseExpression() {
+      return () => false;
+    }
 
-    public static Expression<Func<T, bool>> FalseExpression<T>() => a => false;
+    public static Expression<Func<T, bool>> FalseExpression<T>() {
+      return a => false;
+    }
 
-    public static Expression<Func<T, T2, bool>> FalseExpression<T, T2>() => (a, b) => false;
+    public static Expression<Func<T, T2, bool>> FalseExpression<T, T2>() {
+      return (a, b) => false;
+    }
 
     public static Func<bool> Not(this Func<bool> predicate) {
       return () => !predicate();

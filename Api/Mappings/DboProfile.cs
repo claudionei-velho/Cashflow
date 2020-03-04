@@ -29,7 +29,7 @@ namespace Api.Mappings {
       CreateMap<LoteDto, Lote>().ReverseMap();
       CreateMap<MunicipioDto, Municipio>().ReverseMap();
       CreateMap<OpLinhaDto, OpLinha>().ReverseMap();
-      CreateMap<PaisDto, Pais>().ReverseMap();      
+      CreateMap<PaisDto, Pais>().ReverseMap();
       CreateMap<RhIndiceDto, RhIndice>().ReverseMap();
 
       CreateMap<SalarioDto, Salario>().ReverseMap();

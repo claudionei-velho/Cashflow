@@ -9,12 +9,20 @@ namespace Domain.Models {
     public decimal KmProdutivo { get; private set; }
     public decimal? KmImprodutivo { get; private set; }
 
-    public decimal KmProgramado => KmProdutivo + (KmImprodutivo ?? 0);
+    public decimal KmProgramado {
+      get {
+        return KmProdutivo + (KmImprodutivo ?? 0);
+      }
+    }
 
     public int FrotaOperacao { get; private set; }
     public int? FrotaReserva { get; private set; }
 
-    public int FrotaTotal => FrotaOperacao + (FrotaReserva ?? 0);
+    public int FrotaTotal {
+      get {
+        return FrotaOperacao + (FrotaReserva ?? 0);
+      }
+    }
 
     public decimal? PMm {
       get {

@@ -28,7 +28,7 @@ namespace Infra.Mappings {
 
       builder.HasOne(t => t.Encargo)
           .WithMany(f => f.EEncargos).HasForeignKey(k => k.EncargoId).IsRequired()
-          .OnDelete(DeleteBehavior.Restrict);      
+          .OnDelete(DeleteBehavior.Restrict);
     }
   }
 }

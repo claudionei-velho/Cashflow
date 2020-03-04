@@ -7,7 +7,7 @@ namespace Api.Mappings {
   public class OpcProfile : Profile {
     public OpcProfile() {
       CreateMap<AtendimentoDto, Atendimento>().ReverseMap();
-      
+
       CreateMap<CarroceriaDto, Carroceria>().ReverseMap();
       CreateMap<ChassiDto, Chassi>().ReverseMap();
       CreateMap<CLinhaDto, CLinha>().ReverseMap();

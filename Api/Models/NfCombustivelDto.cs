@@ -10,7 +10,11 @@
     public string UfConsumo { get; set; }
     public decimal BaseCide { get; set; }
     public decimal AliquotaCide { get; set; }
-    public decimal ValorCide => BaseCide * (AliquotaCide * 0.01m);
+    public decimal ValorCide {
+      get {
+        return BaseCide * (AliquotaCide * 0.01m);
+      }
+    }
 
     // Navigation Properties
     public NFiscalDto NFiscal { get; private set; }

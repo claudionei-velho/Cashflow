@@ -28,14 +28,14 @@ namespace Api.Controllers {
 
     // GET: Encargos
     [HttpGet]
-    public async Task<IActionResult> Get() {      
+    public async Task<IActionResult> Get() {
       using (_encargos) {
         return Ok(_mapper.Map<IEnumerable<EncargoDto>>(
                       await _encargos.GetData(
                                 order: e => e.OrderBy(q => q.Grupo)
                                              .ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Encargos/5
@@ -59,7 +59,7 @@ namespace Api.Controllers {
           try {
             validator.ValidateAndThrow(dto);
             await _encargos.Update(_mapper.Map<Encargo>(dto));
-          }          
+          }
           catch (ValidationException ex) {
             return BadRequest(ex.Errors);
           }
@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<EncargoDto>(encargo));
     }
@@ -96,8 +96,8 @@ namespace Api.Controllers {
         if (encargo == null) {
           return NotFound();
         }
-        try { 
-          await _encargos.Delete(encargo);          
+        try {
+          await _encargos.Delete(encargo);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

@@ -29,7 +29,11 @@ namespace Domain.Models {
       }
     }
 
-    public decimal? CoeficienteAno => Coeficiente * CustomCalendar.MonthsPerYear;
+    public decimal? CoeficienteAno {
+      get {
+        return Coeficiente * CustomCalendar.MonthsPerYear;
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class PCoeficienteRepository : RepositoryBase<PCoeficiente>, IPCoeficienteRepository {
     public PCoeficienteRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<PCoeficiente> Get(Expression<Func<PCoeficiente, bool>> condition = null, 
+    protected override IQueryable<PCoeficiente> Get(Expression<Func<PCoeficiente, bool>> condition = null,
         Func<IQueryable<PCoeficiente>, IOrderedQueryable<PCoeficiente>> order = null) {
       try {
         return base.Get(condition, order).Include(p => p.Empresa);

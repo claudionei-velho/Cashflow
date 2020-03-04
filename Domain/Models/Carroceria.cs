@@ -25,10 +25,18 @@ namespace Domain.Models {
     public bool EscapeV { get; private set; }
     public bool EscapeH { get; private set; }
     public int? Catraca { get; private set; }
-    public string CatracaCap => new Posicao().Items[Catraca ?? 0];
+    public string CatracaCap {
+      get {
+        return new Posicao().Items[Catraca ?? 0];
+      }
+    }
 
     public int PortaIn { get; private set; }
-    public string PortaInCap => new Posicao().Items[PortaIn];
+    public string PortaInCap {
+      get {
+        return new Posicao().Items[PortaIn];
+      }
+    }
 
     public bool SaidaFrente { get; private set; }
     public bool SaidaMeio { get; private set; }

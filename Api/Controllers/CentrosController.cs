@@ -84,7 +84,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<CentroDto>(centro));
     }
@@ -97,8 +97,8 @@ namespace Api.Controllers {
         if (centro == null) {
           return NotFound();
         }
-        try { 
-          await _centros.Delete(centro);          
+        try {
+          await _centros.Delete(centro);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

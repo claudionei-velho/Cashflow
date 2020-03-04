@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class CarroceriaRepository : RepositoryBase<Carroceria>, ICarroceriaRepository {
     public CarroceriaRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Carroceria> Get(Expression<Func<Carroceria, bool>> condition = null, 
+    protected override IQueryable<Carroceria> Get(Expression<Func<Carroceria, bool>> condition = null,
         Func<IQueryable<Carroceria>, IOrderedQueryable<Carroceria>> order = null) {
       try {
         return base.Get(condition, order).Include(c => c.Veiculo);

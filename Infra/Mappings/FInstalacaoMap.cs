@@ -7,7 +7,7 @@ namespace Infra.Mappings {
   internal class FInstalacaoMap : IEntityTypeConfiguration<FInstalacao> {
     public void Configure(EntityTypeBuilder<FInstalacao> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);         
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("FInstalacoes");

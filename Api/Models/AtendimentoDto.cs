@@ -12,7 +12,11 @@ namespace Api.Models {
     public string Prefixo { get; set; }
     public string Denominacao { get; set; }
 
-    public string Descricao => $"{Prefixo} | {Denominacao}";
+    public string Descricao {
+      get {
+        return $"{Prefixo} | {Denominacao}";
+      }
+    }
 
     public bool Uteis { get; set; }
     public bool Sabados { get; set; }
@@ -37,7 +41,11 @@ namespace Api.Models {
     public decimal? ExtensaoAB { get; set; }
     public decimal? ExtensaoBA { get; set; }
 
-    public decimal? Extensao => (ExtensaoAB ?? 0) + (ExtensaoBA ?? 0);
+    public decimal? Extensao {
+      get {
+        return (ExtensaoAB ?? 0) + (ExtensaoBA ?? 0);
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

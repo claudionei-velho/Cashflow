@@ -26,10 +26,11 @@ namespace Domain.Lists {
     }
 
     public static int GetWorkday(DateTime reference) {
-      int result = reference.DayOfWeek switch {
-          DayOfWeek.Saturday => 2,
-          DayOfWeek.Sunday => 3,
-          _ => 1
+      int result = reference.DayOfWeek switch
+      {
+        DayOfWeek.Saturday => 2,
+        DayOfWeek.Sunday => 3,
+        _ => 1
       };
       return result;
     }

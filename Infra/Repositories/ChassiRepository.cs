@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class ChassiRepository : RepositoryBase<Chassi>, IChassiRepository {
     public ChassiRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Chassi> Get(Expression<Func<Chassi, bool>> condition = null, 
+    protected override IQueryable<Chassi> Get(Expression<Func<Chassi, bool>> condition = null,
         Func<IQueryable<Chassi>, IOrderedQueryable<Chassi>> order = null) {
       try {
         return base.Get(condition, order).Include(c => c.Veiculo);

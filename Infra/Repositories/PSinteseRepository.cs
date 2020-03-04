@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class PSinteseRepository : RepositoryBase<PSintese>, IPSinteseRepository {
     public PSinteseRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<PSintese> Get(Expression<Func<PSintese, bool>> condition = null, 
+    protected override IQueryable<PSintese> Get(Expression<Func<PSintese, bool>> condition = null,
         Func<IQueryable<PSintese>, IOrderedQueryable<PSintese>> order = null) {
       try {
         return base.Get(condition, order).Include(p => p.Empresa);

@@ -34,7 +34,7 @@ namespace Api.Controllers {
                       await _produtos.GetData(
                                 order: p => p.OrderBy(q => q.Descricao)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: Produtos/5
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (produto == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _produtos.Delete(produto);
         }
         catch (Exception ex) {
@@ -122,7 +122,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList() {
       using (_produtos) {
         return Ok(await _produtos.SelectList(
-                            p => new { p.Id, p.Descricao }, 
+                            p => new { p.Id, p.Descricao },
                             order: p => p.OrderBy(q => q.Descricao)
                         ).ToListAsync());
       }

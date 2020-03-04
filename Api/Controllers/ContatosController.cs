@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<ContatoDto>(contato));
     }
@@ -111,7 +111,7 @@ namespace Api.Controllers {
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
                       await _contatos.GetData(
-                                _contatos.GetExpression(id), 
+                                _contatos.GetExpression(id),
                                 c => c.OrderBy(q => q.Nome)
                             ).ToListAsync()));
       }
@@ -156,7 +156,7 @@ namespace Api.Controllers {
     public ActionResult<KeyValuePair<int, int>> Pages(int? id, int k = 8) {
       using (_contatos) {
         Expression<Func<Contato, bool>> filter = _contatos.GetExpression(id);
-        return new KeyValuePair<int, int>(_contatos.Count(filter), 
+        return new KeyValuePair<int, int>(_contatos.Count(filter),
                                           _contatos.Pages(filter, k));
       }
     }

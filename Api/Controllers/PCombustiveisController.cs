@@ -34,7 +34,7 @@ namespace Api.Controllers {
                       await _pCombustiveis.GetData(
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: PCombustiveis/5
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<PCombustivelDto>(pCombustivel));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (pCombustivel == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _pCombustiveis.Delete(pCombustivel);
         }
         catch (Exception ex) {
@@ -130,8 +130,14 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList() {
       using (_pCombustiveis) {
         return Ok(await _pCombustiveis.SelectList(
-                            p => new { p.Id, p.Empresa.Fantasia, p.Ano, p.Mes, 
-                                       p.CVeiculo.Classe, p.Combustivel.Denominacao },
+                            p => new {
+                              p.Id,
+                              p.Empresa.Fantasia,
+                              p.Ano,
+                              p.Mes,
+                              p.CVeiculo.Classe,
+                              p.Combustivel.Denominacao
+                            },
                             order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                         ).ToListAsync());
       }
@@ -141,8 +147,14 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_pCombustiveis) {
         return Ok(await _pCombustiveis.SelectList(
-                            p => new { p.Id, p.Empresa.Fantasia, p.Ano, p.Mes,
-                                       p.CVeiculo.Classe, p.Combustivel.Denominacao },
+                            p => new {
+                              p.Id,
+                              p.Empresa.Fantasia,
+                              p.Ano,
+                              p.Mes,
+                              p.CVeiculo.Classe,
+                              p.Combustivel.Denominacao
+                            },
                             p => p.EmpresaId == id
                         ).ToListAsync());
       }

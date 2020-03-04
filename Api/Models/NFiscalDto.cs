@@ -7,11 +7,15 @@ namespace Api.Models {
     public int Id { get; set; }
     public int EmpresaId { get; set; }
     public int FornecedorId { get; set; }
-    public string ChaveNfe { get; set; }    
+    public string ChaveNfe { get; set; }
     public string Natureza { get; set; }
     public int FPagamentoId { get; set; }
 
-    public string FPagamentoCap => new FPagamento().Items[FPagamentoId];
+    public string FPagamentoCap {
+      get {
+        return new FPagamento().Items[FPagamentoId];
+      }
+    }
 
     public int Modelo { get; set; }
     public int Serie { get; set; }
@@ -22,7 +26,11 @@ namespace Api.Models {
     public int Digito { get; set; }
     public int Finalidade { get; set; }
 
-    public string FinalidadeCap => new NfProposito().Items[Finalidade];
+    public string FinalidadeCap {
+      get {
+        return new NfProposito().Items[Finalidade];
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

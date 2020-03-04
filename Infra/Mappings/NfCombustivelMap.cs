@@ -37,7 +37,7 @@ namespace Infra.Mappings {
 
       builder.HasOne(t => t.NFiscal)
           .WithMany(f => f.NfCOmbustiveis).HasForeignKey(k => k.NotaId).IsRequired()
-          .OnDelete(DeleteBehavior.Restrict);      
+          .OnDelete(DeleteBehavior.Restrict);
     }
   }
 }

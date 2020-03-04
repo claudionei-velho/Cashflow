@@ -94,7 +94,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _bacias.Delete(bacia);          
+          await _bacias.Delete(bacia);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

@@ -33,7 +33,7 @@ namespace Api.Controllers {
     [HttpGet("{id}/{fx}")]
     public IActionResult Get(int id, int fx) {
       return Ok(_mapper.Map<DepreciacaoDto>(
-                    GetDataSet(q => q.ClasseId == id && 
+                    GetDataSet(q => q.ClasseId == id &&
                                     q.EtariaId == fx).FirstOrDefault()));
     }
 

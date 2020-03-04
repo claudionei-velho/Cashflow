@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<TarifaDto>(tarifa));
     }
@@ -95,13 +95,13 @@ namespace Api.Controllers {
         if (tarifa == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _tarifas.Delete(tarifa);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
         }
-      }      
+      }
       return NoContent();
     }
 

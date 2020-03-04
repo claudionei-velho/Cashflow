@@ -11,9 +11,9 @@ namespace Api.Models.Validations {
           .NotEmpty().WithMessage(x => $"{Resources.ClassificacaoRequired} {Resources.ContaDto}")
           .MaximumLength(16);
 
-      RuleFor(c => c.Denominacao)        
+      RuleFor(c => c.Denominacao)
           .NotNull().WithMessage(x => $"{Resources.DenominacaoRequired} {Resources.ContaDto}")
-          .NotEmpty().WithMessage(x => $"{Resources.DenominacaoRequired} {Resources.ContaDto}")          
+          .NotEmpty().WithMessage(x => $"{Resources.DenominacaoRequired} {Resources.ContaDto}")
           .MaximumLength(64);
     }
   }

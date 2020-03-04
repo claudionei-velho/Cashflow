@@ -30,7 +30,7 @@ namespace Api.Controllers {
       using (_operacoes) {
         return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(
                       await _operacoes.GetData().ToListAsync()));
-      }      
+      }
     }
 
     // GET: Operacoes/5
@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (operacao == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _operacoes.Delete(operacao);
         }
         catch (Exception ex) {
@@ -122,7 +122,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id) {
       using (_operacoes) {
         return Ok(await _operacoes.SelectList(
-                            p => new { p.Id, p.OpLinha.Denominacao }, 
+                            p => new { p.Id, p.OpLinha.Denominacao },
                             p => p.EmpresaId == id
                         ).ToListAsync());
       }

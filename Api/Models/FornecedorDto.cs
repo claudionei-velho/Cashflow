@@ -24,7 +24,11 @@ namespace Api.Models {
     public string Cnae { get; set; }
     public int? TributarioId { get; set; }
 
-    public string TributarioCap => new Tributario().Items[TributarioId ?? 0];
+    public string TributarioCap {
+      get {
+        return new Tributario().Items[TributarioId ?? 0];
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

@@ -11,7 +11,7 @@ namespace Domain.Services {
     private readonly IVeiculoRepository _repository;
 
     public VeiculoService(IVeiculoRepository repository) : base(repository) {
-      _repository = repository;      
+      _repository = repository;
     }
 
     public IQueryable<Veiculo> GetNoChassi(Expression<Func<Veiculo, bool>> condition = null,

@@ -5,7 +5,9 @@ namespace Domain.Lists {
   public class ListBase {
     public IDictionary<int, string> Items;
 
-    public int Count() => Items.Count;
+    public int Count() {
+      return Items.Count;
+    }
 
     public virtual IEnumerable<KeyValuePair<int, string>> ToList() {
       return Items.ToList();

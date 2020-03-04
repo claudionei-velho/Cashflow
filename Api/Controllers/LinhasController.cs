@@ -30,7 +30,7 @@ namespace Api.Controllers {
     // GET: Linhas
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_linhas) {      
+      using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
                       await _linhas.GetData(
                                 order: l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
@@ -80,7 +80,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<LinhaDto>(linha));
     }
@@ -93,7 +93,7 @@ namespace Api.Controllers {
         if (linha == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _linhas.Delete(linha);
         }
         catch (Exception ex) {

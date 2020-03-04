@@ -6,7 +6,7 @@ namespace Infra.Mappings {
   internal class TarifaMap : IEntityTypeConfiguration<Tarifa> {
     public void Configure(EntityTypeBuilder<Tarifa> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);         
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("Tarifas", "opc");

@@ -11,17 +11,29 @@
     public decimal? Extensao { get; private set; }
 
     public int? ViagensUtil { get; private set; }
-    public decimal? PercursoUtil => Extensao * ViagensUtil;
+    public decimal? PercursoUtil {
+      get {
+        return Extensao * ViagensUtil;
+      }
+    }
 
     public int? ViagensSab { get; private set; }
-    public decimal? PercursoSab => Extensao * ViagensSab;
+    public decimal? PercursoSab {
+      get {
+        return Extensao * ViagensSab;
+      }
+    }
 
     public int? ViagensDom { get; private set; }
-    public decimal? PercursoDom => Extensao * ViagensDom;
+    public decimal? PercursoDom {
+      get {
+        return Extensao * ViagensDom;
+      }
+    }
 
     // Navigation Properties
     public Atendimento Atendimento { get; private set; }
     public Empresa Empresa { get; private set; }
-    public Linha Linha { get; private set; }    
+    public Linha Linha { get; private set; }
   }
 }

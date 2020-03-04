@@ -11,7 +11,11 @@ namespace Api.Models {
     public int Classe { get; set; }
     public int? Categoria { get; set; }
 
-    public string CategoriaCap => new Categoria().Items[Categoria ?? 0];
+    public string CategoriaCap {
+      get {
+        return new Categoria().Items[Categoria ?? 0];
+      }
+    }
 
     public string Placa { get; set; }
     public string Renavam { get; set; }

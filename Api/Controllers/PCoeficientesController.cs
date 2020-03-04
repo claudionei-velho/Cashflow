@@ -34,7 +34,7 @@ namespace Api.Controllers {
                       await _pCoeficientes.GetData(
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: PCoeficientes/5
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<PCoeficienteDto>(pCoeficiente));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (pCoeficiente == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _pCoeficientes.Delete(pCoeficiente);
         }
         catch (Exception ex) {

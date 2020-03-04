@@ -64,8 +64,10 @@ namespace Infra.Repositories {
       }
     }
 
-    private IQueryable<Veiculo> GetListVeiculos(int[] list) => from v in Get()
-                                                               where !list.Contains(v.Id)
-                                                               select v;
+    private IQueryable<Veiculo> GetListVeiculos(int[] list) {
+      return from v in Get()
+             where !list.Contains(v.Id)
+             select v;
+    }
   }
 }

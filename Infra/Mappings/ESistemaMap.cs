@@ -23,7 +23,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.ResponsavelId).HasColumnName("ResponsavelId");
       builder.Property(t => t.Util).HasColumnName("Util");
       builder.Property(t => t.Depreciacao).HasColumnName("Depreciacao");
-      builder.Property(t => t.Residual).HasColumnName("Residual");      
+      builder.Property(t => t.Residual).HasColumnName("Residual");
       builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)

@@ -26,11 +26,19 @@ namespace Api.Models {
     public bool EscapeH { get; set; }
     public int? Catraca { get; set; }
 
-    public string CatracaCap => new Posicao().Items[Catraca ?? 0];
+    public string CatracaCap {
+      get {
+        return new Posicao().Items[Catraca ?? 0];
+      }
+    }
 
     public int PortaIn { get; set; }
 
-    public string PortaInCap => new Posicao().Items[PortaIn];
+    public string PortaInCap {
+      get {
+        return new Posicao().Items[PortaIn];
+      }
+    }
 
     public bool SaidaFrente { get; set; }
     public bool SaidaMeio { get; set; }

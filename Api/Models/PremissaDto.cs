@@ -9,12 +9,20 @@ namespace Api.Models {
     public decimal KmProdutivo { get; set; }
     public decimal? KmImprodutivo { get; set; }
 
-    public decimal KmProgramado => KmProdutivo + (KmImprodutivo ?? 0);
+    public decimal KmProgramado {
+      get {
+        return KmProdutivo + (KmImprodutivo ?? 0);
+      }
+    }
 
     public int FrotaOperacao { get; set; }
     public int? FrotaReserva { get; set; }
 
-    public int FrotaTotal => FrotaOperacao + (FrotaReserva ?? 0);
+    public int FrotaTotal {
+      get {
+        return FrotaOperacao + (FrotaReserva ?? 0);
+      }
+    }
 
     public decimal? PMm {
       get {

@@ -99,7 +99,7 @@ namespace Api.Controllers {
           return NotFound();
         }
         try {
-          await _custos.Delete(custo);          
+          await _custos.Delete(custo);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

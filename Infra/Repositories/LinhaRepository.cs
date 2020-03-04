@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class LinhaRepository : RepositoryBase<Linha>, ILinhaRepository {
     public LinhaRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Linha> Get(Expression<Func<Linha, bool>> condition = null, 
+    protected override IQueryable<Linha> Get(Expression<Func<Linha, bool>> condition = null,
         Func<IQueryable<Linha>, IOrderedQueryable<Linha>> order = null) {
       try {
         return base.Get(condition, order).Include(l => l.Empresa)

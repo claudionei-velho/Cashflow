@@ -19,7 +19,7 @@ namespace Domain.Models {
     public Conta Conta { get; private set; }
     public FInstalacao FInstalacao { get; private set; }
     public Instalacao Instalacao { get; private set; }
-    
+
     public ICollection<AAbastece> Abastecimentos { get; private set; }
     public ICollection<AAdmin> Administracoes { get; private set; }
     public ICollection<AAlmox> Almoxarifados { get; private set; }

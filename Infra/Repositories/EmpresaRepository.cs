@@ -39,7 +39,7 @@ namespace Infra.Repositories {
       }
     }
 
-    protected override IQueryable<Empresa> Get(Expression<Func<Empresa, bool>> condition = null, 
+    protected override IQueryable<Empresa> Get(Expression<Func<Empresa, bool>> condition = null,
         Func<IQueryable<Empresa>, IOrderedQueryable<Empresa>> order = null) {
       try {
         return base.Get(condition, order).Include(e => e.Cidade.Uf)

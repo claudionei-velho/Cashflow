@@ -23,7 +23,8 @@ namespace Domain.Services {
 
     public Expression<Func<Linha, bool>> GetExpression(ForeignKey key, int? id) {
       if (key > 0 && id != null) {
-        return key switch {
+        return key switch
+        {
           ForeignKey.MunicipioId => l => l.Empresa.MunicipioId == id,
           ForeignKey.EmpresaId => l => l.EmpresaId == id,
           _ => null,

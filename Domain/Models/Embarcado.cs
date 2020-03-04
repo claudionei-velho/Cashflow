@@ -18,6 +18,6 @@ namespace Domain.Models {
 
     // Navigation Properties
     public Veiculo Veiculo { get; private set; }
-    public VEquipamento Equipamento { get; private set; }    
+    public VEquipamento Equipamento { get; private set; }
   }
 }

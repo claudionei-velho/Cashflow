@@ -31,7 +31,7 @@ namespace Api.Controllers {
                       await _tarifas.GetData(
                                 order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
                             ).ToListAsync()));
-      }      
+      }
     }
 
     // GET: TarifasMod/5

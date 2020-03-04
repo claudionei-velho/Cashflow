@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Newtonsoft.Json.Serialization;
-  
+
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
@@ -28,26 +28,26 @@ namespace Api {
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
       // Database Connections
-      services.AddDbContextPool<DataContext>(options => {          
-          options.UseSqlServer(Configuration.GetConnectionString("DataContext"));
-          options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+      services.AddDbContextPool<DataContext>(options => {
+        options.UseSqlServer(Configuration.GetConnectionString("DataContext"));
+        options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
       });
 
       // Json Configuration
       services.AddControllers().AddNewtonsoftJson(options => {
-          options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
       });
 
       // Auto Mapper Configurations
       services.AddAutoMapper(typeof(Startup).Assembly);
-      
+
       // Cors & Mvc (FluentValidations)
-      services.AddCors(options => 
+      services.AddCors(options =>
           options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
       services.AddMvc().AddControllersAsServices()
-          .AddFluentValidation(cfg => 
+          .AddFluentValidation(cfg =>
               cfg.RegisterValidatorsFromAssemblyContaining<Startup>()
           ).SetCompatibilityVersion(CompatibilityVersion.Latest);
 

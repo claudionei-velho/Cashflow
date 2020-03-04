@@ -136,7 +136,7 @@ namespace Api.Controllers {
     [HttpGet, Route("Pages/{k?}")]
     public IActionResult Pages(int? k) {
       using (_consorcios) {
-        return Ok(new KeyValuePair<int, int>(_consorcios.Count(), 
+        return Ok(new KeyValuePair<int, int>(_consorcios.Count(),
                                              _consorcios.Pages(size: k ?? 16)));
       }
     }

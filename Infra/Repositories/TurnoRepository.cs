@@ -12,8 +12,8 @@ namespace Infra.Repositories {
   public class TurnoRepository : RepositoryBase<Turno>, ITurnoRepository {
     public TurnoRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Turno> Get(Expression<Func<Turno, bool>> condition = null, 
-        Func<IQueryable<Turno>, IOrderedQueryable<Turno>> order = null) {                
+    protected override IQueryable<Turno> Get(Expression<Func<Turno, bool>> condition = null,
+        Func<IQueryable<Turno>, IOrderedQueryable<Turno>> order = null) {
       try {
         return base.Get(condition, order).Include(t => t.Empresa);
       }

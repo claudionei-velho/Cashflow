@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<ChassiDto>(chassi));
     }
@@ -96,8 +96,8 @@ namespace Api.Controllers {
         if (chassi == null) {
           return NotFound();
         }
-        try { 
-          await _chassis.Delete(chassi);          
+        try {
+          await _chassis.Delete(chassi);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

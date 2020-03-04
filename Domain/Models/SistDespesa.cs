@@ -13,6 +13,6 @@ namespace Domain.Models {
 
     // Navigation Properties
     public Conta Conta { get; private set; }
-    public ESistema ESistema { get; private set; }    
+    public ESistema ESistema { get; private set; }
   }
 }

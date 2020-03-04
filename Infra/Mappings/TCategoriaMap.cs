@@ -23,7 +23,7 @@ namespace Infra.Mappings {
 
       // Foreign Keys (Relationships)
       builder.HasOne(t => t.Empresa)
-          .WithMany(f => f.TCategorias).HasForeignKey(k => k.EmpresaId).IsRequired()       
+          .WithMany(f => f.TCategorias).HasForeignKey(k => k.EmpresaId).IsRequired()
           .OnDelete(DeleteBehavior.Restrict);
     }
   }

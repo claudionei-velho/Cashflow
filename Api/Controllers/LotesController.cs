@@ -80,7 +80,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<LoteDto>(lote));
     }
@@ -93,7 +93,7 @@ namespace Api.Controllers {
         if (lote == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _lotes.Delete(lote);
         }
         catch (Exception ex) {

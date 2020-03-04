@@ -14,7 +14,7 @@ namespace Infra.Repositories {
 
     public decimal? MediaHoras(Expression<Func<FrotaHoraria, bool>> condition = null) {
       try {
-        return (decimal)base.Get(condition).Sum(p => p.Veiculos) / 
+        return (decimal)base.Get(condition).Sum(p => p.Veiculos) /
                    base.Get(condition).Max(p => p.Veiculos);
       }
       catch (DivideByZeroException) {
@@ -22,7 +22,7 @@ namespace Infra.Repositories {
       }
     }
 
-    protected override IQueryable<FrotaHoraria> Get(Expression<Func<FrotaHoraria, bool>> condition = null, 
+    protected override IQueryable<FrotaHoraria> Get(Expression<Func<FrotaHoraria, bool>> condition = null,
         Func<IQueryable<FrotaHoraria>, IOrderedQueryable<FrotaHoraria>> order = null) {
       try {
         return base.Get(condition, order).Include(f => f.Empresa);

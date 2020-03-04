@@ -13,7 +13,11 @@ namespace Domain.Models {
     public string Prefixo { get; private set; }
     public string Denominacao { get; private set; }
 
-    public string Descricao => $"{Prefixo} | {Denominacao}";
+    public string Descricao {
+      get {
+        return $"{Prefixo} | {Denominacao}";
+      }
+    }
 
     public bool Uteis { get; private set; }
     public bool Sabados { get; private set; }
@@ -38,7 +42,11 @@ namespace Domain.Models {
     public decimal? ExtensaoAB { get; private set; }
     public decimal? ExtensaoBA { get; private set; }
 
-    public decimal? Extensao => (ExtensaoAB ?? 0) + (ExtensaoBA ?? 0);
+    public decimal? Extensao {
+      get {
+        return (ExtensaoAB ?? 0) + (ExtensaoBA ?? 0);
+      }
+    }
 
     public DateTime? Cadastro { get; private set; }
 

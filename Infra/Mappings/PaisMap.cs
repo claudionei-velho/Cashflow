@@ -7,7 +7,7 @@ namespace Infra.Mappings {
   internal class PaisMap : IEntityTypeConfiguration<Pais> {
     public void Configure(EntityTypeBuilder<Pais> builder) {
       // Primary Key
-      builder.HasKey(t => t.Id);         
+      builder.HasKey(t => t.Id);
 
       // Table, Properties & Column Mappings
       builder.ToTable("Paises");

@@ -80,7 +80,7 @@ namespace Api.Controllers {
         if (via == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _vias.Delete(via);
         }
         catch (Exception ex) {

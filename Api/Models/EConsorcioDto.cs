@@ -10,7 +10,11 @@ namespace Api.Models {
     public string Documento { get; set; }
     public DateTime? Desintegracao { get; set; }
 
-    public bool Ativo => Desintegracao == null;
+    public bool Ativo {
+      get {
+        return Desintegracao == null;
+      }
+    }
 
     public string Responsavel { get; set; }
     public string CpfResponsavel { get; set; }

@@ -29,7 +29,7 @@ namespace Api.Controllers {
     // GET: Instalacoes
     [HttpGet]
     public async Task<IActionResult> Get() {
-      using (_instalacoes) {      
+      using (_instalacoes) {
         return Ok(_mapper.Map<IEnumerable<InstalacaoDto>>(
                       await _instalacoes.GetData(
                                 order: i => i.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
@@ -82,7 +82,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<InstalacaoDto>(instalacao));
     }
@@ -95,7 +95,7 @@ namespace Api.Controllers {
         if (instalacao == null) {
           return NotFound();
         }
-        try { 
+        try {
           await _instalacoes.Delete(instalacao);
         }
         catch (Exception ex) {

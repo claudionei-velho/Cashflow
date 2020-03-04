@@ -10,7 +10,11 @@ namespace Api.Models {
     public int? ContaId { get; set; }
     public DateTime? Desvinculado { get; set; }
 
-    public bool Vigente => Desvinculado == null;
+    public bool Vigente {
+      get {
+        return Desvinculado == null;
+      }
+    }
 
     public DateTime? Cadastro { get; set; }
 

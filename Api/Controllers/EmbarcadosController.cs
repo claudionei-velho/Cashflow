@@ -83,7 +83,7 @@ namespace Api.Controllers {
         }
         catch (ValidationException ex) {
           return BadRequest(ex.Errors);
-        }        
+        }
       }
       return Ok(_mapper.Map<EmbarcadoDto>(embarcado));
     }
@@ -96,8 +96,8 @@ namespace Api.Controllers {
         if (embarcado == null) {
           return NotFound();
         }
-        try { 
-          await _embarcados.Delete(embarcado);          
+        try {
+          await _embarcados.Delete(embarcado);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);

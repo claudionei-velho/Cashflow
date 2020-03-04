@@ -13,7 +13,7 @@ namespace Api.Models.Validations {
           .NotEmpty().WithMessage(x => $"{Resources.DenominacaoRequired} {Resources.BaciaDto}")
           .MaximumLength(64);
 
-      RuleFor(c => c.Descricao).MaximumLength(256);     
+      RuleFor(c => c.Descricao).MaximumLength(256);
     }
   }
 }

@@ -12,7 +12,7 @@ namespace Infra.Repositories {
   public class ConsorcioRepository : RepositoryBase<Consorcio>, IConsorcioRepository {
     public ConsorcioRepository(DataContext context) : base(context) { }
 
-    protected override IQueryable<Consorcio> Get(Expression<Func<Consorcio, bool>> condition = null, 
+    protected override IQueryable<Consorcio> Get(Expression<Func<Consorcio, bool>> condition = null,
         Func<IQueryable<Consorcio>, IOrderedQueryable<Consorcio>> order = null) {
       try {
         return base.Get(condition, order).Include(e => e.Municipio.Uf).Include(e => e.Pais);

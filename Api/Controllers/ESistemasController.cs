@@ -120,8 +120,8 @@ namespace Api.Controllers {
         if (eSistema == null) {
           return NotFound();
         }
-        try { 
-          await _eSistemas.Delete(eSistema);          
+        try {
+          await _eSistemas.Delete(eSistema);
         }
         catch (Exception ex) {
           return BadRequest(ex.Message);
