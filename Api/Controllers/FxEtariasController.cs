@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,8 +26,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_fxEtarias) {
-        return Ok(_mapper.Map<IEnumerable<FxEtariaDto>>(
-                      await _fxEtarias.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<FxEtariaDto>>(await _fxEtarias.ListAsync()));
       }
     }
 
@@ -97,16 +94,14 @@ namespace Api.Controllers {
       }
       using (_fxEtarias) {
         return Ok(_mapper.Map<IEnumerable<FxEtariaDto>>(
-                      await _fxEtarias.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _fxEtarias.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_fxEtarias) {
-        return Ok(await _fxEtarias.SelectList(
-                            f => new { f.Id, f.Denominacao }
-                        ).ToListAsync());
+        return Ok(await _fxEtarias.SelectListAsync(f => new { f.Id, f.Denominacao }));
       }
     }
 

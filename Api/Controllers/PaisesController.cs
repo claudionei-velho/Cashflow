@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,9 +27,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_paises) {
         return Ok(_mapper.Map<IEnumerable<PaisDto>>(
-                      await _paises.GetData(
-                                order: p => p.OrderBy(q => q.Nome)
-                            ).ToListAsync()));
+                      await _paises.ListAsync(order: p => p.OrderBy(q => q.Nome))));
       }
     }
 
@@ -49,10 +46,9 @@ namespace Api.Controllers {
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_paises) {
-        return Ok(await _paises.SelectList(
+        return Ok(await _paises.SelectListAsync(
                             p => new { p.Id, p.Nome },
-                            order: p => p.OrderBy(q => q.Nome)
-                        ).ToListAsync());
+                            order: p => p.OrderBy(q => q.Nome)));
       }
     }
 
@@ -63,9 +59,9 @@ namespace Api.Controllers {
       }
       using (_paises) {
         return Ok(_mapper.Map<IEnumerable<PaisDto>>(
-                      await _paises.GetData(
-                                order: p => p.OrderBy(q => q.Nome)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _paises.PagedListAsync(
+                                order: p => p.OrderBy(q => q.Nome),
+                                skip: p, take: k)));
       }
     }
 

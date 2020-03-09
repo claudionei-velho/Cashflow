@@ -53,25 +53,25 @@ namespace Api.Controllers {
     }
 
     [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
-      int pages = this.GetDataSet().Count() / (k ?? 16);
-      if (this.GetDataSet().Count() % (k ?? 16) > 0) {
+    public ActionResult<KeyValuePair<int, int>> Pages(int k = 8) {
+      int pages = this.GetDataSet().Count() / k;
+      if (this.GetDataSet().Count() % k > 0) {
         ++pages;
       }
-      return this.Ok(new KeyValuePair<int, int>(this.GetDataSet().Count(), pages));
+      return new KeyValuePair<int, int>(GetDataSet().Count(), pages);
     }
 
-    private IQueryable<Depreciacao> GetDataSet(Expression<Func<Depreciacao, bool>> condition = null) {
-      ISet<Depreciacao> result = new HashSet<Depreciacao>();
+    private IEnumerable<Depreciacao> GetDataSet(Expression<Func<Depreciacao, bool>> condition = null) {
+      ICollection<Depreciacao> result = new HashSet<Depreciacao>();
       using (_depreciacoes) {
-        foreach (Depreciacao dp in _depreciacoes.GetData(condition)) {
+        foreach (Depreciacao dp in _depreciacoes.Query(condition)) {
           dp.Coeficiente = _depreciacoes.GetCoeficiente(dp.ClasseId, dp.EtariaId);
           dp.Acumulado = _depreciacoes.GetAcumulado(dp.ClasseId, dp.Anos);
 
           result.Add(dp);
         }
       }
-      return result.AsQueryable();
+      return result.ToList();
     }
   }
 }

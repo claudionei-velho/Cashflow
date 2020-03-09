@@ -252,7 +252,7 @@ namespace Api {
       services.AddScoped<ISalarioService, SalarioService>();
       services.AddScoped<ISalarioRepository, SalarioRepository>();
 
-      services.AddScoped<ISetorService, SetorService>();
+      services.AddScoped<ICollectionorService, SetorService>();
       services.AddScoped<ISetorRepository, SetorRepository>();
 
       services.AddScoped<ISistDespesaService, SistDespesaService>();

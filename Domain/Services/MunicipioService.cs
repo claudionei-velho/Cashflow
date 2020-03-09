@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -12,8 +13,8 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public IQueryable<Municipio> GetExpertise() {
-      return _repository.GetExpertise();
+    public async Task<IEnumerable<Municipio>> GetExpertise() {
+      return await _repository.GetExpertise();
     }
 
     protected override void Dispose(bool disposing) {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,8 +26,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_classLinhas) {
-        return Ok(_mapper.Map<IEnumerable<ClassLinhaDto>>(
-                      await _classLinhas.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ClassLinhaDto>>(await _classLinhas.ListAsync()));
       }
     }
 
@@ -96,17 +93,15 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_classLinhas) {
-        return Ok(_mapper.Map<IEnumerable<ClassLinhaDto>>(
-                      await _classLinhas.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ClassLinhaDto>>(await _classLinhas.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_classLinhas) {
-        return Ok(await _classLinhas.SelectList(
-                            c => new { c.Id, c.Denominacao }
-                        ).ToListAsync());
+        return Ok(await _classLinhas.SelectListAsync(
+                            c => new { c.Id, c.Denominacao }));
       }
     }
 

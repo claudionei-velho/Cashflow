@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,10 +27,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
-                      await _frotaHorarias.GetData(
+                      await _frotaHorarias.ListAsync(
                                 order: f => f.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.Hora)
-                            ).ToListAsync()));
+                                             .ThenBy(q => q.Hora))));
       }
     }
 
@@ -52,10 +50,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
-                      await _frotaHorarias.GetData(
+                      await _frotaHorarias.ListAsync(
                                 f => f.EmpresaId == id,
-                                f => f.OrderBy(q => q.Hora)
-                            ).ToListAsync()));
+                                f => f.OrderBy(q => q.Hora))));
       }
     }
 
@@ -66,9 +63,10 @@ namespace Api.Controllers {
       }
       using (_frotaHorarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaHorariaDto>>(
-                      await _frotaHorarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Hora)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _frotaHorarias.PagedListAsync(
+                                order: f => f.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Hora),
+                                skip: p, take: k)));
       }
     }
 

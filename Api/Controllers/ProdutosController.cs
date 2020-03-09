@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_produtos) {
         return Ok(_mapper.Map<IEnumerable<ProdutoDto>>(
-                      await _produtos.GetData(
-                                order: p => p.OrderBy(q => q.Descricao)
-                            ).ToListAsync()));
+                      await _produtos.ListAsync(
+                                order: p => p.OrderBy(q => q.Descricao))));
       }
     }
 
@@ -112,19 +110,18 @@ namespace Api.Controllers {
       }
       using (_produtos) {
         return Ok(_mapper.Map<IEnumerable<ProdutoDto>>(
-                      await _produtos.GetData(
-                                order: p => p.OrderBy(q => q.Descricao)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _produtos.PagedListAsync(
+                                order: p => p.OrderBy(q => q.Descricao),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_produtos) {
-        return Ok(await _produtos.SelectList(
+        return Ok(await _produtos.SelectListAsync(
                             p => new { p.Id, p.Descricao },
-                            order: p => p.OrderBy(q => q.Descricao)
-                        ).ToListAsync());
+                            order: p => p.OrderBy(q => q.Descricao)));
       }
     }
 

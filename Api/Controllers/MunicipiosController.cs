@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,9 +27,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.GetData(
-                                order: m => m.OrderBy(p => p.Uf.Sigla).ThenBy(p => p.Nome)
-                            ).ToListAsync()));
+                      await _municipios.ListAsync(
+                                order: m => m.OrderBy(p => p.Uf.Sigla)
+                                             .ThenBy(p => p.Nome))));
       }
     }
 
@@ -51,10 +50,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(string uf) {
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.GetData(
+                      await _municipios.ListAsync(
                                 m => m.Uf.Sigla.Equals(uf),
-                                m => m.OrderBy(p => p.Nome)
-                            ).ToListAsync()));
+                                m => m.OrderBy(p => p.Nome))));
       }
     }
 
@@ -65,9 +63,10 @@ namespace Api.Controllers {
       }
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.GetData(
-                                order: m => m.OrderBy(p => p.Uf.Sigla).ThenBy(p => p.Nome)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _municipios.PagedListAsync(
+                                order: m => m.OrderBy(p => p.Uf.Sigla)
+                                             .ThenBy(p => p.Nome),
+                                skip: p, take: k)));
       }
     }
 
@@ -78,32 +77,30 @@ namespace Api.Controllers {
       }
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.GetData(
+                      await _municipios.PagedListAsync(
                                 m => m.Uf.Sigla.Equals(uf),
-                                m => m.OrderBy(p => p.Uf.Sigla).ThenBy(p => p.Nome)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                m => m.OrderBy(p => p.Uf.Sigla)
+                                      .ThenBy(p => p.Nome), p, k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_municipios) {
-        return Ok(await _municipios.SelectList(
+        return Ok(await _municipios.SelectListAsync(
                             m => new { m.Id, m.Nome },
                             order: m => m.OrderBy(p => p.Uf.Sigla)
-                                         .ThenBy(p => p.Nome)
-                        ).ToListAsync());
+                                         .ThenBy(p => p.Nome)));
       }
     }
 
     [HttpGet, Route("SelectList/{uf}")]
     public async Task<IActionResult> SelectList(string uf) {
       using (_municipios) {
-        return Ok(await _municipios.SelectList(
+        return Ok(await _municipios.SelectListAsync(
                             m => new { m.Id, m.Nome },
                             m => m.Uf.Sigla.Equals(uf),
-                            m => m.OrderBy(p => p.Nome)
-                        ).ToListAsync());
+                            m => m.OrderBy(p => p.Nome)));
       }
     }
 
@@ -126,8 +123,7 @@ namespace Api.Controllers {
     [HttpGet, Route("Expertise")]
     public async Task<IActionResult> Expertise() {
       using (_municipios) {
-        return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.GetExpertise().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(await _municipios.GetExpertise()));
       }
     }
   }

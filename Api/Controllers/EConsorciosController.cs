@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,8 +30,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_eConsorcios) {
-        return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
-                      await _eConsorcios.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(await _eConsorcios.ListAsync()));
       }
     }
 
@@ -108,10 +106,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_eConsorcios) {
         return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
-                      await _eConsorcios.GetData(
+                      await _eConsorcios.ListAsync(
                                 _eConsorcios.GetExpression(id),
-                                c => c.OrderByDescending(q => q.Ratio)
-                            ).ToListAsync()));
+                                c => c.OrderByDescending(q => q.Ratio))));
       }
     }
 
@@ -122,31 +119,28 @@ namespace Api.Controllers {
       }
       using (_eConsorcios) {
         return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
-                      await _eConsorcios.GetData(
+                      await _eConsorcios.PagedListAsync(
                                 _eConsorcios.GetExpression(id),
-                                c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio), p, k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_eConsorcios) {
-        return Ok(await _eConsorcios.SelectList(
+        return Ok(await _eConsorcios.SelectListAsync(
                             c => new { c.Id, c.Consorcio.Razao, c.Empresa.Fantasia },
-                            order: c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio)
-                        ).ToListAsync());
+                            order: c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_eConsorcios) {
-        return Ok(await _eConsorcios.SelectList(
+        return Ok(await _eConsorcios.SelectListAsync(
                             c => new { c.Id, c.Consorcio.Razao, c.Empresa.Fantasia },
                             _eConsorcios.GetExpression(id),
-                            c => c.OrderByDescending(q => q.Ratio)
-                        ).ToListAsync());
+                            c => c.OrderByDescending(q => q.Ratio)));
       }
     }
 

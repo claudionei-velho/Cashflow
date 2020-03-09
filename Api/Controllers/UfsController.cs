@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,9 +27,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_ufs) {
         return Ok(_mapper.Map<IEnumerable<UfDto>>(
-                      await _ufs.GetData(
-                                order: u => u.OrderBy(p => p.Sigla)
-                            ).ToListAsync()));
+                      await _ufs.ListAsync(order: u => u.OrderBy(p => p.Sigla))));
       }
     }
 
@@ -53,19 +50,18 @@ namespace Api.Controllers {
       }
       using (_ufs) {
         return Ok(_mapper.Map<IEnumerable<UfDto>>(
-                      await _ufs.GetData(
-                                order: u => u.OrderBy(p => p.Sigla)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _ufs.PagedListAsync(
+                                order: u => u.OrderBy(p => p.Sigla),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_ufs) {
-        return Ok(await _ufs.SelectList(
+        return Ok(await _ufs.SelectListAsync(
                             u => new { u.Id, u.Sigla, u.Estado },
-                            order: u => u.OrderBy(p => p.Sigla)
-                        ).ToListAsync());
+                            order: u => u.OrderBy(p => p.Sigla)));
       }
     }
 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,8 +27,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_anpProdutos) {
-        return Ok(_mapper.Map<IEnumerable<AnpProdutoDto>>(
-                      await _anpProdutos.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<AnpProdutoDto>>(await _anpProdutos.ListAsync()));
       }
     }
 
@@ -97,25 +95,24 @@ namespace Api.Controllers {
       }
       using (_anpProdutos) {
         return Ok(_mapper.Map<IEnumerable<AnpProdutoDto>>(
-                      await _anpProdutos.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _anpProdutos.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_anpProdutos) {
-        return Ok(await _anpProdutos.SelectList(
+        return Ok(await _anpProdutos.SelectListAsync(
                             p => new { p.Id, p.Denominacao },
-                            order: p => p.OrderBy(q => q.Denominacao)
-                        ).ToListAsync());
+                            order: p => p.OrderBy(q => q.Denominacao)));
       }
     }
 
     [HttpGet, Route("Pages/{k?}")]
-    public IActionResult Pages(int? k) {
+    public ActionResult<KeyValuePair<int, int>> Pages(int k = 8) {
       using (_anpProdutos) {
-        return Ok(new KeyValuePair<int, int>(_anpProdutos.Count(),
-                                             _anpProdutos.Pages(size: k ?? 16)));
+        return new KeyValuePair<int, int>(_anpProdutos.Count(),
+                                          _anpProdutos.Pages(size: k));
       }
     }
   }

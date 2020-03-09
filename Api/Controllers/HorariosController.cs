@@ -5,13 +5,13 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
 
 using Api.Models;
 using Api.Models.Validations;
+using Domain.Extensions;
 using Domain.Interfaces.Services;
 using Domain.Models;
 
@@ -32,11 +32,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_horarios) {
         return Ok(_mapper.Map<IEnumerable<HorarioDto>>(
-                      await _horarios.GetData(
+                      await _horarios.ListAsync(
                                 order: h => h.OrderBy(q => q.Linha.EmpresaId)
                                              .ThenBy(q => q.Linha.Prefixo).ThenBy(q => q.DiaId)
-                                             .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)
-                            ).ToListAsync()));
+                                             .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido))));
       }
     }
 
@@ -112,10 +111,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id, int? op = null, string ab = null) {
       Expression<Func<Horario, bool>> condition = h => h.LinhaId == id;
       if (op.HasValue) {
-        condition = string.IsNullOrWhiteSpace(ab)
-          ? (h => (h.LinhaId == id) && (h.DiaId == op.Value))
-          : (Expression<Func<Horario, bool>>)(h => (h.LinhaId == id) &&
-                                             (h.DiaId == op.Value) && h.Sentido.Equals(ab));
+        condition = Predicate.And(condition, h => h.DiaId == op.Value);
+        if (!string.IsNullOrWhiteSpace(ab)) {
+          condition = Predicate.And(condition, h => h.Sentido.Equals(ab));
+        }
       }
       else {
         if (!string.IsNullOrWhiteSpace(ab)) {
@@ -125,11 +124,10 @@ namespace Api.Controllers {
 
       using (_horarios) {
         return Ok(_mapper.Map<IEnumerable<HorarioDto>>(
-                      await _horarios.GetData(
+                      await _horarios.ListAsync(
                                 condition,
                                 h => h.OrderBy(q => q.DiaId)
-                                      .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)
-                            ).ToListAsync()));
+                                      .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido))));
       }
     }
 
@@ -140,11 +138,11 @@ namespace Api.Controllers {
       }
       using (_horarios) {
         return Ok(_mapper.Map<IEnumerable<HorarioDto>>(
-                      await _horarios.GetData(
+                      await _horarios.PagedListAsync(
                                 order: h => h.OrderBy(q => q.Linha.EmpresaId)
                                              .ThenBy(q => q.Linha.Prefixo).ThenBy(q => q.DiaId)
-                                             .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido),
+                                skip: p, take: k)));
       }
     }
 
@@ -152,11 +150,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> SelectList(int id, int? op = null, string ab = null) {
       Expression<Func<Horario, bool>> condition = h => h.LinhaId == id;
       if (op.HasValue) {
-        if (string.IsNullOrWhiteSpace(ab)) {
-          condition = h => h.LinhaId == id && h.DiaId == op.Value;
-        }
-        else {
-          condition = h => h.LinhaId == id && h.DiaId == op.Value && h.Sentido.Equals(ab);
+        condition = Predicate.And(condition, h => h.DiaId == op.Value);
+        if (!string.IsNullOrWhiteSpace(ab)) {
+          condition = Predicate.And(condition, h => h.Sentido.Equals(ab));
         }
       }
       else {
@@ -166,12 +162,11 @@ namespace Api.Controllers {
       }
 
       using (_horarios) {
-        return Ok(await _horarios.SelectList(
+        return Ok(await _horarios.SelectListAsync(
                             h => new { h.Id, h.Inicio },
                             condition,
                             h => h.OrderBy(q => q.DiaId)
-                                  .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)
-                        ).ToListAsync());
+                                  .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido)));
       }
     }
 

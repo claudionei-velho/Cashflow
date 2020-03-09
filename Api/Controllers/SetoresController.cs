@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -18,10 +17,10 @@ namespace Api.Controllers {
   [Route("[controller]")]
   [ApiController]
   public class SetoresController : ControllerBase {
-    private readonly ISetorService _setores;
+    private readonly ICollectionorService _setores;
     private readonly IMapper _mapper;
 
-    public SetoresController(ISetorService setores, IMapper mapper) {
+    public SetoresController(ICollectionorService setores, IMapper mapper) {
       _setores = setores;
       _mapper = mapper;
     }
@@ -31,9 +30,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_setores) {
         return Ok(_mapper.Map<IEnumerable<SetorDto>>(
-                      await _setores.GetData(
-                                order: s => s.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                      await _setores.ListAsync(
+                                order: s => s.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Id))));
       }
     }
 
@@ -109,7 +108,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_setores) {
         return Ok(_mapper.Map<IEnumerable<SetorDto>>(
-                      await _setores.GetData(s => s.EmpresaId == id).ToListAsync()));
+                      await _setores.ListAsync(s => s.EmpresaId == id)));
       }
     }
 
@@ -120,29 +119,28 @@ namespace Api.Controllers {
       }
       using (_setores) {
         return Ok(_mapper.Map<IEnumerable<SetorDto>>(
-                      await _setores.GetData(
-                                order: s => s.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _setores.PagedListAsync(
+                                order: s => s.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_setores) {
-        return Ok(await _setores.SelectList(
+        return Ok(await _setores.SelectListAsync(
                             s => new { s.Id, s.Codigo, s.Denominacao },
-                            order: s => s.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                        ).ToListAsync());
+                            order: s => s.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_setores) {
-        return Ok(await _setores.SelectList(
+        return Ok(await _setores.SelectListAsync(
                             s => new { s.Id, s.Codigo, s.Denominacao },
-                            s => s.EmpresaId == id
-                        ).ToListAsync());
+                            s => s.EmpresaId == id));
       }
     }
 

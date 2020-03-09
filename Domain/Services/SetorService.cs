@@ -3,7 +3,7 @@ using Domain.Interfaces.Services;
 using Domain.Models;
 
 namespace Domain.Services {
-  public class SetorService : ServiceBase<Setor>, ISetorService {
+  public class SetorService : ServiceBase<Setor>, ICollectionorService {
     private readonly ISetorRepository _repository;
 
     public SetorService(ISetorRepository repository) : base(repository) {

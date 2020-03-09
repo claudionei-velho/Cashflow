@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -27,10 +26,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_operacionais) {
         return Ok(_mapper.Map<IEnumerable<OperacionalDto>>(
-                      await _operacionais.GetData(
+                      await _operacionais.ListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.LinhaId)
-                                             .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido)
-                            ).ToListAsync()));
+                                             .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido))));
       }
     }
 
@@ -38,11 +36,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_operacionais) {
         return Ok(_mapper.Map<IEnumerable<OperacionalDto>>(
-                      await _operacionais.GetData(
+                      await _operacionais.ListAsync(
                                 p => p.EmpresaId == id,
                                 p => p.OrderBy(q => q.LinhaId)
-                                      .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido)
-                            ).ToListAsync()));
+                                      .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido))));
       }
     }
 
@@ -50,10 +47,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id, int ln) {
       using (_operacionais) {
         return Ok(_mapper.Map<IEnumerable<OperacionalDto>>(
-                      await _operacionais.GetData(
+                      await _operacionais.ListAsync(
                                 p => (p.EmpresaId == id) && (p.LinhaId == ln),
-                                p => p.OrderBy(q => q.Prefixo).ThenBy(q => q.Sentido)
-                            ).ToListAsync()));
+                                p => p.OrderBy(q => q.Prefixo)
+                                      .ThenBy(q => q.Sentido))));
       }
     }
 
@@ -64,10 +61,10 @@ namespace Api.Controllers {
       }
       using (_operacionais) {
         return Ok(_mapper.Map<IEnumerable<OperacionalDto>>(
-                      await _operacionais.GetData(
+                      await _operacionais.PagedListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.LinhaId)
-                                             .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido),
+                                skip: p, take: k)));
       }
     }
 

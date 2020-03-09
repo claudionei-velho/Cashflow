@@ -26,14 +26,10 @@ namespace Infra.Repositories {
     }
 
     public decimal? GetAcumulado(int classeId, int idade) {
-      decimal? residual = GetData(d => d.ClasseId == classeId).Max(p => p.ECVeiculo.Residual);
-      int[] idades = {
-          SomaIdade(d => d.ClasseId == classeId && d.Anos >= idade),
-          SomaIdade(d => d.ClasseId == classeId)
-      };
-
+      decimal? residual = base.Get(d => d.ClasseId == classeId).Max(p => p.ECVeiculo.Residual);
       try {
-        return (1 - residual) * idades[0] / idades[1];
+        return (1 - residual) * SomaIdade(d => d.ClasseId == classeId && d.Anos >= idade) /
+                                    SomaIdade(d => d.ClasseId == classeId);
       }
       catch (DivideByZeroException) {
         return 1 - residual;

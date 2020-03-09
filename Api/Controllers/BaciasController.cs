@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,7 +29,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_bacias) {
         return Ok(_mapper.Map<IEnumerable<BaciaDto>>(
-                      await _bacias.GetData().ToListAsync()));
+                      await _bacias.ListAsync()));
       }
     }
 
@@ -107,7 +105,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_bacias) {
         return Ok(_mapper.Map<IEnumerable<BaciaDto>>(
-                      await _bacias.GetData(b => b.MunicipioId == id).ToListAsync()));
+                      await _bacias.ListAsync(b => b.MunicipioId == id)));
       }
     }
 
@@ -117,25 +115,23 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_bacias) {
-        return Ok(_mapper.Map<IEnumerable<BaciaDto>>(
-                      await _bacias.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<BaciaDto>>(await _bacias.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_bacias) {
-        return Ok(await _bacias.SelectList(b => new { b.Id, b.Denominacao }).ToListAsync());
+        return Ok(await _bacias.SelectListAsync(b => new { b.Id, b.Denominacao }));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_bacias) {
-        return Ok(await _bacias.SelectList(
+        return Ok(await _bacias.SelectListAsync(
                             b => new { b.Id, b.Denominacao },
-                            b => b.MunicipioId == id
-                        ).ToListAsync());
+                            b => b.MunicipioId == id));
       }
     }
 

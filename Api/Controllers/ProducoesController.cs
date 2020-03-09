@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,11 +30,11 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_producoes) {
         return Ok(_mapper.Map<IEnumerable<ProducaoDto>>(
-                      await _producoes.GetData(
+                      await _producoes.ListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
-                                             .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                             .ThenBy(q => q.TarifariaId)
-                            ).ToListAsync()));
+                                             .ThenByDescending(q => q.Ano)
+                                             .ThenByDescending(q => q.Mes)
+                                             .ThenBy(q => q.TarifariaId))));
       }
     }
 
@@ -111,11 +110,11 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_producoes) {
         return Ok(_mapper.Map<IEnumerable<ProducaoDto>>(
-                      await _producoes.GetData(
+                      await _producoes.ListAsync(
                                 p => p.EmpresaId == id,
-                                p => p.OrderByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                      .ThenBy(q => q.TarifariaId)
-                            ).ToListAsync()));
+                                p => p.OrderByDescending(q => q.Ano)
+                                      .ThenByDescending(q => q.Mes)
+                                      .ThenBy(q => q.TarifariaId))));
       }
     }
 
@@ -126,35 +125,36 @@ namespace Api.Controllers {
       }
       using (_producoes) {
         return Ok(_mapper.Map<IEnumerable<ProducaoDto>>(
-                      await _producoes.GetData(
+                      await _producoes.PagedListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
-                                             .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                             .ThenBy(q => q.TarifariaId)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenByDescending(q => q.Ano)
+                                             .ThenByDescending(q => q.Mes)
+                                             .ThenBy(q => q.TarifariaId),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_producoes) {
-        return Ok(await _producoes.SelectList(
+        return Ok(await _producoes.SelectListAsync(
                             p => new { p.Id, p.EmpresaId, p.Ano, p.Mes, p.TCategoria.Denominacao },
                             order: p => p.OrderBy(q => q.EmpresaId)
-                                         .ThenByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                         .ThenBy(q => q.TarifariaId)
-                        ).ToListAsync());
+                                         .ThenByDescending(q => q.Ano)
+                                         .ThenByDescending(q => q.Mes)
+                                         .ThenBy(q => q.TarifariaId)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_producoes) {
-        return Ok(await _producoes.SelectList(
+        return Ok(await _producoes.SelectListAsync(
                             p => new { p.Id, p.EmpresaId, p.Ano, p.Mes, p.TCategoria.Denominacao },
                             p => p.EmpresaId == id,
-                            p => p.OrderByDescending(q => q.Ano).ThenByDescending(q => q.Mes)
-                                  .ThenBy(q => q.TarifariaId)
-                        ).ToListAsync());
+                            p => p.OrderByDescending(q => q.Ano)
+                                  .ThenByDescending(q => q.Mes)
+                                  .ThenBy(q => q.TarifariaId)));
       }
     }
 

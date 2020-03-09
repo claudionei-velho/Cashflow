@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -32,9 +31,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
-                      await _linhas.GetData(
-                                order: l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
-                            ).ToListAsync()));
+                      await _linhas.ListAsync(
+                                order: l => l.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Prefixo))));
       }
     }
 
@@ -43,7 +42,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get(int id) {
       using (_linhas) {
         Linha linha = await _linhas.GetFirstAsync(l => l.Id == id);
-        return linha == null ? NotFound() : (IActionResult)Ok(_mapper.Map<LinhaDto>(linha));
+        if (linha == null) {
+          return NotFound();
+        }
+        return Ok(_mapper.Map<LinhaDto>(linha));
       }
     }
 
@@ -107,10 +109,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
-                      await _linhas.GetData(
+                      await _linhas.ListAsync(
                                 _linhas.GetExpression(id),
-                                l => l.OrderBy(q => q.Prefixo)
-                            ).ToListAsync()));
+                                l => l.OrderBy(q => q.Prefixo))));
       }
     }
 
@@ -121,31 +122,30 @@ namespace Api.Controllers {
       }
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
-                      await _linhas.GetData(
+                      await _linhas.PagedListAsync(
                                 _linhas.GetExpression(id),
-                                l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                l => l.OrderBy(q => q.EmpresaId)
+                                      .ThenBy(q => q.Prefixo), p, k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_linhas) {
-        return Ok(await _linhas.SelectList(
+        return Ok(await _linhas.SelectListAsync(
                             l => new { l.Id, l.Prefixo, l.Denominacao, l.Descricao },
-                            order: l => l.OrderBy(q => q.EmpresaId).ThenBy(q => q.Prefixo)
-                        ).ToListAsync());
+                            order: l => l.OrderBy(q => q.EmpresaId)
+                                         .ThenBy(q => q.Prefixo)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_linhas) {
-        return Ok(await _linhas.SelectList(
+        return Ok(await _linhas.SelectListAsync(
                             l => new { l.Id, l.Prefixo, l.Denominacao, l.Descricao },
                             _linhas.GetExpression(id),
-                            l => l.OrderBy(q => q.Prefixo)
-                        ).ToListAsync());
+                            l => l.OrderBy(q => q.Prefixo)));
       }
     }
 

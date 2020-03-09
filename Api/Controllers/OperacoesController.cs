@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,8 +26,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_operacoes) {
-        return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(
-                      await _operacoes.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(await _operacoes.ListAsync()));
       }
     }
 
@@ -94,7 +91,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_operacoes) {
         return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(
-                      await _operacoes.GetData(p => p.EmpresaId == id).ToListAsync()));
+                      await _operacoes.ListAsync(p => p.EmpresaId == id)));
       }
     }
 
@@ -105,26 +102,24 @@ namespace Api.Controllers {
       }
       using (_operacoes) {
         return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(
-                      await _operacoes.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _operacoes.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_operacoes) {
-        return Ok(await _operacoes.SelectList(
-                            p => new { p.Id, p.OpLinha.Denominacao }
-                        ).ToListAsync());
+        return Ok(await _operacoes.SelectListAsync(
+                            p => new { p.Id, p.OpLinha.Denominacao }));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_operacoes) {
-        return Ok(await _operacoes.SelectList(
+        return Ok(await _operacoes.SelectListAsync(
                             p => new { p.Id, p.OpLinha.Denominacao },
-                            p => p.EmpresaId == id
-                        ).ToListAsync());
+                            p => p.EmpresaId == id));
       }
     }
 

@@ -28,8 +28,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_eDominios) {
-        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(
-                      await _eDominios.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(await _eDominios.ListAsync()));
       }
     }
 
@@ -94,7 +93,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_eDominios) {
         return Ok(_mapper.Map<IEnumerable<EDominioDto>>(
-                      await _eDominios.GetData(d => d.EmpresaId == id).ToListAsync()));
+                      await _eDominios.ListAsync(d => d.EmpresaId == id)));
       }
     }
 
@@ -104,27 +103,23 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_eDominios) {
-        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(
-                      await _eDominios.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(await _eDominios.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_eDominios) {
-        return Ok(await _eDominios.SelectList(
-                            d => new { d.Id, d.Dominio.Denominacao }
-                        ).ToListAsync());
+        return Ok(await _eDominios.SelectListAsync(d => new { d.Id, d.Dominio.Denominacao }));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_eDominios) {
-        return Ok(await _eDominios.SelectList(
+        return Ok(await _eDominios.SelectListAsync(
                             d => new { d.Id, d.Dominio.Denominacao },
-                            d => d.EmpresaId == id
-                        ).ToListAsync());
+                            d => d.EmpresaId == id));
       }
     }
 

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -30,8 +28,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_lotes) {
-        return Ok(_mapper.Map<IEnumerable<LoteDto>>(
-                      await _lotes.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<LoteDto>>(await _lotes.ListAsync()));
       }
     }
 
@@ -107,7 +104,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_lotes) {
         return Ok(_mapper.Map<IEnumerable<LoteDto>>(
-                      await _lotes.GetData(l => l.BaciaId == id).ToListAsync()));
+                      await _lotes.ListAsync(l => l.BaciaId == id)));
       }
     }
 
@@ -118,24 +115,23 @@ namespace Api.Controllers {
       }
       using (_lotes) {
         return Ok(_mapper.Map<IEnumerable<LoteDto>>(
-                      await _lotes.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _lotes.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_lotes) {
-        return Ok(await _lotes.SelectList(l => new { l.Id, l.Denominacao }).ToListAsync());
+        return Ok(await _lotes.SelectListAsync(l => new { l.Id, l.Denominacao }));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_lotes) {
-        return Ok(await _lotes.SelectList(
+        return Ok(await _lotes.SelectListAsync(
                             l => new { l.Id, l.Denominacao },
-                            l => l.BaciaId == id
-                        ).ToListAsync());
+                            l => l.BaciaId == id));
       }
     }
 

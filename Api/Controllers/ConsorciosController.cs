@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -30,8 +29,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_consorcios) {
-        return Ok(_mapper.Map<IEnumerable<ConsorcioDto>>(
-                      await _consorcios.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ConsorcioDto>>(await _consorcios.ListAsync()));
       }
     }
 
@@ -107,8 +105,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int mn) {
       using (_consorcios) {
         return Ok(_mapper.Map<IEnumerable<ConsorcioDto>>(
-                      await _consorcios.GetData(c => c.MunicipioId == mn,
-                                                c => c.OrderBy(q => q.Fantasia)).ToListAsync()));
+                      await _consorcios.ListAsync(c => c.MunicipioId == mn,
+                                                c => c.OrderBy(q => q.Fantasia))));
       }
     }
 
@@ -119,17 +117,16 @@ namespace Api.Controllers {
       }
       using (_consorcios) {
         return Ok(_mapper.Map<IEnumerable<ConsorcioDto>>(
-                      await _consorcios.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _consorcios.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_consorcios) {
-        return Ok(await _consorcios.SelectList(
+        return Ok(await _consorcios.SelectListAsync(
                             c => new { c.Id, c.Fantasia, c.Cnpj },
-                            order: c => c.OrderBy(q => q.Fantasia)
-                        ).ToListAsync());
+                            order: c => c.OrderBy(q => q.Fantasia)));
       }
     }
 

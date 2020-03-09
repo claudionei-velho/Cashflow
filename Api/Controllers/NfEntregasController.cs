@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_entregas) {
         return Ok(_mapper.Map<IEnumerable<NfEntregaDto>>(
-                      await _entregas.GetData(
-                                order: n => n.OrderBy(q => q.NotaId)
-                            ).ToListAsync()));
+                      await _entregas.ListAsync(order: n => n.OrderBy(q => q.NotaId))));
       }
     }
 
@@ -109,10 +106,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_entregas) {
         return Ok(_mapper.Map<IEnumerable<NfEntregaDto>>(
-                      await _entregas.GetData(
+                      await _entregas.ListAsync(
                                 n => n.NFiscal.EmpresaId == id,
-                                n => n.OrderBy(q => q.NotaId)
-                            ).ToListAsync()));
+                                n => n.OrderBy(q => q.NotaId))));
       }
     }
 
@@ -123,30 +119,28 @@ namespace Api.Controllers {
       }
       using (_entregas) {
         return Ok(_mapper.Map<IEnumerable<NfEntregaDto>>(
-                      await _entregas.GetData(
-                                order: n => n.OrderBy(q => q.NotaId)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _entregas.PagedListAsync(
+                                order: n => n.OrderBy(q => q.NotaId),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_entregas) {
-        return Ok(await _entregas.SelectList(
+        return Ok(await _entregas.SelectListAsync(
                             n => new { n.Id, n.NFiscal.Numero, n.NFiscal.ChaveNfe },
-                            order: n => n.OrderBy(q => q.NotaId)
-                        ).ToListAsync());
+                            order: n => n.OrderBy(q => q.NotaId)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_entregas) {
-        return Ok(await _entregas.SelectList(
+        return Ok(await _entregas.SelectListAsync(
                             n => new { n.Id, n.NFiscal.Numero, n.NFiscal.ChaveNfe },
                             n => n.NFiscal.EmpresaId == id,
-                            n => n.OrderBy(q => q.NotaId)
-                        ).ToListAsync());
+                            n => n.OrderBy(q => q.NotaId)));
       }
     }
 

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,10 +27,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_sinteses) {
         return Ok(_mapper.Map<IEnumerable<PSinteseDto>>(
-                      await _sinteses.GetData(
+                      await _sinteses.ListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.DiaId)
-                            ).ToListAsync()));
+                                             .ThenBy(q => q.DiaId))));
       }
     }
 
@@ -53,10 +51,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_sinteses) {
         return Ok(_mapper.Map<IEnumerable<PSinteseDto>>(
-                      await _sinteses.GetData(
+                      await _sinteses.ListAsync(
                                 p => p.EmpresaId == id,
-                                p => p.OrderBy(q => q.DiaId)
-                            ).ToListAsync()));
+                                p => p.OrderBy(q => q.DiaId))));
       }
     }
 
@@ -67,10 +64,10 @@ namespace Api.Controllers {
       }
       using (_sinteses) {
         return Ok(_mapper.Map<IEnumerable<PSinteseDto>>(
-                      await _sinteses.GetData(
+                      await _sinteses.PagedListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
-                                             .ThenBy(q => q.DiaId)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenBy(q => q.DiaId),
+                                skip: p, take: k)));
       }
     }
 

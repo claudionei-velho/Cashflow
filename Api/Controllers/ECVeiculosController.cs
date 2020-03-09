@@ -30,8 +30,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_ecVeiculos) {
-        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(
-                      await _ecVeiculos.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(await _ecVeiculos.ListAsync()));
       }
     }
 
@@ -107,7 +106,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_ecVeiculos) {
         return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(
-                      await _ecVeiculos.GetData(v => v.EmpresaId == id).ToListAsync()));
+                      await _ecVeiculos.ListAsync(v => v.EmpresaId == id)));
       }
     }
 
@@ -117,27 +116,23 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_ecVeiculos) {
-        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(
-                      await _ecVeiculos.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(await _ecVeiculos.PagedListAsync()));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_ecVeiculos) {
-        return Ok(await _ecVeiculos.SelectList(
-                            v => new { v.Id, v.CVeiculo.Classe }
-                        ).ToListAsync());
+        return Ok(await _ecVeiculos.SelectListAsync(v => new { v.Id, v.CVeiculo.Classe }));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_ecVeiculos) {
-        return Ok(await _ecVeiculos.SelectList(
+        return Ok(await _ecVeiculos.SelectListAsync(
                            v => new { v.Id, v.CVeiculo.Classe },
-                           v => v.EmpresaId == id
-                        ).ToListAsync());
+                           v => v.EmpresaId == id));
       }
     }
 

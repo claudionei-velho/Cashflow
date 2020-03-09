@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,10 +30,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_encargos) {
         return Ok(_mapper.Map<IEnumerable<EncargoDto>>(
-                      await _encargos.GetData(
+                      await _encargos.ListAsync(
                                 order: e => e.OrderBy(q => q.Grupo)
-                                             .ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                                             .ThenBy(q => q.Id))));
       }
     }
 
@@ -110,10 +108,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(char ab) {
       using (_encargos) {
         return Ok(_mapper.Map<IEnumerable<EncargoDto>>(
-                      await _encargos.GetData(
+                      await _encargos.ListAsync(
                                 e => e.Grupo.Equals(ab),
-                                e => e.OrderBy(q => q.Id)
-                            ).ToListAsync()));
+                                e => e.OrderBy(q => q.Id))));
       }
     }
 
@@ -124,19 +121,17 @@ namespace Api.Controllers {
       }
       using (_encargos) {
         return Ok(_mapper.Map<IEnumerable<EncargoDto>>(
-                      await _encargos.GetData(
+                      await _encargos.PagedListAsync(
                                 order: e => e.OrderBy(q => q.Grupo)
-                                             .ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_encargos) {
-        return Ok(await _encargos.SelectList(
-                            e => new { e.Id, e.Grupo, e.Denominacao }
-                        ).ToListAsync());
+        return Ok(await _encargos.SelectListAsync(e => new { e.Id, e.Grupo, e.Denominacao }));
       }
     }
 

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,9 +27,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
-                      await _frotaEtarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.EtariaId)
-                            ).ToListAsync()));
+                      await _frotaEtarias.ListAsync(
+                                order: f => f.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.EtariaId))));
       }
     }
 
@@ -51,10 +50,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
-                      await _frotaEtarias.GetData(
+                      await _frotaEtarias.ListAsync(
                                 f => f.EmpresaId == id,
-                                f => f.OrderBy(q => q.EtariaId)
-                            ).ToListAsync()));
+                                f => f.OrderBy(q => q.EtariaId))));
       }
     }
 
@@ -65,9 +63,10 @@ namespace Api.Controllers {
       }
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
-                      await _frotaEtarias.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.EtariaId)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _frotaEtarias.PagedListAsync(
+                                order: f => f.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.EtariaId),
+                                skip: p, take: k)));
       }
     }
 

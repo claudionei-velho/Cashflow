@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,8 +27,7 @@ namespace Api.Controllers {
     [HttpGet]
     public async Task<IActionResult> Get() {
       using (_rhIndices) {
-        return Ok(_mapper.Map<IEnumerable<RhIndiceDto>>(
-                      await _rhIndices.GetData().ToListAsync()));
+        return Ok(_mapper.Map<IEnumerable<RhIndiceDto>>(await _rhIndices.ListAsync()));
       }
     }
 
@@ -97,17 +95,16 @@ namespace Api.Controllers {
       }
       using (_rhIndices) {
         return Ok(_mapper.Map<IEnumerable<RhIndiceDto>>(
-                      await _rhIndices.GetData().Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _rhIndices.PagedListAsync(skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_rhIndices) {
-        return Ok(await _rhIndices.SelectList(
+        return Ok(await _rhIndices.SelectListAsync(
                             rh => new { rh.Id, rh.Indice, rh.Denominacao },
-                            order: rh => rh.OrderBy(q => q.Indice)
-                        ).ToListAsync());
+                            order: rh => rh.OrderBy(q => q.Indice)));
       }
     }
 

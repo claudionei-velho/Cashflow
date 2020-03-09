@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData(
-                                order: e => e.OrderBy(q => q.Fantasia)
-                            ).ToListAsync()));
+                      await _empresas.ListAsync(
+                                order: e => e.OrderBy(q => q.Fantasia))));
       }
     }
 
@@ -109,10 +107,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int mid) {
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData(
+                      await _empresas.ListAsync(
                                 e => e.MunicipioId == mid,
-                                e => e.OrderBy(q => q.Fantasia)
-                            ).ToListAsync()));
+                                e => e.OrderBy(q => q.Fantasia))));
       }
     }
 
@@ -123,19 +120,18 @@ namespace Api.Controllers {
       }
       using (_empresas) {
         return Ok(_mapper.Map<IEnumerable<EmpresaDto>>(
-                      await _empresas.GetData(
-                                order: e => e.OrderBy(q => q.Fantasia)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _empresas.PagedListAsync(
+                                order: e => e.OrderBy(q => q.Fantasia),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_empresas) {
-        return Ok(await _empresas.SelectList(
+        return Ok(await _empresas.SelectListAsync(
                             e => new { e.Id, e.Fantasia, e.Cnpj },
-                            order: e => e.OrderBy(q => q.Fantasia)
-                        ).ToListAsync());
+                            order: e => e.OrderBy(q => q.Fantasia)));
       }
     }
 

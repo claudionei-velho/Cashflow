@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 
@@ -28,9 +27,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_tarifas) {
         return Ok(_mapper.Map<IEnumerable<TarifaModDto>>(
-                      await _tarifas.GetData(
-                                order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                      await _tarifas.ListAsync(
+                                order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id))));
       }
     }
 
@@ -51,7 +49,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_tarifas) {
         return Ok(_mapper.Map<IEnumerable<TarifaModDto>>(
-                      await _tarifas.GetData(p => p.EmpresaId == id).ToListAsync()));
+                      await _tarifas.ListAsync(p => p.EmpresaId == id)));
       }
     }
 
@@ -62,30 +60,29 @@ namespace Api.Controllers {
       }
       using (_tarifas) {
         return Ok(_mapper.Map<IEnumerable<TarifaModDto>>(
-                      await _tarifas.GetData(
-                                order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _tarifas.PagedListAsync(
+                                order: t => t.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_tarifas) {
-        return Ok(await _tarifas.SelectList(
+        return Ok(await _tarifas.SelectListAsync(
                             t => new { t.Id, t.Denominacao, t.Tarifa },
-                            order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                        ).ToListAsync());
+                            order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_tarifas) {
-        return Ok(await _tarifas.SelectList(
+        return Ok(await _tarifas.SelectListAsync(
                             t => new { t.Id, t.Denominacao, t.Tarifa },
                             t => t.EmpresaId == id,
-                            t => t.OrderBy(q => q.Id)
-                        ).ToListAsync());
+                            t => t.OrderBy(q => q.Id)));
       }
     }
 

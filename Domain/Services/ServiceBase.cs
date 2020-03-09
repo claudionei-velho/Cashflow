@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -14,15 +15,41 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public IQueryable<TEntity> GetData(Expression<Func<TEntity, bool>> condition = null,
+    public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> condition = null, 
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
-      return _repository.GetData(condition, order);
+      return _repository.Query(condition, order);
     }
 
-    public IQueryable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns,
-        Expression<Func<TEntity, bool>> condition = null,
+    public IEnumerable<TEntity> List(Expression<Func<TEntity, bool>> condition = null, 
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
+      return _repository.List(condition, order);
+    }
+
+    public async Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
+      return await _repository.ListAsync(condition, order);
+    }
+
+    public IEnumerable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns, 
+        Expression<Func<TEntity, bool>> condition = null, 
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
       return _repository.SelectList(columns, condition, order);
+    }
+
+    public async Task<IEnumerable<dynamic>> SelectListAsync(Expression<Func<TEntity, dynamic>> columns,
+        Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null) {
+      return await _repository.SelectListAsync(columns, condition, order);
+    }
+
+    public IEnumerable<TEntity> PagedList(Expression<Func<TEntity, bool>> condition = null, 
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
+      return _repository.PagedList(condition, order);
+    }
+
+    public async Task<IEnumerable<TEntity>> PagedListAsync(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
+      return await _repository.PagedListAsync(condition, order, skip, take);
     }
 
     public TEntity GetById(int id) {
@@ -69,19 +96,6 @@ namespace Domain.Services {
       try {
         int pages = _repository.Count(condition) / size;
         if (_repository.Count(condition) % size > 0) {
-          ++pages;
-        }
-        return pages;
-      }
-      catch (DivideByZeroException ex) {
-        throw new Exception(ex.Message);
-      }
-    }
-
-    public async Task<int> PagesAsync(Expression<Func<TEntity, bool>> condition = null, int size = 0) {
-      try {
-        int pages = await _repository.CountAsync(condition) / size;
-        if (await _repository.CountAsync(condition) % size > 0) {
           ++pages;
         }
         return pages;

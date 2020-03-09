@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,11 +30,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_catalogos) {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
-                      await _catalogos.GetData(
+                      await _catalogos.ListAsync(
                                 order: c => c.OrderBy(q => q.EmpresaId)
                                              .ThenByDescending(q => q.Ano)
-                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id))));
       }
     }
 
@@ -111,12 +109,11 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_catalogos) {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
-                      await _catalogos.GetData(
+                      await _catalogos.ListAsync(
                                 c => c.EmpresaId == id,
                                 c => c.OrderBy(q => q.EmpresaId)
                                       .ThenByDescending(q => q.Ano)
-                                      .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                                      .ThenByDescending(q => q.Mes).ThenBy(q => q.Id))));
       }
     }
 
@@ -127,35 +124,33 @@ namespace Api.Controllers {
       }
       using (_catalogos) {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
-                      await _catalogos.GetData(
+                      await _catalogos.PagedListAsync(
                                 order: c => c.OrderBy(q => q.EmpresaId)
                                              .ThenByDescending(q => q.Ano)
-                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                                             .ThenByDescending(q => q.Mes).ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_catalogos) {
-        return Ok(await _catalogos.SelectList(
+        return Ok(await _catalogos.SelectListAsync(
                             c => new { c.Id, c.Empresa.Fantasia, c.Ano, c.Mes, c.CVeiculo.Classe },
                             order: c => c.OrderBy(q => q.EmpresaId)
                                          .ThenByDescending(q => q.Ano)
-                                         .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
-                        ).ToListAsync());
+                                         .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_catalogos) {
-        return Ok(await _catalogos.SelectList(
+        return Ok(await _catalogos.SelectListAsync(
                             c => new { c.Id, c.Empresa.Fantasia, c.Ano, c.Mes, c.CVeiculo.Classe },
                             v => v.EmpresaId == id,
                             c => c.OrderByDescending(q => q.Ano)
-                                  .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)
-                        ).ToListAsync());
+                                  .ThenByDescending(q => q.Mes).ThenBy(q => q.Id)));
       }
     }
 

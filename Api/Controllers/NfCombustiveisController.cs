@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_combustiveis) {
         return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
-                      await _combustiveis.GetData(
-                                order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
-                            ).ToListAsync()));
+                      await _combustiveis.ListAsync(
+                                order: n => n.OrderBy(q => q.NotaId)
+                                             .ThenBy(q => q.ItemId))));
       }
     }
 
@@ -109,10 +108,10 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_combustiveis) {
         return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
-                      await _combustiveis.GetData(
+                      await _combustiveis.ListAsync(
                                 n => n.NFiscal.EmpresaId == id,
-                                n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
-                            ).ToListAsync()));
+                                n => n.OrderBy(q => q.NotaId)
+                                      .ThenBy(q => q.ItemId))));
       }
     }
 
@@ -123,30 +122,31 @@ namespace Api.Controllers {
       }
       using (_combustiveis) {
         return Ok(_mapper.Map<IEnumerable<NfCombustivelDto>>(
-                      await _combustiveis.GetData(
-                                order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _combustiveis.PagedListAsync(
+                                order: n => n.OrderBy(q => q.NotaId)
+                                             .ThenBy(q => q.ItemId),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_combustiveis) {
-        return Ok(await _combustiveis.SelectList(
+        return Ok(await _combustiveis.SelectListAsync(
                             n => new { n.Id, n.NFiscal.Numero, n.AnpProduto.Denominacao },
-                            order: n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
-                        ).ToListAsync());
+                            order: n => n.OrderBy(q => q.NotaId)
+                                         .ThenBy(q => q.ItemId)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_combustiveis) {
-        return Ok(await _combustiveis.SelectList(
+        return Ok(await _combustiveis.SelectListAsync(
                             n => new { n.Id, n.NFiscal.Numero, n.AnpProduto.Denominacao },
                             n => n.NFiscal.EmpresaId == id,
-                            n => n.OrderBy(q => q.NotaId).ThenBy(q => q.ItemId)
-                        ).ToListAsync());
+                            n => n.OrderBy(q => q.NotaId)
+                                  .ThenBy(q => q.ItemId)));
       }
     }
 

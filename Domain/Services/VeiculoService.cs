@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -14,14 +16,14 @@ namespace Domain.Services {
       _repository = repository;
     }
 
-    public IQueryable<Veiculo> GetNoChassi(Expression<Func<Veiculo, bool>> condition = null,
+    public async Task<IEnumerable<Veiculo>> GetNoChassi(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
-      return _repository.GetNoChassi(condition, order);
+      return await _repository.GetNoChassi(condition, order);
     }
 
-    public IQueryable<Veiculo> GetNoCarroceria(Expression<Func<Veiculo, bool>> condition = null,
+    public async Task<IEnumerable<Veiculo>> GetNoCarroceria(Expression<Func<Veiculo, bool>> condition = null,
         Func<IQueryable<Veiculo>, IOrderedQueryable<Veiculo>> order = null) {
-      return _repository.GetNoCarroceria(condition, order);
+      return await _repository.GetNoCarroceria(condition, order);
     }
 
     protected override void Dispose(bool disposing) {

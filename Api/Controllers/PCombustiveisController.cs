@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_pCombustiveis) {
         return Ok(_mapper.Map<IEnumerable<PCombustivelDto>>(
-                      await _pCombustiveis.GetData(
-                                order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                      await _pCombustiveis.ListAsync(
+                                order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id))));
       }
     }
 
@@ -109,7 +107,7 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_pCombustiveis) {
         return Ok(_mapper.Map<IEnumerable<PCombustivelDto>>(
-                      await _pCombustiveis.GetData(p => p.EmpresaId == id).ToListAsync()));
+                      await _pCombustiveis.ListAsync(p => p.EmpresaId == id)));
       }
     }
 
@@ -120,16 +118,17 @@ namespace Api.Controllers {
       }
       using (_pCombustiveis) {
         return Ok(_mapper.Map<IEnumerable<PCombustivelDto>>(
-                      await _pCombustiveis.GetData(
-                                order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _pCombustiveis.PagedListAsync(
+                                order: p => p.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList")]
     public async Task<IActionResult> SelectList() {
       using (_pCombustiveis) {
-        return Ok(await _pCombustiveis.SelectList(
+        return Ok(await _pCombustiveis.SelectListAsync(
                             p => new {
                               p.Id,
                               p.Empresa.Fantasia,
@@ -138,15 +137,14 @@ namespace Api.Controllers {
                               p.CVeiculo.Classe,
                               p.Combustivel.Denominacao
                             },
-                            order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                        ).ToListAsync());
+                            order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_pCombustiveis) {
-        return Ok(await _pCombustiveis.SelectList(
+        return Ok(await _pCombustiveis.SelectListAsync(
                             p => new {
                               p.Id,
                               p.Empresa.Fantasia,
@@ -155,8 +153,7 @@ namespace Api.Controllers {
                               p.CVeiculo.Classe,
                               p.Combustivel.Denominacao
                             },
-                            p => p.EmpresaId == id
-                        ).ToListAsync());
+                            p => p.EmpresaId == id));
       }
     }
 

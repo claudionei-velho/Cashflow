@@ -1,15 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services {
   public interface IServiceBase<TEntity> : IDisposable where TEntity : class {
-    IQueryable<TEntity> GetData(Expression<Func<TEntity, bool>> condition = null,
+    IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> condition = null, 
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
-    IQueryable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns,
+
+    IEnumerable<TEntity> List(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
+    Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
+    IEnumerable<dynamic> SelectList(Expression<Func<TEntity, dynamic>> columns,
         Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
+    Task<IEnumerable<dynamic>> SelectListAsync(Expression<Func<TEntity, dynamic>> columns,
+        Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
+    IEnumerable<TEntity> PagedList(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8);
+    Task<IEnumerable<TEntity>> PagedListAsync(Expression<Func<TEntity, bool>> condition = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8);
 
     TEntity GetById(int id);
     TEntity GetById(object id);
@@ -24,11 +37,10 @@ namespace Domain.Interfaces.Services {
     int Count(Expression<Func<TEntity, bool>> condition = null);
     Task<int> CountAsync(Expression<Func<TEntity, bool>> condition = null);
     int Pages(Expression<Func<TEntity, bool>> condition = null, int size = 0);
-    Task<int> PagesAsync(Expression<Func<TEntity, bool>> condition = null, int size = 0);
 
     Task Insert(TEntity obj);
     Task Update(TEntity obj);
     Task Delete(TEntity obj);
-    Task AddOrUpdate(TEntity obj);
+    Task AddOrUpdate(TEntity obj);    
   }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using AutoMapper;
 using FluentValidation;
@@ -31,9 +30,8 @@ namespace Api.Controllers {
     public async Task<IActionResult> Get() {
       using (_frotas) {
         return Ok(_mapper.Map<IEnumerable<FrotaDto>>(
-                      await _frotas.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).ToListAsync()));
+                      await _frotas.ListAsync(
+                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id))));
       }
     }
 
@@ -109,10 +107,9 @@ namespace Api.Controllers {
     public async Task<IActionResult> List(int id) {
       using (_frotas) {
         return Ok(_mapper.Map<IEnumerable<FrotaDto>>(
-                      await _frotas.GetData(
+                      await _frotas.ListAsync(
                                 f => f.EmpresaId == id,
-                                f => f.OrderBy(q => q.Id)
-                            ).ToListAsync()));
+                                f => f.OrderBy(q => q.Id))));
       }
     }
 
@@ -123,20 +120,20 @@ namespace Api.Controllers {
       }
       using (_frotas) {
         return Ok(_mapper.Map<IEnumerable<FrotaDto>>(
-                      await _frotas.GetData(
-                                order: f => f.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id)
-                            ).Skip((p - 1) * k).Take(k).ToListAsync()));
+                      await _frotas.PagedListAsync(
+                                order: f => f.OrderBy(q => q.EmpresaId)
+                                             .ThenBy(q => q.Id),
+                                skip: p, take: k)));
       }
     }
 
     [HttpGet, Route("SelectList/{id}")]
     public async Task<IActionResult> SelectList(int id) {
       using (_frotas) {
-        return Ok(await _frotas.SelectList(
+        return Ok(await _frotas.SelectListAsync(
                             f => new { f.Id, f.CVeiculo.Classe, f.FxEtaria.Denominacao },
                             f => f.EmpresaId == id,
-                            f => f.OrderBy(q => q.Id)
-                        ).ToListAsync());
+                            f => f.OrderBy(q => q.Id)));
       }
     }
 
