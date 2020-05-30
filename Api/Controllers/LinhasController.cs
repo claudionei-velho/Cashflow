@@ -122,7 +122,7 @@ namespace Api.Controllers {
       }
       using (_linhas) {
         return Ok(_mapper.Map<IEnumerable<LinhaDto>>(
-                      await _linhas.PagedListAsync(
+                      await _linhas.PageListAsync(
                                 _linhas.GetExpression(id),
                                 l => l.OrderBy(q => q.EmpresaId)
                                       .ThenBy(q => q.Prefixo), p, k)));

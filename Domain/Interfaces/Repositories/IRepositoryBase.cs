@@ -19,9 +19,9 @@ namespace Domain.Interfaces.Repositories {
     Task<IEnumerable<dynamic>> SelectListAsync(Expression<Func<TEntity, dynamic>> columns,
         Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null);
-    IEnumerable<TEntity> PagedList(Expression<Func<TEntity, bool>> condition = null,
+    IEnumerable<TEntity> PageList(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8);
-    Task<IEnumerable<TEntity>> PagedListAsync(Expression<Func<TEntity, bool>> condition = null,
+    Task<IEnumerable<TEntity>> PageListAsync(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8);
 
     TEntity GetById(int id);

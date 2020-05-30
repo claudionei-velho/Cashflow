@@ -102,7 +102,7 @@ namespace Api.Controllers {
       }
       using (_operacoes) {
         return Ok(_mapper.Map<IEnumerable<OperacaoDto>>(
-                      await _operacoes.PagedListAsync(skip: p, take: k)));
+                      await _operacoes.PageListAsync(skip: p, take: k)));
       }
     }
 

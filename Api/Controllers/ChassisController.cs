@@ -121,7 +121,7 @@ namespace Api.Controllers {
       }
       using (_chassis) {
         return Ok(_mapper.Map<IEnumerable<ChassiDto>>(
-                      await _chassis.PagedListAsync(
+                      await _chassis.PageListAsync(
                                 order: v => v.OrderBy(q => q.Veiculo.EmpresaId)
                                              .ThenBy(q => q.Veiculo.Numero), skip: p, take: k)));
       }

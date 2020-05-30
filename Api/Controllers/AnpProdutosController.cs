@@ -95,7 +95,7 @@ namespace Api.Controllers {
       }
       using (_anpProdutos) {
         return Ok(_mapper.Map<IEnumerable<AnpProdutoDto>>(
-                      await _anpProdutos.PagedListAsync(skip: p, take: k)));
+                      await _anpProdutos.PageListAsync(skip: p, take: k)));
       }
     }
 

@@ -138,7 +138,7 @@ namespace Api.Controllers {
       }
       using (_horarios) {
         return Ok(_mapper.Map<IEnumerable<HorarioDto>>(
-                      await _horarios.PagedListAsync(
+                      await _horarios.PageListAsync(
                                 order: h => h.OrderBy(q => q.Linha.EmpresaId)
                                              .ThenBy(q => q.Linha.Prefixo).ThenBy(q => q.DiaId)
                                              .ThenBy(q => q.Inicio).ThenBy(q => q.Sentido),

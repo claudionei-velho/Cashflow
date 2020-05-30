@@ -119,7 +119,7 @@ namespace Api.Controllers {
       }
       using (_entregas) {
         return Ok(_mapper.Map<IEnumerable<NfEntregaDto>>(
-                      await _entregas.PagedListAsync(
+                      await _entregas.PageListAsync(
                                 order: n => n.OrderBy(q => q.NotaId),
                                 skip: p, take: k)));
       }

@@ -104,7 +104,7 @@ namespace Api.Controllers {
       }
       using (_cLinhas) {
         return Ok(_mapper.Map<IEnumerable<CLinhaDto>>(
-                      await _cLinhas.PagedListAsync(
+                      await _cLinhas.PageListAsync(
                                 _cLinhas.GetExpression(id), skip: p, take: k)));
       }
     }

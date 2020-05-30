@@ -94,7 +94,7 @@ namespace Api.Controllers {
       }
       using (_fInstalacoes) {
         return Ok(_mapper.Map<IEnumerable<FInstalacaoDto>>(
-                      await _fInstalacoes.PagedListAsync(skip: p, take: k)));
+                      await _fInstalacoes.PageListAsync(skip: p, take: k)));
       }
     }
 

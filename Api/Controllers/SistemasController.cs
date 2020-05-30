@@ -104,7 +104,7 @@ namespace Api.Controllers {
       }
       using (_sistemas) {
         return Ok(_mapper.Map<IEnumerable<SistemaDto>>(
-                      await _sistemas.PagedListAsync(skip: p, take: k)));
+                      await _sistemas.PageListAsync(skip: p, take: k)));
       }
     }
 

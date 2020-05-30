@@ -59,7 +59,7 @@ namespace Api.Controllers {
       }
       using (_paises) {
         return Ok(_mapper.Map<IEnumerable<PaisDto>>(
-                      await _paises.PagedListAsync(
+                      await _paises.PageListAsync(
                                 order: p => p.OrderBy(q => q.Nome),
                                 skip: p, take: k)));
       }

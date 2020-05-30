@@ -115,7 +115,7 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_bacias) {
-        return Ok(_mapper.Map<IEnumerable<BaciaDto>>(await _bacias.PagedListAsync(skip: p, take: k)));
+        return Ok(_mapper.Map<IEnumerable<BaciaDto>>(await _bacias.PageListAsync(skip: p, take: k)));
       }
     }
 

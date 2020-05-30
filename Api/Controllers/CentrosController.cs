@@ -122,7 +122,7 @@ namespace Api.Controllers {
       }
       using (_centros) {
         return Ok(_mapper.Map<IEnumerable<CentroDto>>(
-                      await _centros.PagedListAsync(
+                      await _centros.PageListAsync(
                                 _centros.GetExpression(id),
                                 c => c.OrderBy(q => q.EmpresaId)
                                       .ThenBy(q => q.Classificacao), p, k)));

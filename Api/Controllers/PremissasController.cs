@@ -120,7 +120,7 @@ namespace Api.Controllers {
       }
       using (_premissas) {
         return Ok(_mapper.Map<IEnumerable<PremissaDto>>(
-                      await _premissas.PagedListAsync(
+                      await _premissas.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

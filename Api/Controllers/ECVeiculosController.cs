@@ -116,7 +116,7 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_ecVeiculos) {
-        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(await _ecVeiculos.PagedListAsync()));
+        return Ok(_mapper.Map<IEnumerable<ECVeiculoDto>>(await _ecVeiculos.PageListAsync()));
       }
     }
 

@@ -123,7 +123,7 @@ namespace Api.Controllers {
       }
       using (_planos) {
         return Ok(_mapper.Map<IEnumerable<PlanoDto>>(
-                      await _planos.PagedListAsync(
+                      await _planos.PageListAsync(
                                 order: p => p.OrderBy(q => q.Linha.EmpresaId)
                                              .ThenBy(q => q.Linha.Prefixo)
                                              .ThenBy(q => q.Atendimento.Prefixo),

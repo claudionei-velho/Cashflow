@@ -125,7 +125,7 @@ namespace Api.Controllers {
       }
       using (_producoes) {
         return Ok(_mapper.Map<IEnumerable<ProducaoDto>>(
-                      await _producoes.PagedListAsync(
+                      await _producoes.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes)

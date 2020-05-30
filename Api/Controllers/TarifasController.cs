@@ -118,7 +118,7 @@ namespace Api.Controllers {
       }
       using (_tarifas) {
         return Ok(_mapper.Map<IEnumerable<TarifaDto>>(
-                      await _tarifas.PagedListAsync(
+                      await _tarifas.PageListAsync(
                                 order: t => t.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

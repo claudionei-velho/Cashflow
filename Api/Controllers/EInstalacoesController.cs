@@ -121,7 +121,7 @@ namespace Api.Controllers {
       }
       using (_eInstalacoes) {
         return Ok(_mapper.Map<IEnumerable<EInstalacaoDto>>(
-                      await _eInstalacoes.PagedListAsync(
+                      await _eInstalacoes.PageListAsync(
                                 order: e => e.OrderBy(q => q.Instalacao.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

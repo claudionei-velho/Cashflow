@@ -119,7 +119,7 @@ namespace Api.Controllers {
       }
       using (_eConsorcios) {
         return Ok(_mapper.Map<IEnumerable<EConsorcioDto>>(
-                      await _eConsorcios.PagedListAsync(
+                      await _eConsorcios.PageListAsync(
                                 _eConsorcios.GetExpression(id),
                                 c => c.OrderBy(q => q.ConsorcioId).ThenByDescending(q => q.Ratio), p, k)));
       }

@@ -63,7 +63,7 @@ namespace Api.Controllers {
       }
       using (_frotaEtarias) {
         return Ok(_mapper.Map<IEnumerable<FrotaEtariaDto>>(
-                      await _frotaEtarias.PagedListAsync(
+                      await _frotaEtarias.PageListAsync(
                                 order: f => f.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.EtariaId),
                                 skip: p, take: k)));

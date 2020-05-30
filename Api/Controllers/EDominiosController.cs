@@ -103,7 +103,7 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_eDominios) {
-        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(await _eDominios.PagedListAsync(skip: p, take: k)));
+        return Ok(_mapper.Map<IEnumerable<EDominioDto>>(await _eDominios.PageListAsync(skip: p, take: k)));
       }
     }
 

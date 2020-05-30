@@ -115,7 +115,7 @@ namespace Api.Controllers {
       }
       using (_lotes) {
         return Ok(_mapper.Map<IEnumerable<LoteDto>>(
-                      await _lotes.PagedListAsync(skip: p, take: k)));
+                      await _lotes.PageListAsync(skip: p, take: k)));
       }
     }
 

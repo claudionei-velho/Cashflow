@@ -122,7 +122,7 @@ namespace Api.Controllers {
       }
       using (_veiculos) {
         return Ok(_mapper.Map<IEnumerable<NfVeiculoDto>>(
-                      await _veiculos.PagedListAsync(
+                      await _veiculos.PageListAsync(
                                 order: n => n.OrderBy(q => q.NotaId)
                                              .ThenBy(q => q.ItemId),
                                 skip: p, take: k)));

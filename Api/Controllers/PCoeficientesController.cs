@@ -119,7 +119,7 @@ namespace Api.Controllers {
       }
       using (_pCoeficientes) {
         return Ok(_mapper.Map<IEnumerable<PCoeficienteDto>>(
-                      await _pCoeficientes.PagedListAsync(
+                      await _pCoeficientes.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

@@ -64,7 +64,7 @@ namespace Api.Controllers {
       }
       using (_sinteses) {
         return Ok(_mapper.Map<IEnumerable<PSinteseDto>>(
-                      await _sinteses.PagedListAsync(
+                      await _sinteses.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.DiaId),
                                 skip: p, take: k)));

@@ -61,7 +61,7 @@ namespace Api.Controllers {
       }
       using (_operacionais) {
         return Ok(_mapper.Map<IEnumerable<OperacionalDto>>(
-                      await _operacionais.PagedListAsync(
+                      await _operacionais.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId).ThenBy(q => q.LinhaId)
                                              .ThenBy(q => q.Prefixo).ThenBy(q => q.Sentido),
                                 skip: p, take: k)));

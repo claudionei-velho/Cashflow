@@ -125,7 +125,7 @@ namespace Api.Controllers {
       }
       using (_custos) {
         return Ok(_mapper.Map<IEnumerable<CstChassiDto>>(
-                      await _custos.PagedListAsync(
+                      await _custos.PageListAsync(
                                 _custos.GetExpression(id),
                                 c => c.OrderBy(q => q.EmpresaId)
                                       .ThenByDescending(q => q.Ano)

@@ -94,7 +94,7 @@ namespace Api.Controllers {
       }
       using (_fxEtarias) {
         return Ok(_mapper.Map<IEnumerable<FxEtariaDto>>(
-                      await _fxEtarias.PagedListAsync(skip: p, take: k)));
+                      await _fxEtarias.PageListAsync(skip: p, take: k)));
       }
     }
 

@@ -121,7 +121,7 @@ namespace Api.Controllers {
       }
       using (_contatos) {
         return Ok(_mapper.Map<IEnumerable<ContatoDto>>(
-                      await _contatos.PagedListAsync(
+                      await _contatos.PageListAsync(
                                 _contatos.GetExpression(id),
                                 order: c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Nome), p, k)));
       }

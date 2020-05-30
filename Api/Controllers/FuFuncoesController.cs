@@ -117,7 +117,7 @@ namespace Api.Controllers {
       }
       using (_fuFuncoes) {
         return Ok(_mapper.Map<IEnumerable<FuFuncaoDto>>(
-                      await _fuFuncoes.PagedListAsync(
+                      await _fuFuncoes.PageListAsync(
                                 order: f => f.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

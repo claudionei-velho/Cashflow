@@ -50,7 +50,7 @@ namespace Api.Controllers {
       }
       using (_ufs) {
         return Ok(_mapper.Map<IEnumerable<UfDto>>(
-                      await _ufs.PagedListAsync(
+                      await _ufs.PageListAsync(
                                 order: u => u.OrderBy(p => p.Sigla),
                                 skip: p, take: k)));
       }

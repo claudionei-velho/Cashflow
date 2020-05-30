@@ -123,7 +123,7 @@ namespace Api.Controllers {
       }
       using (_notas) {
         return Ok(_mapper.Map<IEnumerable<NFiscalDto>>(
-                      await _notas.PagedListAsync(
+                      await _notas.PageListAsync(
                                 order: n => n.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.FornecedorId)
                                              .ThenBy(q => q.Numero),

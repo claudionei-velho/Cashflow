@@ -42,14 +42,14 @@ namespace Domain.Services {
       return await _repository.SelectListAsync(columns, condition, order);
     }
 
-    public IEnumerable<TEntity> PagedList(Expression<Func<TEntity, bool>> condition = null, 
+    public IEnumerable<TEntity> PageList(Expression<Func<TEntity, bool>> condition = null, 
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
-      return _repository.PagedList(condition, order);
+      return _repository.PageList(condition, order);
     }
 
-    public async Task<IEnumerable<TEntity>> PagedListAsync(Expression<Func<TEntity, bool>> condition = null,
+    public async Task<IEnumerable<TEntity>> PageListAsync(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
-      return await _repository.PagedListAsync(condition, order, skip, take);
+      return await _repository.PageListAsync(condition, order, skip, take);
     }
 
     public TEntity GetById(int id) {

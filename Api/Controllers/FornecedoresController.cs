@@ -110,7 +110,7 @@ namespace Api.Controllers {
       }
       using (_fornecedores) {
         return Ok(_mapper.Map<IEnumerable<FornecedorDto>>(
-                      await _fornecedores.PagedListAsync(
+                      await _fornecedores.PageListAsync(
                                 order: f => f.OrderBy(q => q.Fantasia),
                                 skip: p, take: k)));
       }

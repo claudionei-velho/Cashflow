@@ -119,7 +119,7 @@ namespace Api.Controllers {
       }
       using (_funcoes) {
         return Ok(_mapper.Map<IEnumerable<FuncaoDto>>(
-                      await _funcoes.PagedListAsync(
+                      await _funcoes.PageListAsync(
                                 order: f => f.OrderBy(q => q.Cargo.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

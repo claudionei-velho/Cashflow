@@ -63,7 +63,7 @@ namespace Api.Controllers {
       }
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.PagedListAsync(
+                      await _municipios.PageListAsync(
                                 order: m => m.OrderBy(p => p.Uf.Sigla)
                                              .ThenBy(p => p.Nome),
                                 skip: p, take: k)));
@@ -77,7 +77,7 @@ namespace Api.Controllers {
       }
       using (_municipios) {
         return Ok(_mapper.Map<IEnumerable<MunicipioDto>>(
-                      await _municipios.PagedListAsync(
+                      await _municipios.PageListAsync(
                                 m => m.Uf.Sigla.Equals(uf),
                                 m => m.OrderBy(p => p.Uf.Sigla)
                                       .ThenBy(p => p.Nome), p, k)));

@@ -94,7 +94,7 @@ namespace Api.Controllers {
       }
       using (_opLinhas) {
         return Ok(_mapper.Map<IEnumerable<OpLinhaDto>>(
-                      await _opLinhas.PagedListAsync(skip: p, take: k)));
+                      await _opLinhas.PageListAsync(skip: p, take: k)));
       }
     }
 

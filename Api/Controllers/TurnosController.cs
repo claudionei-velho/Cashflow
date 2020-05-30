@@ -118,7 +118,7 @@ namespace Api.Controllers {
       }
       using (_turnos) {
         return Ok(_mapper.Map<IEnumerable<TurnoDto>>(
-                      await _turnos.PagedListAsync(
+                      await _turnos.PageListAsync(
                                 order: t => t.OrderBy(q => q.EmpresaId).ThenBy(q => q.Id),
                                 skip: p, take: k)));
       }

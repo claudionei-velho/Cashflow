@@ -124,7 +124,7 @@ namespace Api.Controllers {
       }
       using (_catalogos) {
         return Ok(_mapper.Map<IEnumerable<VCatalogoDto>>(
-                      await _catalogos.PagedListAsync(
+                      await _catalogos.PageListAsync(
                                 order: c => c.OrderBy(q => q.EmpresaId)
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes).ThenBy(q => q.Id),

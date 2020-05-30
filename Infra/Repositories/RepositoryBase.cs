@@ -47,7 +47,7 @@ namespace Infra.Repositories {
       return await Get(condition, order).Select(columns).ToListAsync();
     }
 
-    public IEnumerable<TEntity> PagedList(Expression<Func<TEntity, bool>> condition = null,
+    public IEnumerable<TEntity> PageList(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
       if (skip < 1 || take < 1) {
         return Get(condition, order).ToList();
@@ -55,7 +55,7 @@ namespace Infra.Repositories {
       return Get(condition, order).Skip((skip - 1) * take).Take(take).ToList();
     }
 
-    public async Task<IEnumerable<TEntity>> PagedListAsync(Expression<Func<TEntity, bool>> condition = null,
+    public async Task<IEnumerable<TEntity>> PageListAsync(Expression<Func<TEntity, bool>> condition = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order = null, int skip = 1, int take = 8) {
       if (skip < 1 || take < 1) {
         return await Get(condition, order).ToListAsync();

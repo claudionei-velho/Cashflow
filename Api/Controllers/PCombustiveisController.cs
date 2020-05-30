@@ -118,7 +118,7 @@ namespace Api.Controllers {
       }
       using (_pCombustiveis) {
         return Ok(_mapper.Map<IEnumerable<PCombustivelDto>>(
-                      await _pCombustiveis.PagedListAsync(
+                      await _pCombustiveis.PageListAsync(
                                 order: p => p.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

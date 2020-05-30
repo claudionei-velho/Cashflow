@@ -93,7 +93,7 @@ namespace Api.Controllers {
         return BadRequest();
       }
       using (_vias) {
-        return Ok(_mapper.Map<IEnumerable<ViaDto>>(await _vias.PagedListAsync(skip: p, take: k)));
+        return Ok(_mapper.Map<IEnumerable<ViaDto>>(await _vias.PageListAsync(skip: p, take: k)));
       }
     }
 

@@ -135,7 +135,7 @@ namespace Api.Controllers {
       }
       using (_fSistemas) {
         return Ok(_mapper.Map<IEnumerable<SistFuncaoDto>>(
-                      await _fSistemas.PagedListAsync(
+                      await _fSistemas.PageListAsync(
                                 order: d => d.OrderBy(q => q.SistemaId)
                                              .ThenBy(q => q.Item),
                                 skip: p, take: k)));

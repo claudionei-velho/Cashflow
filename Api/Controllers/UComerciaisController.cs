@@ -94,7 +94,7 @@ namespace Api.Controllers {
       }
       using (_ucomerciais) {
         return Ok(_mapper.Map<IEnumerable<UComercialDto>>(
-                      await _ucomerciais.PagedListAsync(skip: p, take: k)));
+                      await _ucomerciais.PageListAsync(skip: p, take: k)));
       }
     }
 

@@ -118,7 +118,7 @@ namespace Api.Controllers {
       }
       using (_vEquipamentos) {
         return Ok(_mapper.Map<IEnumerable<VEquipamentoDto>>(
-                      await _vEquipamentos.PagedListAsync(
+                      await _vEquipamentos.PageListAsync(
                                 order: v => v.OrderBy(q => q.EmpresaId)
                                              .ThenBy(q => q.Id),
                                 skip: p, take: k)));

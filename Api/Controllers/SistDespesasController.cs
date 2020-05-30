@@ -120,7 +120,7 @@ namespace Api.Controllers {
       }
       using (_dSistemas) {
         return Ok(_mapper.Map<IEnumerable<SistDespesaDto>>(
-                      await _dSistemas.PagedListAsync(
+                      await _dSistemas.PageListAsync(
                                 order: d => d.OrderBy(q => q.SistemaId)
                                              .ThenBy(q => q.Item),
                                 skip: p, take: k)));

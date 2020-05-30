@@ -122,7 +122,7 @@ namespace Api.Controllers {
       }
       using (_referencias) {
         return Ok(_mapper.Map<IEnumerable<NfReferenciaDto>>(
-                      await _referencias.PagedListAsync(
+                      await _referencias.PageListAsync(
                                 order: n => n.OrderBy(q => q.NotaId)
                                              .ThenBy(q => q.Numero),
                                 skip: p, take: k)));

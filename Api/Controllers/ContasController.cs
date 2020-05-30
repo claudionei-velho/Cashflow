@@ -122,7 +122,7 @@ namespace Api.Controllers {
           return BadRequest();
         }
         return Ok(_mapper.Map<IEnumerable<ContaDto>>(
-                      await _contas.PagedListAsync(
+                      await _contas.PageListAsync(
                                 _contas.GetExpression(id),
                                 c => c.OrderBy(q => q.EmpresaId).ThenBy(q => q.Classificacao), p, k)));
       }

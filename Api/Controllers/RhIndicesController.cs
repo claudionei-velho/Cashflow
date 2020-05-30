@@ -95,7 +95,7 @@ namespace Api.Controllers {
       }
       using (_rhIndices) {
         return Ok(_mapper.Map<IEnumerable<RhIndiceDto>>(
-                      await _rhIndices.PagedListAsync(skip: p, take: k)));
+                      await _rhIndices.PageListAsync(skip: p, take: k)));
       }
     }
 

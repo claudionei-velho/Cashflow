@@ -117,7 +117,7 @@ namespace Api.Controllers {
       }
       using (_consorcios) {
         return Ok(_mapper.Map<IEnumerable<ConsorcioDto>>(
-                      await _consorcios.PagedListAsync(skip: p, take: k)));
+                      await _consorcios.PageListAsync(skip: p, take: k)));
       }
     }
 

@@ -125,7 +125,7 @@ namespace Api.Controllers {
       }
       using (_salarios) {
         return Ok(_mapper.Map<IEnumerable<SalarioDto>>(
-                      await _salarios.PagedListAsync(
+                      await _salarios.PageListAsync(
                                 order: s => s.OrderBy(q => q.Funcao.Cargo.EmpresaId)
                                              .ThenByDescending(q => q.Ano)
                                              .ThenByDescending(q => q.Mes)
