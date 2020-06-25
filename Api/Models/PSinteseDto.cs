@@ -10,7 +10,7 @@ namespace Api.Models {
 
     public string DiaIdCap {
       get {
-        return new Workday().Items[DiaId];
+        return Workday.Items[DiaId];
       }
     }
 

@@ -26,7 +26,7 @@ namespace Api.Models {
 
     public string TributarioCap {
       get {
-        return new Tributario().Items[TributarioId ?? 0];
+        return Tributario.Items[TributarioId ?? 0];
       }
     }
 

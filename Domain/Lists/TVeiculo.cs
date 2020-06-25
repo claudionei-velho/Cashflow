@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace Domain.Lists {
-  public class TVeiculo : ListBase {
-    public TVeiculo() {
-      Items = new Dictionary<int, string>() {
+  public static class TVeiculo {
+    public static IDictionary<int, string> Items = new Dictionary<int, string>() {
         {  2, "CICLOMOTO" },
         {  3, "MOTONETA" },
         {  4, "MOTOCICLO" },
@@ -19,7 +18,6 @@ namespace Domain.Lists {
         { 22, "ESP / ÔNIBUS" },
         { 23, "MISTO / CAM" },
         { 24, "CARGA / CAM" }
-      };
-    }
+    };
   }
 }

@@ -13,7 +13,7 @@ namespace Domain.Models {
     public int FPagamentoId { get; private set; }
     public string FPagamentoCap {
       get {
-        return new FPagamento().Items[FPagamentoId];
+        return FPagamento.Items[FPagamentoId];
       }
     }
 
@@ -27,7 +27,7 @@ namespace Domain.Models {
     public int Finalidade { get; private set; }
     public string FinalidadeCap {
       get {
-        return new NfProposito().Items[Finalidade];
+        return NfProposito.Items[Finalidade];
       }
     }
 

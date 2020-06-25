@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Domain.Lists;
-
 namespace Domain.Models {
   public class Veiculo {
     public int Id { get; private set; }
@@ -14,7 +12,7 @@ namespace Domain.Models {
 
     public string CategoriaCap {
       get {
-        return new Categoria().Items[Categoria ?? 0];
+        return Lists.Categoria.Items[Categoria ?? 0];
       }
     }
 

@@ -27,14 +27,14 @@ namespace Domain.Models {
     public int? Catraca { get; private set; }
     public string CatracaCap {
       get {
-        return new Posicao().Items[Catraca ?? 0];
+        return Posicao.Items[Catraca ?? 0];
       }
     }
 
     public int PortaIn { get; private set; }
     public string PortaInCap {
       get {
-        return new Posicao().Items[PortaIn];
+        return Posicao.Items[PortaIn];
       }
     }
 

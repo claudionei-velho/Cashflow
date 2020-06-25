@@ -11,116 +11,116 @@ namespace Api.Controllers {
   public class ListsController : ControllerBase {
     [HttpGet]
     [Route("ListCategorias")]
-    public IEnumerable<KeyValuePair<int, string>> ListCategorias() {
-      return new Categoria().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListCategorias() {
+      return Categoria.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListCombustiveis")]
-    public IEnumerable<KeyValuePair<int, string>> ListCombustiveis() {
-      return new Combustivel().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListCombustiveis() {
+      return Combustivel.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListCondicoes")]
-    public IEnumerable<KeyValuePair<int, string>> ListCondicoes() {
-      return new Condicao().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListCondicoes() {
+      return Condicao.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListConformes")]
-    public IEnumerable<KeyValuePair<int, string>> ListConformes() {
-      return new Conforme().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListConformes() {
+      return Conforme.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListCores")]
-    public IEnumerable<KeyValuePair<int, string>> ListCores() {
-      return new Cor().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListCores() {
+      return Cor.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListDirecoes")]
-    public IEnumerable<KeyValuePair<int, string>> ListDirecoes() {
-      return new Direcao().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListDirecoes() {
+      return Direcao.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListEVeiculos")]
-    public IEnumerable<KeyValuePair<int, string>> ListEVeiculos() {
-      return new EVeiculo().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListEVeiculos() {
+      return EVeiculo.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListMeses")]
-    public IEnumerable<KeyValuePair<int, string>> ListMeses() {
-      return new Mes().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListMeses() {
+      return Mes.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListMesesAb")]
-    public IEnumerable<KeyValuePair<int, string>> ListMesesAb() {
-      return new Mes().Short.ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListMesesAb() {
+      return Mes.Short.ToList();
     }
 
     [HttpGet]
     [Route("ListMotores")]
-    public IEnumerable<KeyValuePair<int, string>> ListMotores() {
-      return new Motor().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListMotores() {
+      return Motor.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListPosicoes")]
-    public IEnumerable<KeyValuePair<int, string>> ListPosicoes() {
-      return new Posicao().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListPosicoes() {
+      return Posicao.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListSemanas")]
-    public IEnumerable<KeyValuePair<int, string>> ListSemanas() {
-      return new Semana().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListSemanas() {
+      return Semana.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListSemanasAb")]
-    public IEnumerable<KeyValuePair<int, string>> ListSemanasAb() {
-      return new Semana().Short.ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListSemanasAb() {
+      return Semana.Short.ToList();
     }
 
     [HttpGet]
     [Route("ListSentidos")]
-    public IEnumerable<KeyValuePair<string, string>> ListSentidos() {
-      return new Sentido().ToList();
+    public static IEnumerable<KeyValuePair<string, string>> ListSentidos() {
+      return Sentido.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListTransmissoes")]
-    public IEnumerable<KeyValuePair<int, string>> ListTransmissoes() {
-      return new Transmissao().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListTransmissoes() {
+      return Transmissao.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListTributarios")]
-    public IEnumerable<KeyValuePair<int, string>> ListTributarios() {
-      return new Tributario().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListTributarios() {
+      return Tributario.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListTVeiculos")]
-    public IEnumerable<KeyValuePair<int, string>> ListTVeiculos() {
-      return new TVeiculo().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListTVeiculos() {
+      return TVeiculo.Items.ToList();
     }
 
     [HttpGet]
     [Route("ListWorkday")]
-    public IEnumerable<KeyValuePair<int, string>> ListWorkday() {
-      return new Workday().ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListWorkday() {
+      return Workday.Items.Where(p => p.Key > 0).ToList();
     }
 
     [HttpGet]
     [Route("ListWorkdayAb")]
-    public IEnumerable<KeyValuePair<int, string>> ListWorkdayAb() {
-      return new Workday().Short.ToList();
+    public static IEnumerable<KeyValuePair<int, string>> ListWorkdayAb() {
+      return Workday.Short.ToList();
     }
   }
 }

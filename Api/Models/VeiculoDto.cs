@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Domain.Lists;
-
 namespace Api.Models {
   public class VeiculoDto {
     public int Id { get; set; }
@@ -13,7 +11,7 @@ namespace Api.Models {
 
     public string CategoriaCap {
       get {
-        return new Categoria().Items[Categoria ?? 0];
+        return Domain.Lists.Categoria.Items[Categoria ?? 0];
       }
     }
 

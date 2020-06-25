@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace Domain.Lists {
-  public class Mes : ListBase {
-    public readonly IDictionary<int, string> Short;
-
-    public Mes() {
-      Items = new Dictionary<int, string> {
+  public static class Mes {
+    public static IDictionary<int, string> Items = new Dictionary<int, string> {
         { 1, "Janeiro" },
         { 2, "Fevereiro" },
         { 3, "Março" },
@@ -18,9 +15,9 @@ namespace Domain.Lists {
         { 10, "Outubro" },
         { 11, "Novembro" },
         { 12, "Dezembro" }
-      };
+    };
 
-      Short = new Dictionary<int, string> {
+    public static IDictionary<int, string> Short = new Dictionary<int, string> {
         { 1, "Jan" },
         { 2, "Fev" },
         { 3, "Mar" },
@@ -33,7 +30,6 @@ namespace Domain.Lists {
         { 10, "Out" },
         { 11, "Nov" },
         { 12, "Dez" }
-      };
-    }
+    };
   }
 }

@@ -17,7 +17,7 @@ namespace Domain.Models {
     public int? MotorId { get; private set; }
     public string MotorCap {
       get {
-        return new Motor().Items[MotorId ?? 0];
+        return Motor.Items[MotorId ?? 0];
       }
     }
 
@@ -25,7 +25,7 @@ namespace Domain.Models {
     public int? PosMotor { get; private set; }
     public string PosMotorCap {
       get {
-        return new Posicao().Items[PosMotor ?? 0];
+        return Posicao.Items[PosMotor ?? 0];
       }
     }
 
@@ -36,14 +36,14 @@ namespace Domain.Models {
     public int? TransmiteId { get; private set; }
     public string TransmiteCap {
       get {
-        return new Transmissao().Items[TransmiteId ?? 1];
+        return Transmissao.Items[TransmiteId ?? 1];
       }
     }
 
     public int? DirecaoId { get; private set; }
     public string DirecaoCap {
       get {
-        return new Direcao().Items[DirecaoId ?? 1];
+        return Direcao.Items[DirecaoId ?? 1];
       }
     }
 

@@ -16,7 +16,7 @@ namespace Domain.Models {
     public int CombustivelId { get; private set; }
     public string CombustivelCap {
       get {
-        return new Combustivel().Items[CombustivelId];
+        return Combustivel.Items[CombustivelId];
       }
     }
 
@@ -29,14 +29,14 @@ namespace Domain.Models {
     public int TVeiculoId { get; private set; }
     public string TVeiculoCap {
       get {
-        return new TVeiculo().Items[TVeiculoId];
+        return TVeiculo.Items[TVeiculoId];
       }
     }
 
     public int EVeiculoId { get; private set; }
     public string EVeiculoCap {
       get {
-        return new EVeiculo().Items[EVeiculoId];
+        return EVeiculo.Items[EVeiculoId];
       }
     }
 
@@ -44,7 +44,7 @@ namespace Domain.Models {
     public int CondicaoId { get; private set; }
     public string CondicaoCap {
       get {
-        return new VCondicao().Items[CondicaoId];
+        return VCondicao.Items[CondicaoId];
       }
     }
 
@@ -52,7 +52,7 @@ namespace Domain.Models {
     public int? CorDenatran { get; private set; }
     public string CorDenatranCap {
       get {
-        return new Cor().Items[CorDenatran ?? 0];
+        return Lists.Cor.Items[CorDenatran ?? 0];
       }
     }
 
@@ -60,7 +60,7 @@ namespace Domain.Models {
     public int RestricaoId { get; private set; }
     public string RestricaoCap {
       get {
-        return new Restricao().Items[RestricaoId];
+        return Restricao.Items[RestricaoId];
       }
     }
 

@@ -28,7 +28,7 @@ namespace Api.Models {
 
     public string CatracaCap {
       get {
-        return new Posicao().Items[Catraca ?? 0];
+        return Posicao.Items[Catraca ?? 0];
       }
     }
 
@@ -36,7 +36,7 @@ namespace Api.Models {
 
     public string PortaInCap {
       get {
-        return new Posicao().Items[PortaIn];
+        return Posicao.Items[PortaIn];
       }
     }
 

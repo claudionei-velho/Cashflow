@@ -26,13 +26,13 @@ namespace Api.Models {
       get {
         StringBuilder aux = new StringBuilder();
         if (Uteis) {
-          aux.Append($"{new Workday().Items[1]}; ");
+          aux.Append($"{Workday.Items[1]}; ");
         }
         if (Sabados) {
-          aux.Append($"{new Workday().Items[2]}; ");
+          aux.Append($"{Workday.Items[2]}; ");
         }
         if (Domingos) {
-          aux.Append(new Workday().Items[3]);
+          aux.Append(Workday.Items[3]);
         }
         return aux.ToString().Trim(charsToTrim);
       }

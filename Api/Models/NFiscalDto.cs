@@ -13,7 +13,7 @@ namespace Api.Models {
 
     public string FPagamentoCap {
       get {
-        return new FPagamento().Items[FPagamentoId];
+        return FPagamento.Items[FPagamentoId];
       }
     }
 
@@ -28,7 +28,7 @@ namespace Api.Models {
 
     public string FinalidadeCap {
       get {
-        return new NfProposito().Items[Finalidade];
+        return NfProposito.Items[Finalidade];
       }
     }
 
