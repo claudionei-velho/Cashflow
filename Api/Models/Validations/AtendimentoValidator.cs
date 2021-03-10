@@ -23,6 +23,7 @@ namespace Api.Models.Validations {
       RuleFor(a => a.Domingos).NotNull().WithMessage(x => Resources.DomingosRequired);
       RuleFor(a => a.ExtensaoAB).ScalePrecision(18, 3);
       RuleFor(a => a.ExtensaoBA).ScalePrecision(18, 3);
+      RuleFor(a => a.Escolar).NotNull().WithMessage(x => Resources.EscolarRequired);
     }
   }
 }

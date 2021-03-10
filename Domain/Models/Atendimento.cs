@@ -48,6 +48,7 @@ namespace Domain.Models {
       }
     }
 
+    public bool Escolar { get; private set; }
     public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties

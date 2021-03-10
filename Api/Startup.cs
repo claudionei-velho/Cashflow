@@ -33,11 +33,12 @@ namespace Api {
         options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
       });
 
-      // Json Configuration
+      /*/ Json Configuration
       services.AddControllers().AddNewtonsoftJson(options => {
         options.SerializerSettings.ContractResolver = new DefaultContractResolver();
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-      });
+      }); */
+      // services.AddControllers().AddJsonOptions();
 
       // Auto Mapper Configurations
       services.AddAutoMapper(typeof(Startup).Assembly);

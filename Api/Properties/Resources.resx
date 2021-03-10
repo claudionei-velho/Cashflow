@@ -312,6 +312,9 @@
   <data name="EscapeVRequired" xml:space="preserve">
     <value>Informe se Escapamento Vertical</value>
   </data>
+  <data name="EscolarRequired" xml:space="preserve">
+    <value>Informe se a Linha ou Atendimento referem-se ao Serviço Escolar</value>
+  </data>
   <data name="EtariaIdRequired" xml:space="preserve">
     <value>Informe a Faixa Etária</value>
   </data>

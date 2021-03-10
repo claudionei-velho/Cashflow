@@ -33,6 +33,7 @@ namespace Api.Models.Validations {
       RuleFor(l => l.Distribuicao).NotNull().WithMessage(x => Resources.DistribuicaoRequired);
       RuleFor(l => l.ExtensaoAB).ScalePrecision(18, 3);
       RuleFor(l => l.ExtensaoBA).ScalePrecision(18, 3);
+      RuleFor(l => l.Escolar).NotNull().WithMessage(x => Resources.EscolarRequired);
     }
   }
 }

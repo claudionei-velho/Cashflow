@@ -24,6 +24,7 @@ namespace Infra.Mappings {
       builder.Property(t => t.Domingos).HasColumnName("Domingos").IsRequired();
       builder.Property(t => t.ExtensaoAB).HasColumnName("ExtensaoAB").HasColumnType("decimal(18, 3)");
       builder.Property(t => t.ExtensaoBA).HasColumnName("ExtensaoBA").HasColumnType("decimal(18, 3)");
+      builder.Property(t => t.Escolar).HasColumnName("Escolar").IsRequired();
       builder.Property(t => t.Cadastro).HasColumnName("Cadastro");
 
       // Foreign Keys (Relationships)

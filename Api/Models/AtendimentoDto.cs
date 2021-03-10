@@ -47,6 +47,7 @@ namespace Api.Models {
       }
     }
 
+    public bool Escolar { get; set; }
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties

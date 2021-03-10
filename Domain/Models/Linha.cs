@@ -73,6 +73,7 @@ namespace Domain.Models {
     }
 
     public int? LoteId { get; private set; }
+    public bool Escolar { get; private set; }
     public DateTime? Cadastro { get; private set; }
 
     // Navigation Properties

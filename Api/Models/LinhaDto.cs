@@ -71,6 +71,7 @@ namespace Api.Models {
     }
 
     public int? LoteId { get; set; }
+    public bool Escolar { get; set; }
     public DateTime? Cadastro { get; set; }
 
     // Navigation Properties

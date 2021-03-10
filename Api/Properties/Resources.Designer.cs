@@ -646,6 +646,15 @@ namespace Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informe se a Linha ou Atendimento referem-se ao Serviço Escolar.
+        /// </summary>
+        public static string EscolarRequired {
+            get {
+                return ResourceManager.GetString("EscolarRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe a Faixa Etária.
         /// </summary>
         public static string EtariaIdRequired {
